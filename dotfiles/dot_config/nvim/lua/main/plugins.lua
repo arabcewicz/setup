@@ -12,12 +12,18 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
-  { "ellisonleao/gruvbox.nvim", config = function() vim.cmd([[ colorscheme gruvbox ]]) end },
-  { "b3nj5m1n/kommentary", keys = { "<C-_>", "<Plug>kommentary_line_defaul", mode = "n" } }
-  --[[ { "b3nj5m1n/kommentary", config = function()
-      vim.api.nvim_set_keymap("n", "<C-_>", "<Plug>kommentary_line_defaul", {})
+  { "morhetz/gruvbox", config = function() vim.cmd([[ colorscheme gruvbox ]]) end },
+  { "b3nj5m1n/kommentary", config = function()
+      vim.api.nvim_set_keymap("n", "<C-_>", "<Plug>kommentary_line_default", {})
+      vim.api.nvim_set_keymap("v", "<C-_>", "<Plug>kommentary_visual_default", {})
     end
-  } ]]
+  },
+  {
+    "mg979/vim-visual-multi",
+    config = function()
+      vim.cmd([[ source keymaps.vim ]])
+    end
+  }
 
 }
 
