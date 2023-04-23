@@ -13,7 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
   { "ellisonleao/gruvbox.nvim", config = function() vim.cmd([[ colorscheme gruvbox ]]) end },
-  { "b3nj5m1n/kommentary", keys = { ("<C-_>", "<Plug>kommentary_line_defaul", mode = "n") } }
+  { "b3nj5m1n/kommentary", keys = { "<C-_>", "<Plug>kommentary_line_defaul", mode = "n" } }
   --[[ { "b3nj5m1n/kommentary", config = function()
       vim.api.nvim_set_keymap("n", "<C-_>", "<Plug>kommentary_line_defaul", {})
     end
