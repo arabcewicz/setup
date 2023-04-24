@@ -9,7 +9,19 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
+
 vim.opt.rtp:prepend(lazypath)
+
+vim.cmd [[
+  let g:VM_maps                       = {}
+  let g:VM_maps['Find Under']         = '<M-n>'
+  let g:VM_maps['Find Subword Under'] = '<M-n>'
+  let g:VM_maps['Select All']         = '<M-C-n>'
+  let g:VM_maps['Start Regex Search'] = '<M-/>'
+  let g:VM_maps["Add Cursor Down"]    = '<M-C-j>'
+  let g:VM_maps["Add Cursor Up"]      = '<M-C-k>'
+  let g:VM_maps["Skip Region"]        = '<M-x>'
+]]
 
 local plugins = {
   { "morhetz/gruvbox", config = function() vim.cmd([[ colorscheme gruvbox ]]) end },
@@ -18,12 +30,7 @@ local plugins = {
       vim.api.nvim_set_keymap("v", "<C-_>", "<Plug>kommentary_visual_default", {})
     end
   },
-  {
-    "mg979/vim-visual-multi",
-    config = function()
-      vim.cmd([[ source keymaps.vim ]])
-    end
-  }
+  { "mg979/vim-visual-multi" },
 
 }
 
