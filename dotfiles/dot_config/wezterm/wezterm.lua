@@ -37,18 +37,23 @@ return {
     font = wezterm.font { family = 'Noto Sans', weight = 'Regular' },
   },
   disable_default_key_bindings = true,
-  leader = { key = 'a', mods = 'CMD', timeout_milliseconds = 2000 },
+  leader = { key = ' ', mods = 'ALT|WIN', timeout_milliseconds = 2000 },
   keys = {
+    { key = 'p', mods = 'LEADER', action = act.ActivateCommandPalette },
     { key = 'h', mods = 'LEADER|SHIFT', action = act.ActivateTabRelative(-1) },
     { key = 'l', mods = 'LEADER|SHIFT', action = act.ActivateTabRelative(1) },
-    { key = 'h', mods = 'LEADER|CTRL|SHIFT', action = act.SplitPane { direction = 'Left' } },
-    { key = 'l', mods = 'LEADER|CTRL|SHIFT', action = act.SplitPane { direction = 'Right' } },
-    { key = 'j', mods = 'LEADER|CTRL|SHIFT', action = act.SplitPane { direction = 'Down' } },
-    { key = 'k', mods = 'LEADER|CTRL|SHIFT', action = act.SplitPane { direction = 'Up' } },
-    { key = 'h', mods = 'LEADER|ALT|SHIFT', action = act.ActivatePaneDirection 'Left', },
-    { key = 'l', mods = 'LEADER|ALT|SHIFT', action = act.ActivatePaneDirection 'Right' },
-    { key = 'j', mods = 'LEADER|ALT|SHIFT', action = act.ActivatePaneDirection 'Down' },
-    { key = 'k', mods = 'LEADER|ALT|SHIFT', action = act.ActivatePaneDirection 'Up' },
+    { key = 'h', mods = 'ALT|WIN', action = act.ActivatePaneDirection 'Left', },
+    { key = 'l', mods = 'ALT|WIN', action = act.ActivatePaneDirection 'Right' },
+    { key = 'j', mods = 'ALT|WIN', action = act.ActivatePaneDirection 'Down' },
+    { key = 'k', mods = 'ALT|WIN', action = act.ActivatePaneDirection 'Up' },
+    { key = 'h', mods = 'ALT|WIN|SHIFT', action = act.SplitPane { direction = 'Left' } },
+    { key = 'l', mods = 'ALT|WIN|SHIFT', action = act.SplitPane { direction = 'Right' } },
+    { key = 'j', mods = 'ALT|WIN|SHIFT', action = act.SplitPane { direction = 'Down' } },
+    { key = 'k', mods = 'ALT|WIN|SHIFT', action = act.SplitPane { direction = 'Up' } },
+    { key = 'h', mods = 'ALT|WIN|CTRL', action = act.AdjustPaneSize { 'Left', 5 } },
+    { key = 'l', mods = 'ALT|WIN|CTRL', action = act.AdjustPaneSize { 'Right', 5 } },
+    { key = 'j', mods = 'ALT|WIN|CTRL', action = act.AdjustPaneSize { 'Down', 5 } },
+    { key = 'k', mods = 'ALT|WIN|CTRL', action = act.AdjustPaneSize { 'Up', 5 } },
     -- { key = 'Enter', mods = 'CMD', action = act.ActivateCopyMode },
     -- { key = 'R', mods = 'SHIFT|CTRL', action = act.ReloadConfiguration },
     { key = '=', mods = 'LEADER', action = act.IncreaseFontSize },
@@ -60,12 +65,12 @@ return {
     -- { key = 'v', mods = 'CMD', action = act.PasteFrom 'Clipboard' },
     { key = 'PageUp', mods = 'CTRL', action = act.ActivateTabRelative(-1) },
     { key = 'PageDown', mods = 'CTRL', action = act.ActivateTabRelative(1) },
-    { key = 'f', mods = 'CMD', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
+    { key = 'f', mods = 'LEADER', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
     { key = 't', mods = 'LEADER', action = act.SpawnTab 'CurrentPaneDomain' },
     { key = 'w', mods = 'LEADER', action = act.CloseCurrentTab{ confirm = false } },
     { key = 'x', mods = 'LEADER', action = act.CloseCurrentPane{ confirm = false } },
     -- { key = 'b', mods = 'LEADER|CTRL', action = act.SendString '\x02', },
-    -- { key = 'Enter', mods = 'LEADER', action = act.ActivateCopyMode, },
+    { key = 'Enter', mods = 'LEADER', action = act.ActivateCopyMode, },
     -- { key = 'p', mods = 'LEADER', action = act.PastePrimarySelection, },
     --[[ { key = 'k', mods = 'CTRL|ALT', action = act.Multiple
       {
@@ -78,6 +83,3 @@ return {
   wsl_domains = wsl_domains,
 }
 
--- aaa
--- aaa
--- aaa
