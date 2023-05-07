@@ -27,3 +27,22 @@ scoop install sumatrapdf
 scoop install vcredist2022 #suggested by neovim
 scoop install vifm
 scoop install wezterm
+scoop install idea-ultimate
+
+
+cd ~\scoop\apps\idea-ultimate\current\IDE\bin
+# ideavim
+idea.exe installPlugins IdeaVIM
+idea.exe installPlugins com.joshestein.ideavim-quickscope
+idea.exe installPlugins AceJump
+idea.exe installPlugins org.jetbrains.IdeaVim-EasyMotion
+idea.exe installPlugins com.github.dankinsoid.multicursor
+# other
+idea.exe installPlugins com.github.copilot
+idea.exe installPlugins org.intellij.scala
+idea.exe installPlugins socrates.tabshifter
+idea.exe installPlugins com.intellij.plugins.xwinkeymap
+idea.exe installPlugins io.github.xiaopihai7256
+
+
+

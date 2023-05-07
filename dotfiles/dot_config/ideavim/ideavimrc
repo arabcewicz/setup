@@ -1,0 +1,299 @@
+set number
+set scrolloff=6
+set incsearch
+set clipboard+=unnamed
+set showmode
+
+let mapleader=" "
+
+" Alt-v - starts visual block mode (CTRL-v remapped to 'Paste' in the IDE
+nmap <A-V> <C-V>
+
+
+map <C-L> <Del>
+nnoremap <C-H> "_dh
+inoremap <C-L> <C-O><Del>
+inoremap <C-;> <C-O>$
+
+sethandler <C-2> a:vim
+sethandler <C-A> a:vim
+sethandler <C-B> a:vim
+sethandler <C-C> a:ide " Copy
+sethandler <C-D> a:vim
+sethandler <C-E> a:vim
+sethandler <C-F> a:vim
+sethandler <C-G> a:vim
+sethandler <C-H> a:vim
+sethandler <C-I> n:ide i-v:vim "Forward
+sethandler <C-J> a:vim
+sethandler <C-K> a:vim
+sethandler <C-L> a:vim
+sethandler <C-M> a:vim
+sethandler <C-N> a:vim
+sethandler <C-O> n:ide i-v:vim  "Back
+sethandler <C-P> a:ide " ParameterInfo
+sethandler <C-Q> a:ide " QuickJavaDoc
+sethandler <C-R> a:vim
+sethandler <C-S-2> a:vim
+sethandler <C-S-6> a:vim
+sethandler <C-S> a:ide " Save
+sethandler <C-T> a:vim
+sethandler <C-U> a:vim
+sethandler <C-V> a:ide " Paste
+sethandler <C-W> a:vim
+sethandler <C-X> a:ide " Cut
+sethandler <C-Y> a:vim
+sethandler <C-Z> a:vim
+sethandler <C-[> a:vim
+sethandler <C-]> a:vim
+
+
+set ideajoin
+set ideamarks
+set idearefactormode=keep
+set showmode
+"------------  plugins -------------------
+set multiple-cursors
+nmap <S-A-n> <Plug>AllWholeOccurrences
+xmap <S-A-n> <Plug>AllWholeOccurrences
+nmap <C-S-A-n> <Plug>AllOccurrences
+xmap <C-S-A-n> <Plug>AllOccurrences
+
+set commentary "commands: gc{m}, gcc, gcgc
+set surround
+set ReplaceWithRegister
+set highlightedyank
+set textobj-entire
+set exchange
+set argtextobj
+let g:argtextobj_pairs="[:],(:),<:>,{:}"
+"set NERDTree
+set textobj-indent " text-objects: ai, ii, aI, II
+
+" IdeaVimMulticursor
+set multicursor
+" free:
+" ALT-A Select file in Project View
+" ALT-B Scala Class
+" ALT-C New File
+" ALT-D Show diff
+" ALT-E Recent Files
+" ALT-F Go to Class...
+" ALT-G
+" ALT-H Left
+" ALT-I Go to implementation(s) (deadkey on Mac)
+" ALT-J Down
+" ALT-K Up
+" ALT-L Right
+" ALT-M Amend Commit
+" ALT-N remapped <C-N> into <A-N> in vimrc; multicursor
+" ALT-P
+" ALT-Q Context Info
+" ALT-R Rename
+" ALT-S Go to Symbol
+" ALT-T Go to File
+" ALT-U (deadkey on Mac)
+" ALT-V
+" ALT-W Close Tab
+" ALT-X
+" ALT-Y
+" ALT-Z
+" ALT-1 TW: Project
+" ALT-2 TW: Bookmarks
+" ALT-3 TW: Find
+" ALT-4 TW: Run
+" ALT-5 TW: Debug
+" ALT-6 TW: Problems
+" ALT-7 TW: Structure
+" ALT-8 TW: Services
+" ALT-9 TW: Git
+" ALT-0 TW: Commit
+" ALT--
+" ALT-= Scala: Type Info
+" ALT-[ Previous Difference
+" ALT-] Next Difference
+" ALT-\ Use compiler for error highlighting in Scala
+" ALT-;
+" ALT-'
+" ALT-, Commit Message History
+" ALT-.
+" ALT-/ Cyclic expand wor
+
+"IdeaVim-EasyMotion (which installs AceJump)
+set easymotion
+nmap s <Action>(AceForwardAction)
+nmap S <Action>(AceBackwardAction)
+map s <Plug>(easymotion-s2)
+nmap <leader>dj d<Plug>(easymotion-j)
+nmap <leader>dk d<Plug>(easymotion-k)
+nmap <leader>yj y<Plug>(easymotion-j)
+nmap <leader>yk y<Plug>(easymotion-k)
+nmap <leader>vj V<Plug>(easymotion-j)
+nmap <leader>vk V<Plug>(easymotion-k)
+
+"IdeaVim-Quickscope
+set quickscope
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+"------------------------------------------------------------
+" general editing / movement within single document
+"------------------------------------------------------------
+noremap x "_x
+vnoremap <leader>p "_dP
+" yank pasted text again
+xnoremap p pgvy
+
+vnoremap < <gv
+vnoremap > >gv
+" camel case movements
+map <leader><leader>w [w
+map <leader><leader>b [b
+map <leader>ciw [bv]wc
+map <leader>diw [bd]w
+
+"map <leader>rr <Action>(RenameElement) " <ALT-R> in IDE instead, to be able to change name of file in explorer
+map <leader>ec <Action>(ShowIntentionActions)
+map <leader>ee <Action>(ShowErrorDescription)
+map <leader>eg <Action>(ChangeSignature)
+map <leader>ei <Action>(QuickImplementations)
+map <leader>ej <Action>(MoveLineDown)
+map <leader>ek <Action>(MoveLineUp)
+map <leader>el <Action>(ImplementMethods)
+map <leader>em <Action>(Inline)
+map <leader>en <Action>(MethodDown)
+map <leader>eo <Action>(OptimizeImports)
+map <leader>ep <Action>(MethodUp)
+map <leader>eq <Action>(QuickJavaDoc)
+map <leader>er <Action>(ReformatCode)
+map <leader>es <Action>(FileStructurePopup)
+map <leader>et <Action>(QuickTypeDefinition)
+map <leader>eu <Action>(FindUsagesInFile)
+map <leader>ev <Action>(IntroduceVariable)
+map <leader>ew <Action>(SurroundWith)
+map <leader>ex <Action>(EditorContextInfo)
+map <C-J> <Action>(MoveLineDown)
+map <C-K> <Action>(MoveLineUp)
+" C-P ParameterInfo
+
+map <leader>sa <Action>(Scala.ShowImplicitArguments)
+map <leader>sc <Action>(Scala.ShowImplicitConversions)
+map <leader>so <Action>(Scala.GenerateCompanionObject)
+map <leader>si <Action>(Scala.ShowImplicits)
+map <leader>st <Action>(Scala.TypeInfo)
+map <leader>sx <Action>(Scala.ExtractTrait)
+
+" note: FindNext = <S-*>
+" note: FindPrevious = <S-#>
+"------------------------------------------------------------
+" navigation/movement to other files
+"------------------------------------------------------------
+"map gi :action GotoImplementation<CR>
+"nnoremap <leader>fj <Action>(NextOccurence) " through <FindInPath> <Compile> result
+"nnoremap <leader>fk <Action>(PreviousOccurence)
+
+"should be in the other
+map <leader>fa <Action>(GotoAction)
+map <leader>fd <Action>(GotoTest)
+map <leader>fe <Action>(RecentFiles)
+map <leader>ff <Action>(GotoClass)
+map <leader>fh <Action>(CallHierarchy)
+map <leader>fg <Action>(TypeHierarchy)
+map <leader>fp <Action>(FindInPath)
+map <leader>fs <Action>(GotoSymbol)
+map <leader>ft <Action>(GotoFile)
+map <leader>fu <Action>(ShowUsages)
+map <leader>fv <Action>(FindUsages)
+
+map <leader>gi <Action>(GotoImplementation)
+map <leader>gu <Action>(GotoSuperMethod)
+map <leader>gt <Action>(GotoTypeDeclaration)
+map <leader>gl <Action>(JumpToLastChange)
+map <leader>ge <Action>(GotoNextError)
+map <leader>gE <Action>(GotoPreviousError)
+
+"----------------------------------------------------------
+" editor
+"------------------------------------------------------------
+nnoremap zh 50zh
+nnoremap zl 50zl
+map <S-H> gT
+map <S-l> gt
+map <A-S-H> <C-W>h
+map <A-S-L> <C-W>l
+map <A-S-J> <C-W>j
+map <A-S-K> <C-W>k
+map <A-S-I> <Action>(NextWindow)
+map <A-S-O> <Action>(PreviousWindow)
+
+map <C-A-S-H> <Action>(StretchSplitToLeft)
+map <C-A-S-L> <Action>(StretchSplitToRight)
+map <C-A-S-J> <Action>(StretchSplitToBottom)
+map <C-A-S-K> <Action>(StretchSplitToTop)
+
+map <C-S-H> <Action>(TabShiftActions.ShiftLeft)
+map <C-S-L> <Action>(TabShiftActions.ShiftRight)
+map <C-S-J> <Action>(TabShiftActions.ShiftDown)
+map <C-S-K> <Action>(TabShiftActions.ShiftUp)
+
+map <leader>wb <Action>(JumpToLastWindow)
+map <leader>wf <Action>(ToggleDistractionFreeMode)
+map <leader>wh <Action>(HideActiveWindow)
+map <leader>wj <Action>(MoveTabDown)
+map <leader>wl <Action>(MoveTabRight)
+map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
+map <leader>wn <Action>(EditSourceInNewWindow)
+map <leader>wu <Action>(Unsplit)
+map <leader>wx <Action>(MaximizeEditorInSplit)
+map <C-.> <Action>(HideActiveWindow)
+" ScalaClass -
+" ALT-A "Select File In Project"
+map <leader>t <Action>(ActivateTerminalToolWindow)
+
+" note: when opening file from file picker one can press <S-Ent> to open file in other split
+
+"------------------------------------------------------------
+" Find more examples here: https://jb.gg/share-ideavimrc
+nnoremap <leader>xe :edit ~/.ideavimrc<CR>
+nnoremap <leader>xi :source ~/.ideavimrc<CR>
+nnoremap <leader>xs <Action>(SaveAll)
+" ALT-A Select file in Project View
+" ALT-B Scala Class
+" ALT-C New File
+
+"------------------------------------------------------------
+" git
+"------------------------------------------------------------
+"ALT-, in the IDE instead
+"map <leader>vb <Action>(Vcs.ShowMessageHistory) " on commit window
+map <leader>v[ <Action>(VcsShowPrevChangeMarker)
+map <leader>v] <Action>(VcsShowNextChangeMarker)
+map <leader>vc <Action>(Git.CompareWithBranch)
+map <leader>vd <Action>(Diff.ShowDiff)
+map <leader>vg <Action>(ActivateVersionControlToolWindow)
+map <leader>vh <Action>(Vcs.ShowTabbedFileHistory)
+map <leader>vm <Action>(Git.ContextMenu)
+map <leader>vp <Action>(Vcs.Push)
+map <leader>vs <Action>(Compare.LastVersion)
+map <leader>vu <Action>(Vcs.UpdateProject)
+map <leader>vv <Action>(ActivateCommitToolWindow)
+"nnoremap <C-S-J> <Action>(NextDiff) " not work
+"nnoremap <C-S-K> <Action>(PreviousDiff) " not work
+" ALT-D Show diff
+
+
+"------------------------------------------------------------
+" other actions
+"------------------------------------------------------------
+"map Q gq
+map <leader>os <Action>(SelectIn)
+map <leader>qq <Action>(Exit)
+map <leader>qr <Action>(RestartIde)
+
+
+
+"------------------------------------------------------------
+" compile/build/run
+"------------------------------------------------------------
+map <leader>bb <Action>(CompileDirty)
+map <leader>rr <Action>(Run)
+" Alt+w
+"nmap <A-W> <Action>(CloseAllReadonly)
