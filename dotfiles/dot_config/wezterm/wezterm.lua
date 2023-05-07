@@ -8,7 +8,6 @@ for _, domain in ipairs(wsl_domains) do
 end
 
 return {
---  font = wezterm.font('MonoLisa' ),
   default_prog = { 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe' },
   color_scheme = 'Gruvbox dark, pale (base16)',
   font = wezterm.font('JetBrainsMono Nerd Font'),
