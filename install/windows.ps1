@@ -4,6 +4,11 @@
 # 1. go to HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System, if there is no System, create one
 #2. create a 32bit DWORD, name it DisableLockWorkstation
 #3. set the value of DisableLockWorkstation to 1
+# 
+# to disable WIN+W:
+# create key HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace and value AllowWindowsInkWorkspace (DWORD32), set to 0
+#
+#
 # Some env used by various command line apps
 [System.Environment]::SetEnvironmentVariable('HOME2',$Env:USERPROFILE,[System.EnvironmentVariableTarget]::User)
 [System.Environment]::SetEnvironmentVariable('XDG_CONFIG_HOME2', $Env:USERPROFILE +'\.config',[System.EnvironmentVariableTarget]::User)

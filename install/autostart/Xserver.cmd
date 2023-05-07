@@ -1,0 +1,1 @@
+powershell -windowstyle hidden C:\Users\adamr\bin\XServer.ps1
