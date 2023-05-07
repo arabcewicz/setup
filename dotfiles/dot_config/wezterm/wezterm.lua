@@ -12,7 +12,7 @@ return {
   default_prog = { 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe' },
   color_scheme = 'Gruvbox dark, pale (base16)',
   font = wezterm.font('JetBrainsMono Nerd Font'),
-  font_size = 10.5,
+  font_size = 10,
   line_height = 1.05,
   enable_tab_bar=true,
   use_ime = true,
@@ -39,6 +39,10 @@ return {
   disable_default_key_bindings = true,
   leader = { key = ' ', mods = 'ALT|WIN', timeout_milliseconds = 2000 },
   keys = {
+    -- paste from the clipboard
+    { key = 'V', mods = 'CTRL|SHIFT', action = act.PasteFrom 'Clipboard' },
+    -- paste from the primary selection
+    --{ key = 'V', mods = 'CTRL', action = act.PasteFrom 'PrimarySelection' },
     { key = 'p', mods = 'LEADER', action = act.ActivateCommandPalette },
     { key = 'h', mods = 'LEADER|SHIFT', action = act.ActivateTabRelative(-1) },
     { key = 'l', mods = 'LEADER|SHIFT', action = act.ActivateTabRelative(1) },
