@@ -10,11 +10,14 @@
 #
 #
 # Some env used by various command line apps
-[System.Environment]::SetEnvironmentVariable('HOME2',$Env:USERPROFILE,[System.EnvironmentVariableTarget]::User)
+[System.Environment]::SetEnvironmentVariable('HOME',$Env:USERPROFILE,[System.EnvironmentVariableTarget]::User)
 [System.Environment]::SetEnvironmentVariable('XDG_CONFIG_HOME2', $Env:USERPROFILE +'\.config',[System.EnvironmentVariableTarget]::User)
 [System.Environment]::SetEnvironmentVariable('VIFM2', $Env:USERPROFILE +'\.config\vifm',[System.EnvironmentVariableTarget]::User)
 [System.Environment]::SetEnvironmentVariable('KOMOREBI_CONFIG_HOME', $Env:USERPROFILE +'\.config\komorebi',[System.EnvironmentVariableTarget]::User)
 
+
+scoop add bucket extras
+scoop add bucket java
 
 scoop install 7zip
 scoop install autohotkey
@@ -27,6 +30,9 @@ scoop install sumatrapdf
 scoop install vcredist2022 #suggested by neovim
 scoop install vifm
 scoop install wezterm
+scoop install sudo
+scoop install win32yank
+scoop install graalvm-jdk17
 scoop install idea-ultimate
 
 
@@ -44,5 +50,5 @@ idea.exe installPlugins socrates.tabshifter
 idea.exe installPlugins com.intellij.plugins.xwinkeymap
 idea.exe installPlugins io.github.xiaopihai7256
 
-
-
+sudo New-Item -ItemType SymbolicLink -Target "~\setup\jetbrains\keymaps" -Path "~\scoop\apps\idea-ultimate\current\profile\config\keymaps"
+sudo New-Item -ItemType SymbolicLink -Target "~\setup\jetbrains\templates" -Path "~\scoop\apps\idea-ultimate\current\profile\config\templates"

@@ -10,8 +10,8 @@ end
 return {
   default_prog = { 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe' },
   color_scheme = 'Gruvbox dark, pale (base16)',
-  font = wezterm.font('JetBrainsMono Nerd Font'),
-  font_size = 10,
+  font = wezterm.font('JetBrainsMono NF'),
+  font_size = 9.9,
   line_height = 1.05,
   enable_tab_bar=true,
   use_ime = true,
