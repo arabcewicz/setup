@@ -39,7 +39,7 @@ NamedWorkspacePadding("c", 2)
 NamedWorkspacePadding("a", 2)
 NamedWorkspacePadding("s", 2)
 NamedWorkspacePadding("d", 2)
-NamedWorkspacePadding("q", 2)
+NamedWorkspacePadding("q", 8)
 NamedWorkspacePadding("w", 2)
 NamedWorkspacePadding("e", 2)
 ; Set the gaps between the containers for a workspace

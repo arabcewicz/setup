@@ -1,4 +1,5 @@
 local wezterm = require "wezterm"
+
 local mux = wezterm.mux
 local act = wezterm.action
 local wsl_domains = wezterm.default_wsl_domains()
@@ -8,6 +9,7 @@ for _, domain in ipairs(wsl_domains) do
 end
 
 return {
+  -- default_prog = { 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -Command -noprofile -noexit "-Invoke-Expression \'. \'\'~\\.config\\powershell\\profile.ps1\'\'\''},
   default_prog = { 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe' },
   color_scheme = 'Gruvbox dark, pale (base16)',
   font = wezterm.font('JetBrainsMono NF'),
@@ -28,23 +30,40 @@ return {
     brightness = 0.7,
   },
   use_dead_keys = false,
-  scrollback_lines = 5000,
+  scrollback_lines = 10000,
   show_update_window = true,
   unicode_version = 14,
-  -- adjust_window_size_when_changing_font_size = false
+  adjust_window_size_when_changing_font_size = false,
+  force_reverse_video_cursor = true,
+  window_close_confirmation = 'NeverPrompt',
+  window_background_opacity = 0.8,
+  text_background_opacity = 0.9,
   window_frame = {
     font = wezterm.font { family = 'Noto Sans', weight = 'Regular' },
+    font_size = 9,
+    active_titlebar_bg = '#282828',
+    inactive_titlebar_bg = '#928374',
+  },
+  colors = {
+    tab_bar = {
+      inactive_tab_edge = '#fabd2f',
+    },
+  },
+  window_padding = {
+    left = 0,
+    right = 0,
+    bottom = 0,
+    top = 0,
   },
   disable_default_key_bindings = true,
-  leader = { key = ' ', mods = 'ALT|WIN', timeout_milliseconds = 2000 },
+  audible_bell = 'Disabled',
+  -- leader = { key = ' ', mods = 'ALT|WIN', timeout_milliseconds = 2000 },
   keys = {
     -- paste from the clipboard
     { key = 'V', mods = 'CTRL|SHIFT', action = act.PasteFrom 'Clipboard' },
     -- paste from the primary selection
     --{ key = 'V', mods = 'CTRL', action = act.PasteFrom 'PrimarySelection' },
-    { key = 'p', mods = 'LEADER', action = act.ActivateCommandPalette },
-    { key = 'h', mods = 'LEADER|SHIFT', action = act.ActivateTabRelative(-1) },
-    { key = 'l', mods = 'LEADER|SHIFT', action = act.ActivateTabRelative(1) },
+    { key = 'Space', mods = 'ALT|WIN', action = act.ActivateCommandPalette },
     { key = 'h', mods = 'ALT|WIN', action = act.ActivatePaneDirection 'Left', },
     { key = 'l', mods = 'ALT|WIN', action = act.ActivatePaneDirection 'Right' },
     { key = 'j', mods = 'ALT|WIN', action = act.ActivatePaneDirection 'Down' },
@@ -57,23 +76,26 @@ return {
     { key = 'l', mods = 'ALT|WIN|CTRL', action = act.AdjustPaneSize { 'Right', 5 } },
     { key = 'j', mods = 'ALT|WIN|CTRL', action = act.AdjustPaneSize { 'Down', 5 } },
     { key = 'k', mods = 'ALT|WIN|CTRL', action = act.AdjustPaneSize { 'Up', 5 } },
-    -- { key = 'Enter', mods = 'CMD', action = act.ActivateCopyMode },
+    -- { key = 'Enter', mods = 'CMD',= act.ActivateCopyMode },
     -- { key = 'R', mods = 'SHIFT|CTRL', action = act.ReloadConfiguration },
-    { key = '=', mods = 'LEADER', action = act.IncreaseFontSize },
-    { key = '-', mods = 'LEADER', action = act.DecreaseFontSize },
-    { key = '0', mods = 'LEADER', action = act.ResetFontSize },
+    { key = '.', mods = 'ALT|WIN', action = act.IncreaseFontSize },
+    { key = ',', mods = 'ALT|WIN', action = act.DecreaseFontSize },
+    { key = '/', mods = 'ALT|WIN', action = act.ResetFontSize },
     -- { key = 'C', mods = 'SHIFT|CTRL', action = act.CopyTo 'Clipboard' },
     -- { key = 'N', mods = 'SHIFT|CTRL', action = act.SpawnWindow },
     -- { key = 'U', mods = 'SHIFT|CTRL', action = act.CharSelect{ copy_on_select = true, copy_to =  'ClipboardAndPrimarySelection' } },
     -- { key = 'v', mods = 'CMD', action = act.PasteFrom 'Clipboard' },
-    { key = 'PageUp', mods = 'CTRL', action = act.ActivateTabRelative(-1) },
-    { key = 'PageDown', mods = 'CTRL', action = act.ActivateTabRelative(1) },
-    { key = 'f', mods = 'LEADER', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
-    { key = 't', mods = 'LEADER', action = act.SpawnTab 'CurrentPaneDomain' },
-    { key = 'w', mods = 'LEADER', action = act.CloseCurrentTab{ confirm = false } },
-    { key = 'x', mods = 'LEADER', action = act.CloseCurrentPane{ confirm = false } },
+    --[[ { key = 'PageUp', mods = 'CTRL', action = act.ActivateTabRelative(-1) },
+    { key = 'PageDown', mods = 'CTRL', action = act.ActivateTabRelative(1) }, ]]
+    { key = 'u', mods = 'ALT|WIN', action = act.ActivateTabRelative(-1) },
+    { key = 'p', mods = 'ALT|WIN', action = act.ActivateTabRelative(1) },
+
+    { key = 'v', mods = 'ALT|WIN', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
+    { key = 't', mods = 'ALT', action = act.SpawnTab 'CurrentPaneDomain' },
+    { key = 'w', mods = 'ALT|WIN', action = act.CloseCurrentTab{ confirm = false } },
+    { key = 'x', mods = 'ALT|WIN', action = act.CloseCurrentPane{ confirm = false } },
     -- { key = 'b', mods = 'LEADER|CTRL', action = act.SendString '\x02', },
-    { key = 'Enter', mods = 'LEADER', action = act.ActivateCopyMode, },
+    { key = 'Enter', mods = 'ALT|WIN', action = act.ActivateCopyMode, },
     -- { key = 'p', mods = 'LEADER', action = act.PastePrimarySelection, },
     --[[ { key = 'k', mods = 'CTRL|ALT', action = act.Multiple
       {
