@@ -100,13 +100,13 @@ $^#+l::Stack("right")
 $^#+k::Stack("up")
 $^#+j::Stack("down")
 $^#+;::Unstack()
-$^#+[::CycleStack("previous")
-$^#+]::CycleStack("next")
+$[::CycleStack("previous")
+$]::CycleStack("next")
 
 
 ; Manipulate windows
 #t::ToggleFloat()
-#+f::ToggleMonocle()
+#f::ToggleMonocle()
 
 ; Window manager options
 #+r::Retile()

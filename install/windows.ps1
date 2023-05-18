@@ -50,5 +50,12 @@ idea.exe installPlugins socrates.tabshifter
 idea.exe installPlugins com.intellij.plugins.xwinkeymap
 idea.exe installPlugins io.github.xiaopihai7256
 
+// installing idea plugins on WSL2 host (remote development):
+// cd ~/.cache/JetBrains/RemoteDev/dist
+// cd %instance%
+// bin/remote-dev-server.sh installPlugins PROJECT_PATH pluginId
+
+
+
 sudo New-Item -ItemType SymbolicLink -Target "~\setup\jetbrains\keymaps" -Path "~\scoop\apps\idea-ultimate\current\profile\config\keymaps"
 sudo New-Item -ItemType SymbolicLink -Target "~\setup\jetbrains\templates" -Path "~\scoop\apps\idea-ultimate\current\profile\config\templates"
