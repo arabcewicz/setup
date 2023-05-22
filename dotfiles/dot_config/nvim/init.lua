@@ -55,5 +55,40 @@ vim.opt_global.completeopt = { "menuone", "noinsert", "noselect" }
 -- requirement of metals
 --vim.opt_global.shortmess:remove("F"):append("c")
 
-require("main/plugins")
+
+-- Autogroups
+local augroup = vim.api.nvim_create_augroup   -- Create/get autocommand group
+local autocmd = vim.api.nvim_create_autocmd   -- Create autocommand
+
+-- Highlight on yank
+augroup('YankHighlight', { clear = true })
+autocmd('TextYankPost', {
+  group = 'YankHighlight',
+  callback = function()
+    vim.highlight.on_yank({ higroup = 'IncSearch', timeout = '300' })
+  end
+})
+
+-- Remove whitespace on save
+autocmd('BufWritePre', {
+  pattern = '*',
+  command = ":%s/\\s\\+$//e"
+})
+
+-- Format on save
+--[[ autocmd('BufWritePre', {
+  pattern = '*',
+  command = "lua vim.lsp.buf.formatting_sync()"
+}) ]]
+
+-- Settings for fyletypes:
+-- Disable line lenght marker
+augroup('setLineLenght', { clear = true })
+autocmd('Filetype', {
+  group = 'setLineLenght',
+  pattern = { 'text', 'markdown', 'html', 'xhtml', 'javascript', 'typescript' },
+  command = 'setlocal cc=0'
+})
+
+require("main")
 

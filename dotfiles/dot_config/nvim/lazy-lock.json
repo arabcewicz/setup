@@ -1,6 +1,9 @@
 {
   "gruvbox": { "branch": "master", "commit": "bf2885a95efdad7bd5e4794dd0213917770d79b7" },
   "kommentary": { "branch": "main", "commit": "3a80117148c6798972bb69414423311ab151d368" },
-  "lazy.nvim": { "branch": "main", "commit": "a55ab6062520a9ea13e90e90bf3e3ef3843c5b0f" },
+  "lazy.nvim": { "branch": "main", "commit": "5f316cea4f0b5379e0094d6cfa5e1ee5e279f65a" },
+  "plenary.nvim": { "branch": "master", "commit": "9ac3e9541bbabd9d73663d757e4fe48a675bb054" },
+  "telekasten.nvim": { "branch": "main", "commit": "8a8daa0ea1b288011f2118155b5620ec3cfc4ec6" },
+  "telescope.nvim": { "branch": "master", "commit": "c1a2af0af69e80e14e6b226d3957a064cd080805" },
   "vim-visual-multi": { "branch": "master", "commit": "724bd53adfbaf32e129b001658b45d4c5c29ca1a" }
 }
