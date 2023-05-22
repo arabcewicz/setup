@@ -39,7 +39,7 @@ NamedWorkspacePadding("c", 2)
 NamedWorkspacePadding("a", 2)
 NamedWorkspacePadding("s", 2)
 NamedWorkspacePadding("d", 2)
-NamedWorkspacePadding("q", 8)
+NamedWorkspacePadding("q", 2)
 NamedWorkspacePadding("w", 2)
 NamedWorkspacePadding("e", 2)
 ; Set the gaps between the containers for a workspace
@@ -78,8 +78,6 @@ CompleteConfiguration()
 #j::Focus("down")
 #k::Focus("up")
 #l::Focus("right")
-#[::CycleFocus("previous")
-#]::CycleFocus("next")
 
 ; Move windows
 #+h::Move("left")
@@ -100,8 +98,8 @@ $^#+l::Stack("right")
 $^#+k::Stack("up")
 $^#+j::Stack("down")
 $^#+;::Unstack()
-$[::CycleStack("previous")
-$]::CycleStack("next")
+$#[::CycleStack("previous")
+$#]::CycleStack("next")
 
 
 ; Manipulate windows
@@ -146,5 +144,7 @@ $]::CycleStack("next")
 #+w::MoveToNamedWorkspace("w")
 #+e::MoveToNamedWorkspace("e")
 
-
+InitialNamedWorkspaceRule("exe", "thunderbird.exe", "x")
+InitialNamedWorkspaceRule("exe", "brave.exe", "q")
+InitialNamedWorkspaceRule("exe", "wezterm-gui.exe", "z")
 
