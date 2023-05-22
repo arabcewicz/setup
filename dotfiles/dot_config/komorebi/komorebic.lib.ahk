@@ -380,6 +380,10 @@ NamedWorkspaceRule(identifier, id, workspace) {
     RunWait("komorebic.exe named-workspace-rule " identifier " `"" id "`" " workspace, , "Hide")
 }
 
+InitialNamedWorkspaceRule(identifier, id, workspace) {
+    RunWait("komorebic.exe initial-named-workspace-rule " identifier " `"" id "`" " workspace, , "Hide")
+}
+
 IdentifyObjectNameChangeApplication(identifier, id) {
     RunWait("komorebic.exe identify-object-name-change-application " identifier " `"" id "`"", , "Hide")
 }
