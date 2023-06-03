@@ -4,7 +4,7 @@
 # 1. go to HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\System, if there is no System, create one
 #2. create a 32bit DWORD, name it DisableLockWorkstation
 #3. set the value of DisableLockWorkstation to 1
-# 
+#
 # to disable WIN+W:
 # create key HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace and value AllowWindowsInkWorkspace (DWORD32), set to 0
 #
@@ -14,12 +14,13 @@
 [System.Environment]::SetEnvironmentVariable('XDG_CONFIG_HOME2', $Env:USERPROFILE +'\.config',[System.EnvironmentVariableTarget]::User)
 [System.Environment]::SetEnvironmentVariable('VIFM2', $Env:USERPROFILE +'\.config\vifm',[System.EnvironmentVariableTarget]::User)
 [System.Environment]::SetEnvironmentVariable('KOMOREBI_CONFIG_HOME', $Env:USERPROFILE +'\.config\komorebi',[System.EnvironmentVariableTarget]::User)
-
+[System.Environment]::SetEnvironmentVariable('GIT_SSH_COMMAND', "'" + $Env:USERPROFILE +"\scoop\shims\ssh.exe' -T",[System.EnvironmentVariableTarget]::User)
+ # $env:GIT_SSH_COMMAND = "'$env:HOME\scoop\shims\ssh.exe' -T"
 
 scoop add bucket extras
 scoop add bucket java
 
-scoop install 7zip
+scoop install 7zip:
 scoop install autohotkey
 scoop install chezmoi
 scoop install git
