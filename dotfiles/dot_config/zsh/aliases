@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+alias ll='ls -alF'
+alias vim='nvim'
+# alias vimd="nvim ~/.dotfiles"
+

@@ -1,0 +1,72 @@
+
+# vim - system clipboard integration in WSL
+# if [[ $(uname -r | sed -n 's/.*\( *Microsoft *\).*/\1/ip') ]]
+# then
+#     export DISPLAY="$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0"
+#     if ! which win32yank.exe > /dev/null
+#     then
+#         echo "Installing win32yank.exe"
+#         curl -sLo/tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
+#         unzip -p /tmp/win32yank.zip win32yank.exe > ~/bin/win32yank.exe
+#         chmod +x ~/bin/win32yank.exe
+#     fi
+# fi
+
+# compinit -d ~/.cache/zsh/zcompdump-$ZSH_VERSION
+# +------------+
+# | NAVIGATION |
+# +------------+
+# setopt AUTO_CD              # Go to folder path without using cd.
+# setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
+# setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
+# setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
+
+# +---------+
+# | HISTORY |
+# +---------+
+export HISTFILE="$XDG_CACHE_HOME/zsh/.zsh_history"
+export HISTSIZE=1000000000
+export SAVEHIST=$HISTSIZE
+export HISTFILESIZE=$HISTSIZE
+setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
+setopt HIST_IGNORE_DUPS          # Do not record an event that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete an old recorded event if a new event is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a previously found event.
+setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
+setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
+
+unsetopt BEEP
+
+
+# if [ -f "$HOME/.fzf.zsh" ] ; then
+#   source "$HOME/.fzf.zsh"
+# fi
+
+
+# source $ZDOTDIR/vimmode
+source $ZDOTDIR/env
+source $ZDOTDIR/aliases
+# source $ZDOTDIR/prompt
+
+# autoload -U compinit
+# compinit -d "$XDG_CACHE_HOME/zsh/.zcompdump"
+# _comp_options+=(globdots) # With hidden file
+# source $ZDOTDIR/plugins
+# source $ZDOTDIR/completions
+
+
+# fpath=(.config/lf/zsh $fpath)
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#
+
+## Nix
+#if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+#  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+#fi
+# End Nix
+#

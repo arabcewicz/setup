@@ -1,0 +1,23 @@
+#!/bin/zsh
+
+ZPLUGINS=$XDG_CACHE_HOME/zsh/plugins
+
+function zsh_add_file() {
+    [ -f "$ZPLUGINS/$1" ] && source "$ZPLUGINS/$1"
+}
+
+function zsh_add_plugin() {
+    PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
+    if [ -d "$ZPLUGINS/$PLUGIN_NAME" ]; then
+        # For plugins
+        zsh_add_file "$ZPLUGINs/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" || \
+        zsh_add_file "$ZPLUGINs/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
+    else
+        git clone "https://github.com/$1.git" "$ZPLUGINS/$PLUGIN_NAME"
+    fi
+}
+
+
+zsh_add_plugin "zsh-users/zsh-autosuggestions"
+zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
+zsh_add_plugin "hlissner/zsh-autopair"
