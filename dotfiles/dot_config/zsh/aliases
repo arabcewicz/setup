@@ -1,6 +1,11 @@
 #!/bin/zsh
 
-alias ll='ls -alF'
+alias ll='ls -alF --color'
 alias vim='nvim'
 # alias vimd="nvim ~/.dotfiles"
-
+alias hm="home-manager"
+alias hmd = "cd ~/.config/home-manager";
+alias hms = "home-manager switch --flake ~/.config/home-manager#adrab";
+alias hme = "home-manager edit";
+alias hmp = "home-manager packages";
+alias hmu = "nix flake update ~/.config/home-manager && hms";
