@@ -1,6 +1,6 @@
 sourceDir = "~/setup"
 [git]
-    autoPush = true
+    autoPush = false
 [edit]
   command="vim"
 [diff]

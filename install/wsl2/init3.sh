@@ -7,3 +7,11 @@ home-manager switch
 
 echo "[SETUP3] Removing chezmoi (now it's installed through home-manager)..."
 rm ~/bin/chezmoi
+
+echo "[SETUP3] Executing 'chezmoi apply'..."
+chezmoi -c ~/setup/chezmoi/chezmoi.toml apply
+
+echo "[SETUP3] Switching to zsh..."
+mkdir -p ~/.cache/zsh
+which zsh | sudo tee -a /etc/shells
+chsh -s $(which zsh)

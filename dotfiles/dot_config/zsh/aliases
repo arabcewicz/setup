@@ -9,3 +9,4 @@ alias hms="home-manager switch --flake ~/.config/home-manager#adrab";
 alias hme="home-manager edit";
 alias hmp="home-manager packages";
 alias hmu="nix flake update ~/.config/home-manager && hms";
+alias chezmoi='chezmoi -c ~/setup/chezmoi/chezmoi.toml'

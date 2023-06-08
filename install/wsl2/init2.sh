@@ -7,7 +7,8 @@ echo "[SETUP2] Installing 'chezmoi'..."
 sh -c "$(wget -qO- get.chezmoi.io)"
 
 echo "[SETUP2] Executing 'chezmoi apply'..."
-~/bin/chezmoi -c ~/setup/chezmoi/chezmoi.toml apply
+~/bin/chezmoi -c ~/setup/chezmoi/chezmoi.toml apply ~/.config/nix
+~/bin/chezmoi -c ~/setup/chezmoi/chezmoi.toml apply ~/.config/home-manager
 
 
 echo "[SETUP2] Installing nix package manager..."
