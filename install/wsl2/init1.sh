@@ -14,14 +14,14 @@ echo "[SETUP1] Updating .bashrc..."
 WINHOME=$(cmd.exe /c echo %USERPROFILE% 2>/dev/null | sed 's+C:\\+/mnt/c/+' | sed 's+\\+/+g' | sed 's/\r//' )
 cat << EOF >~/.setuprc
 # ------ [SETUP1] -----------
-~/bin/wsl-ssh-agent-relay start
+export SSH_AUTH_SOCK=\${HOME}/.ssh/wsl-ssh-agent.sock
+export WINHOME=${WINHOME}
+export PATH=~/bin:\${PATH}
 
-export SSH_AUTH_SOCK=${HOME}/.ssh/wsl-ssh-agent.sock
-export WINHOME="${WINHOME}"
-export PATH=~/bin:${PATH}
-
-alias wslssh="~bin/wsl-ssh-agent-relay start"
+alias wslssh="~/bin/wsl-ssh-agent-relay start"
 alias chezmoi="chezmoi -c ~/setup/chezmoi/chezmoi.toml"
+
+~/bin/wsl-ssh-agent-relay start
 # ------ [SETUP1] -----------
 EOF
 
