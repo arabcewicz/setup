@@ -19,3 +19,17 @@ cp /mnt/c/Users/<user>/setup/install/wsl2/init* .
 ```
 ./init2.sh
 ```
+
+### Nixpkgs + home-manager
+
+4. install nix
+```
+ sh <(curl -L https://nixos.org/nix/install) --no-daemon
+
+```
+5. Relaunch distro
+6. Activate `home-manaer`
+```
+nix run home-manager/master -- init --switch
+```
+
