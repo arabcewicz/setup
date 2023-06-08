@@ -21,7 +21,7 @@ return {
   --[[ window_background_opacity = 0.9,
   win32_system_backdrop = 'Acrylic', ]]
   enable_csi_u_key_encoding = true,
-  allow_win32_input_mode = false, 
+  allow_win32_input_mode = false,
   -- debug_key_events = true,
   term = 'xterm-256color',
   -- term = 'wezterm',
@@ -36,8 +36,8 @@ return {
   adjust_window_size_when_changing_font_size = false,
   force_reverse_video_cursor = true,
   window_close_confirmation = 'NeverPrompt',
-  window_background_opacity = 0.8,
-  text_background_opacity = 0.9,
+--  window_background_opacity = 0.9,
+--  text_background_opacity = 0.9,
   window_frame = {
     font = wezterm.font { family = 'Noto Sans', weight = 'Regular' },
     font_size = 9,
