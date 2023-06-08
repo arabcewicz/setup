@@ -4,3 +4,5 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 skip_global_compinit=1
 
+if [ -e $HOME/.setuprc ]; then source ~/.setuprc; fi
+

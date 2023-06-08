@@ -12,8 +12,7 @@ mkdir .ssh -p
 
 echo "[SETUP1] Updating .bashrc..."
 WINHOME=$(cmd.exe /c echo %USERPROFILE% 2>/dev/null | sed 's+C:\\+/mnt/c/+' | sed 's+\\+/+g' | sed 's/\r//' )
-cat << EOF >>~/.bashrc
-
+cat << EOF >~/.setuprc
 # ------ [SETUP1] -----------
 ~/bin/wsl-ssh-agent-relay start
 
@@ -25,6 +24,8 @@ alias wslssh="~bin/wsl-ssh-agent-relay start"
 alias chezmoi="chezmoi -c ~/setup/chezmoi/chezmoi.toml"
 # ------ [SETUP1] -----------
 EOF
+
+echo "if [ -e \$HOME/.setuprc ]; then . \$HOME/.setuprc; fi" >> ~/.bashrc
 
 echo "[SETUP1] Creating link-script ~/bin/win32yank.exe..."
 cat << EOF >> ~/bin/win32yank.exe
