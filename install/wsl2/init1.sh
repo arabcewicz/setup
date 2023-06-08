@@ -1,4 +1,5 @@
 #!/bin/sh
+
 #--- Setting infra for ssh to be able to access keys from host ---
 echo "[SETUP1] Installing socat..."
 sudo apt install socat -y
