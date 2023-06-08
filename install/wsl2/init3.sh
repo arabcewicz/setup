@@ -5,7 +5,7 @@ nix run home-manager/master -- init --switch
 echo "[SETUP3] Executing 'home-manager switch'..."
 home-manager switch
 
-echo "[SETUP3] Removing chezmoi (now it's installed through home-manager)..."
+echo "[SETUP3] Removing chezmoi (now it's handled through home-manager now)..."
 rm ~/bin/chezmoi
 
 echo "[SETUP3] Executing 'chezmoi apply'..."

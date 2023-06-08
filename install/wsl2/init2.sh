@@ -6,7 +6,7 @@ git clone git@github.com:arabcewicz/setup.git
 echo "[SETUP2] Installing 'chezmoi'..."
 sh -c "$(wget -qO- get.chezmoi.io)"
 
-echo "[SETUP2] Executing 'chezmoi apply'..."
+echo "[SETUP2] Executing 'chezmoi apply for .config/nix and .config/home-manager'..."
 ~/bin/chezmoi -c ~/setup/chezmoi/chezmoi.toml apply ~/.config/nix
 ~/bin/chezmoi -c ~/setup/chezmoi/chezmoi.toml apply ~/.config/home-manager
 
