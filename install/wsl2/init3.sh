@@ -1,4 +1,5 @@
 #/bin/bash
+
 echo "[SETUP3] Activating home manager..."
 nix run home-manager/master -- init --switch
 

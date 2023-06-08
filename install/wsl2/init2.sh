@@ -1,5 +1,4 @@
 #!/bin/bash
-
 echo "[SETUP2] Clonning 'setup' repo..."
 git clone git@github.com:arabcewicz/setup.git
 
