@@ -26,7 +26,7 @@ alias chezmoi="chezmoi -c ~/setup/chezmoi/chezmoi.toml"
 # ------ [SETUP1] -----------
 EOF
 
-echo "[SETUP1] Creating link-script ~/bin/win32yank.exe ..."
+echo "[SETUP1] Creating link-script ~/bin/win32yank.exe..."
 cat << EOF >> ~/bin/win32yank.exe
 #!/bin/sh
 \$WINHOME/scoop/apps/neovim/current/bin/win32yank.exe "\$@" 2>/dev/null
