@@ -22,6 +22,8 @@
     # # "Hello, world!" when run.
     chezmoi
     zsh
+    zsh-syntax-highlighting
+    starship
     neovim
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
