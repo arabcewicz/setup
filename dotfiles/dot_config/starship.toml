@@ -88,7 +88,7 @@ $character"""
 # [ ]()
 
 [env_var.OS_ICON]
-format = " $env_value "
+format = "$env_value "
 style = "fg:#bbbbbb"
 variable = 'OS_ICON'
 default = "?"
@@ -97,7 +97,4 @@ default = "?"
 command = 'echo $WSL_DISTRO_NAME'
 when = ''' test -n "$WSL_DISTRO_NAME" '''
 format = '$output '
-
-[character]
-format = " $symbol "
 
