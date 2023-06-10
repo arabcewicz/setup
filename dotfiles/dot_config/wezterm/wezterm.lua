@@ -50,8 +50,8 @@ return {
     },
   },
   window_padding = {
-    left = 0,
-    right = 0,
+    left = 4,
+    right = 4,
     bottom = 0,
     top = 0,
   },
