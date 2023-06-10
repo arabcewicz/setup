@@ -2,10 +2,10 @@ sourceDir = "~/setup"
 [git]
     autoPush = false
 [edit]
-  command="vim"
+  command="nvim"
 [diff]
-    command = "vim"
+    command = "nvim"
     args = ["-d", "{{ .Destination }}", "{{ .Target }}"]
 [merge]
-    command = "vim"
+    command = "nvim"
     args = ["-d", "{{ .Destination }}", "{{ .Source }}", "{{ .Target }}"]

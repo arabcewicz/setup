@@ -49,7 +49,7 @@ unsetopt BEEP
 # source $ZDOTDIR/vimmode
 source $ZDOTDIR/env
 source $ZDOTDIR/aliases
-# source $ZDOTDIR/prompt
+source $ZDOTDIR/starship
 
 # autoload -U compinit
 # compinit -d "$XDG_CACHE_HOME/zsh/.zcompdump"
@@ -73,4 +73,5 @@ source $ZDOTDIR/aliases
 
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 eval "$(starship init zsh)"
-source .nix-profile/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.nix-profile/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+freshfetch
