@@ -94,7 +94,7 @@ variable = 'OS_ICON'
 default = "?"
 
 [custom.foo]
-command = 'echo $WSL_DISTRO_NAME' # shows output of command
+command = 'echo $WSL_DISTRO_NAME'
 when = ''' test -n "$WSL_DISTRO_NAME" '''
 format = '$output '
 

@@ -72,6 +72,7 @@ source $ZDOTDIR/starship
 ###
 
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-eval "$(starship init zsh)"
+
+
 source ~/.nix-profile/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-freshfetch
+

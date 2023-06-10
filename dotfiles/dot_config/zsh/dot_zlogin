@@ -1,0 +1,14 @@
+# function set_win_title(){
+#   echo -ne "\033]0;"; echo -n " $WSL_DISTRO_NAME "; echo -ne "\007"
+# }
+
+function set_win_title(){
+    echo -ne "\033]0; $(echo "$WSL_DISTRO_NAME") \007"
+}
+
+eval "$(starship init zsh)"
+freshfetch
+
+echo ".zlogin"
+# if [ -n "$WSL_DISTRO_NAME" ]; then set_win_title; fi
+set_win_title
