@@ -16,6 +16,7 @@
 [System.Environment]::SetEnvironmentVariable('KOMOREBI_CONFIG_HOME', $Env:USERPROFILE +'\.config\komorebi',[System.EnvironmentVariableTarget]::User)
 [System.Environment]::SetEnvironmentVariable('GIT_SSH_COMMAND', "'" + $Env:USERPROFILE +"\scoop\shims\ssh.exe' -T",[System.EnvironmentVariableTarget]::User)
  # $env:GIT_SSH_COMMAND = "'$env:HOME\scoop\shims\ssh.exe' -T"
+[System.Environment]::SetEnvironmentVariable('OS_ICON','',[System.EnvironmentVariableTarget]::User)
 
 scoop add bucket extras
 scoop add bucket java
