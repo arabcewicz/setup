@@ -9,8 +9,6 @@ for _, domain in ipairs(wsl_domains) do
 end
 
 return {
-  -- default_prog = { 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -Command -noprofile -noexit "-Invoke-Expression \'. \'\'~\\.config\\powershell\\profile.ps1\'\'\''},
-  default_prog = { 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe' },
   color_scheme = 'Gruvbox dark, pale (base16)',
   font = wezterm.font('JetBrainsMono NF'),
   font_size = 9.9,

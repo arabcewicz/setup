@@ -17,6 +17,7 @@
 [System.Environment]::SetEnvironmentVariable('GIT_SSH_COMMAND', "'" + $Env:USERPROFILE +"\scoop\shims\ssh.exe' -T",[System.EnvironmentVariableTarget]::User)
  # $env:GIT_SSH_COMMAND = "'$env:HOME\scoop\shims\ssh.exe' -T"
 [System.Environment]::SetEnvironmentVariable('OS_ICON','',[System.EnvironmentVariableTarget]::User)
+[System.Environment]::SetEnvironmentVariable('COMSPEC','powershell.exe',[System.EnvironmentVariableTarget]::User)
 
 scoop add bucket extras
 scoop add bucket java
@@ -58,6 +59,11 @@ idea.exe installPlugins io.github.xiaopihai7256
 // bin/remote-dev-server.sh installPlugins PROJECT_PATH pluginId
 
 
+New-Item $env:USERPROFILE\Documents\PowerShell\Profile.ps1 -Force
+Set-Content $env:USERPROFILE\Documents\PowerShell\Profile.ps1 ". ~\.config\powershell\profile.ps1"
+# change ComSpec env var into "pwsh.exe"
+
+sudo New-Item -ItemType SymbolicLink -Path ~/.config/chezmoi -Target ~/setup/chezmoi
 
 sudo New-Item -ItemType SymbolicLink -Target "~\setup\jetbrains\keymaps" -Path "~\scoop\apps\idea-ultimate\current\profile\config\keymaps"
 sudo New-Item -ItemType SymbolicLink -Target "~\setup\jetbrains\templates" -Path "~\scoop\apps\idea-ultimate\current\profile\config\templates"

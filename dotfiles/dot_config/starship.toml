@@ -1,6 +1,5 @@
 format = """
 ${env_var.OS_ICON}\
-${custom.foo}\
 $username\
 $hostname\
 $localip\
@@ -93,8 +92,8 @@ style = "fg:#bbbbbb"
 variable = 'OS_ICON'
 default = "?"
 
-[custom.foo]
-command = 'echo $WSL_DISTRO_NAME'
-when = ''' test -n "$WSL_DISTRO_NAME" '''
-format = '$output '
+# [custom.foo]
+# command = 'echo $WSL_DISTRO_NAME'
+# when = ''' test -n "$WSL_DISTRO_NAME" '''
+# format = '$output '
 
