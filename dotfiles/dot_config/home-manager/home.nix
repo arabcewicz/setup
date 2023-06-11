@@ -27,9 +27,14 @@
     neovim
     freshfetch
     onefetch
+    neofetch
     bat
     ripgrep
     fd
+    btop
+    tldr
+    cmatrix
+    gdu
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
