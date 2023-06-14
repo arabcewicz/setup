@@ -1,1 +1,0 @@
-powershell -windowstyle hidden "komorebic start --await-configuration"

@@ -67,3 +67,6 @@ sudo New-Item -ItemType SymbolicLink -Path ~/.config/chezmoi -Target ~/setup/che
 
 sudo New-Item -ItemType SymbolicLink -Target "~\setup\jetbrains\keymaps" -Path "~\scoop\apps\idea-ultimate\current\profile\config\keymaps"
 sudo New-Item -ItemType SymbolicLink -Target "~\setup\jetbrains\templates" -Path "~\scoop\apps\idea-ultimate\current\profile\config\templates"
+
+sudo New-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run -Name xlaunch -Value "$Env:USERPROFILE\scoop\shims\xlaunch.exe -run $Env:USERPROFILE\.config\vcxsrv\config.xlaunch"
+sudo New-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run -Name komorebic -Value "$Env:USERPROFILE\scoop\shims\komorebic.exe start --await-configuration"
