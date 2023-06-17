@@ -70,3 +70,10 @@ sudo New-Item -ItemType SymbolicLink -Target "~\setup\jetbrains\templates" -Path
 
 sudo New-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run -Name xlaunch -Value "$Env:USERPROFILE\scoop\shims\xlaunch.exe -run $Env:USERPROFILE\.config\vcxsrv\config.xlaunch"
 sudo New-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run -Name komorebic -Value "$Env:USERPROFILE\scoop\shims\komorebic.exe start --await-configuration"
+
+
+# after installing Brave through scoop, it uses scoop's local User-Dir (see shortcut properties) via parameter. You want to add it to windows' "open by" default app:
+# 0. Set Brave as default browser
+# 1. Check the `ProgId` for Brave (sth like `BraveHTML.NUKOK6QA4CGDOQLA5IFTMTZCMQ`) in HKEY_CURRENT_USER\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice
+# 2. Search registry for this ProgId; it should be somewhere under `Computer\HKEY_USERS\S-1-5-21-3755535739-746031237-2308601346-1001\SOFTWARE\Classes\BraveHTML.NUKOK6QA4CGDOQLA5IFTMTZCMQ`
+# 3. Go deeper to shell -> open -> command and add argument "-user-data-dir="<dir-to-scoop>\apps\brave\current\User Data"
