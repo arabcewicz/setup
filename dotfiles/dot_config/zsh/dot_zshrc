@@ -60,6 +60,9 @@ source $ZDOTDIR/starship
 
 # fpath=(.config/lf/zsh $fpath)
 
+# local, non shared settings
+if [ -f "$ZDOTDIR/_local" ] ; then source "$ZDOTDIR/_local"; fi
+
 ## Nix
 #if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
 #  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
