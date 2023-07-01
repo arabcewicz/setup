@@ -46,9 +46,9 @@ unsetopt BEEP
 # fi
 
 
-# source $ZDOTDIR/vimmode
 source $ZDOTDIR/env
 source $ZDOTDIR/aliases
+source $ZDOTDIR/vimmode
 source $ZDOTDIR/starship
 
 # autoload -U compinit
