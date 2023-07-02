@@ -24,35 +24,29 @@ vim.cmd [[
 ]]
 
 local plugins = {
-  { "morhetz/gruvbox", config = function() vim.cmd([[ colorscheme gruvbox ]]) end },
-  { "b3nj5m1n/kommentary", config = function()
-      vim.api.nvim_set_keymap("n", "<C-_>", "<Plug>kommentary_line_default", {})
-      vim.api.nvim_set_keymap("v", "<C-_>", "<Plug>kommentary_visual_default", {})
-    end
-  },
+  { 'nvim-lua/plenary.nvim' },
+  { "morhetz/gruvbox" },
+  { "b3nj5m1n/kommentary" },
+  { 'fedepujol/move.nvim' },
   { "mg979/vim-visual-multi" },
-  { 'nvim-telescope/telescope.nvim',
-     tag = '0.1.1',
-     dependencies = { 'nvim-lua/plenary.nvim' },
-     config = function()
-       local builtin = require('telescope.builtin')
-       vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-       vim.keymap.set('n', '<M-t>', builtin.find_files, {})
-       vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-       vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-       vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-     end
-  },
-  { 'renerocksai/telekasten.nvim',
-    dependencies = {'nvim-telescope/telescope.nvim'},
-    config = function()
-      require('telekasten').setup({
-        -- home = vim.fn.expand("~/notes1"),
-        home = vim.fn.expand("C:/Users/adamr/notes1"),
-      })
-    end
-  },
+  { 'nvim-telescope/telescope.nvim', tag = '0.1.1' },
+  { 'renerocksai/telekasten.nvim' },
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  { 'nvim-treesitter/playground' },
+  { 'ThePrimeagen/harpoon' },
+  { "neovim/nvim-lspconfig" },
+  { "hrsh7th/nvim-cmp" },
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/cmp-path" },
+  { "hrsh7th/cmp-nvim-lsp" },
+  { "hrsh7th/cmp-cmdline" },
+  { "hrsh7th/cmp-nvim-lua" },
+  { "L3MON4D3/LuaSnip" },
+  { "saadparwaiz1/cmp_luasnip" },
+  { "mfussenegger/nvim-dap" },
+  { "scalameta/nvim-metals" },
 }
+
 
 local opts = {}
 require("lazy").setup(plugins, opts)
