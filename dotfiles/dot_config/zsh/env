@@ -1,28 +1,22 @@
 #!/bin/zsh
 
-# export NVM_DIR="$HOME/.cache/nvm"
-
-# if [[ `uname` == "Linux" ]]; then
-#   eval ""
-# elif [[ `uname` == "Darwin" ]]; then
-#   eval "$(/opt/homebrew/bin/brew shellenv)"
-#   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-#   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-# else
-#   echo 'Unknown OS!'
-# fi
-# export LANG=en_US.UTF-8
-
 # # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='nvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
 
 # export MANPATH="/usr/local/man:$MANPATH"
 export MANPAGER='nvim +Man!'
 # export MANWIDTH=999
 
-# sbt
-#export SBT_OPTS="-Xmx1536M -Xss2M"
+## fzf
+export FZF_DEFAULT_COMMAND='fd --type f --color=never --hidden'
+export FZF_DEFAULT_OPTS='--no-height --color=bg+:#343d46,gutter:-1,pointer:#ff3c3c,info:#0dbc79,hl:#0dbc79,hl+:#23d18b'
+
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --line-range :50 {}'"
+
+export FZF_ALT_C_COMMAND='fd --type d . --color=never --hidden'
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -50'"export SBT_OPTS="-Xmx1536M -Xss2M"

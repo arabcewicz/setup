@@ -31,6 +31,8 @@
     bat
     ripgrep
     fd
+    tree
+    fzf
     btop
     tldr
     cmatrix

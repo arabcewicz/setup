@@ -40,12 +40,6 @@ setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history
 
 unsetopt BEEP
 
-
-# if [ -f "$HOME/.fzf.zsh" ] ; then
-#   source "$HOME/.fzf.zsh"
-# fi
-
-
 source $ZDOTDIR/env
 source $ZDOTDIR/aliases
 source $ZDOTDIR/vimmode
@@ -85,3 +79,11 @@ vifm()
     fi
     cd "$dst"
 }
+
+# fzf
+if [ -n "${commands[fzf-share]}" ]; then
+  echo "sourcing zsh"
+  source "$(fzf-share)/key-bindings.zsh"
+  source "$(fzf-share)/completion.zsh"
+fi
+
