@@ -23,11 +23,13 @@
     chezmoi
     zsh
     zsh-syntax-highlighting
+    zsh-autosuggestions
     starship
     neovim
     freshfetch
     onefetch
     neofetch
+    git
     bat
     ripgrep
     fd

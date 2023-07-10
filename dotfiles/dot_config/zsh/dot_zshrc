@@ -45,14 +45,39 @@ source $ZDOTDIR/aliases
 source $ZDOTDIR/vimmode
 source $ZDOTDIR/starship
 
-# autoload -U compinit
+
+# completions
+fpath=(~/.nix-profile/share/zsh/site-functions $XDG_CACHE_HOME/zsh/completions $fpath)
+autoload -U compinit
+compinit -i
 # compinit -d "$XDG_CACHE_HOME/zsh/.zcompdump"
 # _comp_options+=(globdots) # With hidden file
-# source $ZDOTDIR/plugins
-# source $ZDOTDIR/completions
 
 
-# fpath=(.config/lf/zsh $fpath)
+function generate-completions() {
+  local COMPDIR=$XDG_CACHE_HOME/zsh/completions
+
+  # bloop
+  curl -s https://raw.githubusercontent.com/scalacenter/bloop/master/etc/zsh-completions -o $COMPDIR/_bloop
+
+  # cs
+  #cs --completions zsh > $COMPDIR/_cs
+  echo '#compdef _cs cs
+function _cs {
+  eval "$(cs complete zsh-v1 $CURRENT $words[@])"
+}' > $COMPDIR/_cs
+
+
+  # gh
+  #gh completion -s zsh > $COMPDIR/_gh
+
+  # scalafix
+  scalafix --zsh > $COMPDIR/_scalafix
+
+  # scalafmt
+  curl -s https://raw.githubusercontent.com/scalameta/scalafmt/master/bin/_scalafmt -o $DIR/_scalafmt
+}
+
 
 # local, non shared settings
 if [ -f "$ZDOTDIR/_local" ] ; then source "$ZDOTDIR/_local"; fi
@@ -67,7 +92,9 @@ if [ -f "$ZDOTDIR/_local" ] ; then source "$ZDOTDIR/_local"; fi
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 
-source ~/.nix-profile/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.nix-profile/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.nix-profile/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+bindkey '^[;' autosuggest-accept
 
 # change dir to current in vifm on exit
 vifm()
@@ -82,8 +109,8 @@ vifm()
 
 # fzf
 if [ -n "${commands[fzf-share]}" ]; then
-  echo "sourcing zsh"
   source "$(fzf-share)/key-bindings.zsh"
   source "$(fzf-share)/completion.zsh"
 fi
+#source ~/.nix-profile/share/fzf-git-sh/fzf-git.sh
 

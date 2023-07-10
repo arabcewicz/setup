@@ -3,7 +3,7 @@ function set_win_title(){
 }
 
 eval "$(starship init zsh)"
-freshfetch
+#freshfetch
 
 sleep 0.05 # command below doesn't work without that
 if [ -n "$WSL_DISTRO_NAME" ]; then set_win_title; fi
