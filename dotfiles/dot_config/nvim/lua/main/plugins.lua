@@ -25,11 +25,13 @@ vim.cmd [[
 
 local plugins = {
   { 'nvim-lua/plenary.nvim' },
-  { "morhetz/gruvbox" },
+  { 'nvim-tree/nvim-web-devicons' },
+  { "gruvbox-community/gruvbox" },
   { "b3nj5m1n/kommentary" },
   { 'fedepujol/move.nvim' },
   { "mg979/vim-visual-multi" },
   { 'nvim-telescope/telescope.nvim', tag = '0.1.1' },
+  { "nvim-telescope/telescope-file-browser.nvim" },
   { 'renerocksai/telekasten.nvim' },
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   { 'nvim-treesitter/playground' },

@@ -14,4 +14,6 @@ alias che="chezmoi edit"
 alias cheh="chezmoi edit ~/.config/home-manager/home.nix"
 alias chea="chezmoi edit ~/.config/zsh/aliases"
 alias cha='chezmoi apply'
+alias scalanew3='sbt new scala/scala3.g8'
+alias scalanew3cross='sbt new scala/scala3-cross.g8'
 

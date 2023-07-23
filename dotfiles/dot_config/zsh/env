@@ -20,3 +20,4 @@ export FZF_CTRL_T_OPTS="--exact --preview 'bat --color=always --line-range :50 {
 
 export FZF_ALT_C_COMMAND='fd --type d . --color=never --hidden'
 export FZF_ALT_C_OPTS="--exact --preview 'tree -C {} | head -50'"
+export PATH=$HOME/bin:$PATH
