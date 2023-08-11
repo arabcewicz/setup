@@ -11,7 +11,7 @@ vim.keymap.set("n", "<M-l>", "<C-w>l", opts)
 vim.keymap.set("n", "<M-j>", "<C-w>j", opts)
 vim.keymap.set("n", "<M-k>", "<C-w>k", opts)
 
-vim.keymap.set("n", "<leader>fm", vim.cmd.Ex)
+-- vim.keymap.set("n", "<leader>fm", vim.cmd.Ex)
 
 
 -- Stay in visual mode after indenting

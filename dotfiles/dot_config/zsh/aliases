@@ -2,6 +2,7 @@
 
 alias ll='ls -alF --color'
 alias vim='nvim'
+alias v='nvim'
 # alias vimd="nvim ~/.dotfiles"
 alias hm="home-manager"
 alias hmd="cd ~/.config/home-manager"

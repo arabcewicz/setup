@@ -18,7 +18,8 @@ cat << EOF >~/.setuprc
 # ------ [SETUP1] -----------
 export SSH_AUTH_SOCK=\${HOME}/.ssh/wsl-ssh-agent.sock
 export WINHOME=${WINHOME}
-export PATH=~/bin:\${PATH}
+export PATH=$HOME/bin:\${PATH}
+export BROWSER=brave.exe
 
 alias wslssh="~/bin/wsl-ssh-agent-relay start"
 alias chezmoi="chezmoi -c ~/setup/chezmoi/chezmoi.toml"

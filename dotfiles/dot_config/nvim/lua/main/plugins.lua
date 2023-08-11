@@ -24,19 +24,34 @@ vim.cmd [[
 ]]
 
 local plugins = {
+  -- basics
   { 'nvim-lua/plenary.nvim' },
   { 'nvim-tree/nvim-web-devicons' },
   { "gruvbox-community/gruvbox" },
+
+  -- editing
   { "b3nj5m1n/kommentary" },
   { 'fedepujol/move.nvim' },
   { "mg979/vim-visual-multi" },
-  { 'nvim-telescope/telescope.nvim', tag = '0.1.1' },
-  { "nvim-telescope/telescope-file-browser.nvim" },
-  { 'renerocksai/telekasten.nvim' },
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-  { 'nvim-treesitter/playground' },
+  {
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    config = function() require("nvim-surround").setup({}) end
+  },
+
+  -- navigation
   { 'ThePrimeagen/harpoon' },
-  { "neovim/nvim-lspconfig" },
+
+  -- telescope
+  { 'nvim-telescope/telescope.nvim',             tag = '0.1.1' },
+  { "nvim-telescope/telescope-file-browser.nvim" },
+
+  -- treesitter
+  { "nvim-treesitter/nvim-treesitter",           build = ":TSUpdate" },
+  { 'nvim-treesitter/playground' },
+
+  -- programming
+  -- completion
   { "hrsh7th/nvim-cmp" },
   { "hrsh7th/cmp-buffer" },
   { "hrsh7th/cmp-path" },
@@ -45,11 +60,20 @@ local plugins = {
   { "hrsh7th/cmp-nvim-lua" },
   { "L3MON4D3/LuaSnip" },
   { "saadparwaiz1/cmp_luasnip" },
-  { "mfussenegger/nvim-dap" },
+
+  -- lsp
+  -- { "williamboman/mason.nvim" },
+  -- { "williamboman/mason-lspconfig.nvim" },
+  { "neovim/nvim-lspconfig" },
   { "scalameta/nvim-metals" },
+  { "mfussenegger/nvim-dap" },
+
+
+  -- note taking
+  { 'renerocksai/telekasten.nvim' },
+  { 'epwalsh/obsidian.nvim' },
 }
 
 
 local opts = {}
 require("lazy").setup(plugins, opts)
-

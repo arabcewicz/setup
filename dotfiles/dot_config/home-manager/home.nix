@@ -25,7 +25,12 @@
     zsh-syntax-highlighting
     zsh-autosuggestions
     starship
+
     neovim
+    # lsp servers
+    marksman
+    lua-language-server
+
     freshfetch
     onefetch
     neofetch
@@ -41,6 +46,7 @@
     gdu
     vifm-full
     xdragon
+    xdg-utils
     #
     coursier
     gcc
