@@ -89,7 +89,7 @@ return {
     { key = 'p', mods = 'ALT|WIN', action = act.ActivateTabRelative(1) },
 
     { key = 'v', mods = 'ALT|WIN', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
-    { key = 't', mods = 'ALT', action = act.SpawnTab 'CurrentPaneDomain' },
+    { key = 't', mods = 'ALT|WIN', action = act.SpawnTab 'CurrentPaneDomain' },
     { key = 'w', mods = 'ALT|WIN', action = act.CloseCurrentTab{ confirm = false } },
     { key = 'x', mods = 'ALT|WIN', action = act.CloseCurrentPane{ confirm = false } },
     -- { key = 'b', mods = 'LEADER|CTRL', action = act.SendString '\x02', },
