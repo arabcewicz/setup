@@ -8,7 +8,9 @@ for _, domain in ipairs(wsl_domains) do
   domain.default_cwd = "~"
 end
 
+
 return {
+  default_prog = {{ if eq .chezmoi.os "windows" }}{ 'pwsh.exe' }{{ else }}{ 'zsh' }{{ end }},
   color_scheme = 'Gruvbox dark, pale (base16)',
   font = wezterm.font('JetBrainsMono NF'),
   font_size = 9.9,
