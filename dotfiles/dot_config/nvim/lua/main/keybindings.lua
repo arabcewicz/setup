@@ -6,10 +6,10 @@ vim.keymap.set("i", "<C-s>", "<Esc>:wa<CR>", opts)
 
 
 -- Move around splits using Alt + {h,j,k,l}
-vim.keymap.set("n", "<M-h>", "<C-w>h", opts)
+--[[ vim.keymap.set("n", "<M-h>", "<C-w>h", opts)
 vim.keymap.set("n", "<M-l>", "<C-w>l", opts)
 vim.keymap.set("n", "<M-j>", "<C-w>j", opts)
-vim.keymap.set("n", "<M-k>", "<C-w>k", opts)
+vim.keymap.set("n", "<M-k>", "<C-w>k", opts) ]]
 
 -- vim.keymap.set("n", "<leader>fm", vim.cmd.Ex)
 
@@ -26,8 +26,8 @@ vim.keymap.set("n", "<leader>J", "mzJ`z", opts)
 vim.keymap.set("x", "<leader>p", "\"_dP", opts)
 --
 -- LSP mappings
-vim.keymap.set("n", "gD",  vim.lsp.buf.definition)
-vim.keymap.set("n", "K",  vim.lsp.buf.hover)
+vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+vim.keymap.set("n", "K", vim.lsp.buf.hover)
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
 vim.keymap.set("n", "gr", vim.lsp.buf.references)
 vim.keymap.set("n", "gds", vim.lsp.buf.document_symbol)
@@ -35,7 +35,7 @@ vim.keymap.set("n", "gws", vim.lsp.buf.workspace_symbol)
 vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run)
 vim.keymap.set("n", "<leader>sh", vim.lsp.buf.signature_help)
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 
 -- diagnostic

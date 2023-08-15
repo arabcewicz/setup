@@ -38,16 +38,33 @@ local plugins = {
     event = "VeryLazy",
     config = function() require("nvim-surround").setup({}) end
   },
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {}
+  },
+  { 'vim-scripts/argtextobj.vim' },
+  -- { "kana/vim-textobj-user" }, -- required for textobj-entire
+  -- { "kana/vim-textobj-entire",   depends = "kana/vim-textobj-user" },
 
+  -- UI
+  { 'nvim-lualine/lualine.nvim' },
+  { "SmiteshP/nvim-navic" },
+  { 'mrjones2014/smart-splits.nvim' },
   -- navigation
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+  },
   { 'ThePrimeagen/harpoon' },
 
   -- telescope
-  { 'nvim-telescope/telescope.nvim',             tag = '0.1.1' },
-  { "nvim-telescope/telescope-file-browser.nvim" },
+  { 'nvim-telescope/telescope.nvim',   tag = '0.1.1' },
+  -- { "nvim-telescope/telescope-file-browser.nvim" },
 
   -- treesitter
-  { "nvim-treesitter/nvim-treesitter",           build = ":TSUpdate" },
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   { 'nvim-treesitter/playground' },
 
   -- programming
@@ -62,12 +79,10 @@ local plugins = {
   { "saadparwaiz1/cmp_luasnip" },
 
   -- lsp
-  -- { "williamboman/mason.nvim" },
-  -- { "williamboman/mason-lspconfig.nvim" },
   { "neovim/nvim-lspconfig" },
   { "scalameta/nvim-metals" },
   { "mfussenegger/nvim-dap" },
-
+  { 'onsails/lspkind-nvim' },
 
   -- note taking
   { 'renerocksai/telekasten.nvim' },

@@ -2,14 +2,18 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.opt.mouse = 'a'
-vim.opt.clipboard = 'unnamedplus'         -- copy/paste to system clipboard
-vim.opt.completeopt = 'longest,menuone,noinsert,noselect'  -- autocomplete options
+vim.opt.clipboard = 'unnamedplus'                         -- copy/paste to system clipboard
+vim.opt.completeopt = 'longest,menuone,noinsert,noselect' -- autocomplete options
 vim.opt.encoding = 'utf8'
 vim.opt.ambiwidth = 'single'
 
-vim.opt.swapfile = false                  -- don't use swapfile
-vim.opt.undofile = true                -- save undo history
+vim.opt.swapfile = false -- don't use swapfile
+vim.opt.undofile = true  -- save undo history
 vim.opt.backup = false
 
 -- tabs, intend
@@ -26,28 +30,28 @@ vim.opt.numberwidth = 4
 vim.opt.relativenumber = false
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
-vim.opt.showmatch = true        -- highlight matching parenthesis
-vim.opt.foldmethod = 'marker'   -- enable folding (default 'foldmarker')
+vim.opt.showmatch = true      -- highlight matching parenthesis
+vim.opt.foldmethod = 'marker' -- enable folding (default 'foldmarker')
 --vim.opt.colorcolumn = '120'      -- line lenght marker at 80 columns
-vim.opt.splitright = true       -- vertical split to the right
-vim.opt.splitbelow = true       -- horizontal split to the bottom
-vim.opt.ignorecase = false       -- ignore case letters when search
-vim.opt.smartcase = true        -- ignore lowercase for the whole pattern
-vim.opt.termguicolors = true    -- enable 24-bit RGB colors
-vim.opt.laststatus = 3            -- set global statusline
+vim.opt.splitright = true     -- vertical split to the right
+vim.opt.splitbelow = true     -- horizontal split to the bottom
+vim.opt.ignorecase = false    -- ignore case letters when search
+vim.opt.smartcase = true      -- ignore lowercase for the whole pattern
+vim.opt.termguicolors = true  -- enable 24-bit RGB colors
+vim.opt.laststatus = 3        -- set global statusline
 vim.opt.signcolumn = 'yes'
 vim.opt.wrap = true
-vim.opt.linebreak = true        -- wrap on word boundary
+vim.opt.linebreak = true -- wrap on word boundary
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.scrolloff = 8
 
 -- memory, cPU
-vim.opt.hidden = true           -- enable background buffers
-vim.opt.history = 100           -- remember N lines in history
-vim.opt.lazyredraw = true       -- faster scrolling
-vim.opt.synmaxcol = 240         -- max column for syntax highlight
-vim.opt.updatetime = 70         -- ms to wait for trigger an event
+vim.opt.hidden = true     -- enable background buffers
+vim.opt.history = 100     -- remember N lines in history
+vim.opt.lazyredraw = true -- faster scrolling
+vim.opt.synmaxcol = 240   -- max column for syntax highlight
+vim.opt.updatetime = 70   -- ms to wait for trigger an event
 
 
 -- wildmenu
@@ -64,8 +68,8 @@ vim.opt_global.completeopt = { "menuone", "noinsert", "noselect" }
 
 
 -- Autogroups
-local augroup = vim.api.nvim_create_augroup   -- Create/get autocommand group
-local autocmd = vim.api.nvim_create_autocmd   -- Create autocommand
+local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
+local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 
 -- Highlight on yank
 augroup('YankHighlight', { clear = true })
@@ -90,12 +94,12 @@ autocmd('BufWritePre', {
 
 -- Settings for fyletypes:
 -- Disable line lenght marker
-augroup('setLineLenght', { clear = true })
+--[[ augroup('setLineLenght', { clear = true })
 autocmd('Filetype', {
   group = 'setLineLenght',
   pattern = { 'text', 'markdown', 'html', 'xhtml', 'javascript', 'typescript' },
   command = 'setlocal cc=0'
-})
+}) ]]
 
 
 --Transparent background
