@@ -12,17 +12,6 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-vim.cmd [[
-  let g:VM_maps                       = {}
-  let g:VM_maps['Find Under']         = '<M-n>'
-  let g:VM_maps['Find Subword Under'] = '<M-n>'
-  let g:VM_maps['Select All']         = '<M-C-n>'
-  let g:VM_maps['Start Regex Search'] = '<M-/>'
-  let g:VM_maps["Add Cursor Down"]    = '<M-C-j>'
-  let g:VM_maps["Add Cursor Up"]      = '<M-C-k>'
-  let g:VM_maps["Skip Region"]        = '<M-x>'
-]]
-
 local plugins = {
   -- basics
   { 'nvim-lua/plenary.nvim' },
@@ -32,7 +21,23 @@ local plugins = {
   -- editing
   { "b3nj5m1n/kommentary" },
   { 'fedepujol/move.nvim' },
-  { "mg979/vim-visual-multi" },
+  {
+    "mg979/vim-visual-multi",
+    -- bindings has to be set before plugin is loaded
+    init = function()
+      vim.g.VM_default_mappings = 0
+      vim.g.VM_maps = {
+        ['Find Under']         = '<M-n>',
+        ['Find Subword Under'] = '<M-n>',
+        ['Remove Region']      = '<M-p>',
+        ['Select All']         = '<M-S-n>',
+        ['Start Regex Search'] = '<M-/>',
+        ['Add Cursor Down']    = '<C-S-j>',
+        ['Add Cursor Up']      = '<C-S-k>',
+        ['Skip Region']        = '<M-b>',
+      }
+    end,
+  },
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",
@@ -49,7 +54,7 @@ local plugins = {
 
   -- UI
   { 'nvim-lualine/lualine.nvim' },
-  { "SmiteshP/nvim-navic" },
+  -- { "SmiteshP/nvim-navic" },
   { 'mrjones2014/smart-splits.nvim' },
   -- navigation
   {

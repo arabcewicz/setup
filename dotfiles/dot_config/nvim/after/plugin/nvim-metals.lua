@@ -16,12 +16,12 @@ metals_config.init_options.statusBarProvider = "on"
 -- Example if you are using cmp how to make sure the correct capabilities for snippets are set
 metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-local navic = require("nvim-navic")
+-- local navic = require("nvim-navic")
 metals_config.on_attach = function(client, bufnr)
   require("metals").setup_dap()
-  if client.server_capabilities.documentSymbolProvider then
+  --[[ if client.server_capabilities.documentSymbolProvider then
     navic.attach(client, bufnr)
-  end
+  end ]]
 end
 
 -- Autocmd that will actually be in charging of starting the whole thing

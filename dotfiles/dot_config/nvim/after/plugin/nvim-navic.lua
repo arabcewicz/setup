@@ -1,4 +1,4 @@
-require('nvim-navic').setup({
+--[[ require('nvim-navic').setup({
   icons = {
     File          = "󰈙 ",
     Module        = " ",
@@ -28,4 +28,4 @@ require('nvim-navic').setup({
     TypeParameter = "󰊄 ",
   },
   click = true
-})
+}) ]]

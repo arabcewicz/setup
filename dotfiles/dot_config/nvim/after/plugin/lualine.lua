@@ -2,7 +2,11 @@ local function metals_status()
   return vim.g["metals_status"] or ""
 end
 
-local navic = require("nvim-navic")
+-- local navic = require("nvim-navic")
+
+-- vim-visual-multi's status line doesn't work well with lualine, so disabling it
+vim.g.VM_set_statusline = 0 -- disable VM's statusline updates to prevent clobbering
+vim.g.VM_silent_exit = 1    -- because the status line already tells me the mode
 
 require('lualine').setup {
   options = {
@@ -12,7 +16,12 @@ require('lualine').setup {
     globalstatus = true,
   },
   sections = {
-    lualine_a = { 'mode' },
+    lualine_a = {
+      'mode',
+      --[[ fmt = function(mode)
+        return vim.b['visual_multi'] and mode .. ' - MULTI' or mode
+      end ]]
+    },
     lualine_b = {
       {
         'filename',
@@ -27,8 +36,19 @@ require('lualine').setup {
       'filesize'
     },
     lualine_c = {
-      "navic",
+      -- "navic",
       metals_status,
+      --[[ {
+        function()
+          if vim.b['visual_multi'] then
+            local ret = vim.api.nvim_exec2('call b:VM_Selection.Funcs.infoline()', { output = true })
+            print(ret.output)
+            return string.match(ret.output, 'M.*')
+          else
+            return ''
+          end
+        end
+      }, ]]
     },
     lualine_x = { 'encoding', 'fileformat', 'filetype' },
     lualine_y = { 'branch', 'diff', 'diagnostics' },
