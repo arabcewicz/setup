@@ -8,7 +8,9 @@ for _, domain in ipairs(wsl_domains) do
   domain.default_cwd = "~"
 end
 
+
 return {
+  default_prog = {{ if eq .chezmoi.os "windows" }}{ 'pwsh.exe' }{{ else }}{ 'zsh' }{{ end }},
   color_scheme = 'Gruvbox dark, pale (base16)',
   font = wezterm.font('JetBrainsMono NF'),
   font_size = 9.9,
@@ -89,7 +91,7 @@ return {
     { key = 'p', mods = 'ALT|WIN', action = act.ActivateTabRelative(1) },
 
     { key = 'v', mods = 'ALT|WIN', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
-    { key = 't', mods = 'ALT', action = act.SpawnTab 'CurrentPaneDomain' },
+    { key = 't', mods = 'ALT|WIN', action = act.SpawnTab 'CurrentPaneDomain' },
     { key = 'w', mods = 'ALT|WIN', action = act.CloseCurrentTab{ confirm = false } },
     { key = 'x', mods = 'ALT|WIN', action = act.CloseCurrentPane{ confirm = false } },
     -- { key = 'b', mods = 'LEADER|CTRL', action = act.SendString '\x02', },
