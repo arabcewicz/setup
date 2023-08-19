@@ -18,6 +18,7 @@ local plugins = {
   { 'nvim-tree/nvim-web-devicons' },
   { "gruvbox-community/gruvbox" },
 
+
   -- editing
   { "b3nj5m1n/kommentary" },
   { 'fedepujol/move.nvim' },
@@ -52,24 +53,35 @@ local plugins = {
   -- { "kana/vim-textobj-user" }, -- required for textobj-entire
   -- { "kana/vim-textobj-entire",   depends = "kana/vim-textobj-user" },
 
+
   -- UI
   { 'nvim-lualine/lualine.nvim' },
   -- { "SmiteshP/nvim-navic" },
   { 'mrjones2014/smart-splits.nvim' },
-  -- navigation
-  {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
-    lazy = false,
-  },
-  { 'ThePrimeagen/harpoon' },
+  { 'akinsho/bufferline.nvim',                   version = "*" },
+  { "lukas-reineke/indent-blankline.nvim" },
+  { 'yamatsum/nvim-cursorline' },
+  { 'rcarriga/nvim-notify' },
+  { 'levouh/tint.nvim' }, -- dim inactive window
 
-  -- telescope
-  { 'nvim-telescope/telescope.nvim',   tag = '0.1.1' },
-  -- { "nvim-telescope/telescope-file-browser.nvim" },
+
+  -- navigation
+  -- {
+  --   "nvim-tree/nvim-tree.lua",
+  --   version = "*",
+  --   lazy = false,
+  -- },
+  { 'nvim-telescope/telescope.nvim',             tag = '0.1.1' },
+  { "nvim-telescope/telescope-file-browser.nvim" },
+  { 'ThePrimeagen/harpoon' },
+  { 'famiu/bufdelete.nvim' },
+  { 'vim-scripts/BufOnly.vim' },
+
+  -- session management
+  { 'rmagatti/auto-session' },
 
   -- treesitter
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  { "nvim-treesitter/nvim-treesitter",           build = ":TSUpdate" },
   { 'nvim-treesitter/playground' },
 
   -- programming

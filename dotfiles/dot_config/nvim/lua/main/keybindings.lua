@@ -5,6 +5,16 @@ vim.keymap.set("n", "<C-s>", ":wa<CR>", opts)
 vim.keymap.set("i", "<C-s>", "<Esc>:wa<CR>", opts)
 
 
+-- basic buffers ### handled by ++smart-split++ now
+-- vim.keymap.set("n", "<S-h>", ":bprev<CR>", opts)
+-- vim.keymap.set("n", "<S-l>", ":bnext<CR>", opts)
+-- vim.keymap.set("n", "<A-w>", ":bdelete<CR>", opts)
+
+vim.keymap.set("n", "<A-s>", ":source %<CR>", opts)
+
+vim.keymap.set("n", "<A-q>", ":q<CR>", opts)
+vim.keymap.set("n", "<A-S-q>", ":qa!<CR>", opts)
+
 -- Move around splits using Alt + {h,j,k,l}
 --[[ vim.keymap.set("n", "<M-h>", "<C-w>h", opts)
 vim.keymap.set("n", "<M-l>", "<C-w>l", opts)

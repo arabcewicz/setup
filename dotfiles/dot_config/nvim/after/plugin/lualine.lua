@@ -18,9 +18,6 @@ require('lualine').setup {
   sections = {
     lualine_a = {
       'mode',
-      --[[ fmt = function(mode)
-        return vim.b['visual_multi'] and mode .. ' - MULTI' or mode
-      end ]]
     },
     lualine_b = {
       {
@@ -36,8 +33,12 @@ require('lualine').setup {
       'filesize'
     },
     lualine_c = {
+      {
+        require('auto-session.lib').current_session_name
+      },
       -- "navic",
       metals_status,
+      -- vim-visual-multi status line poor integration with lualine
       --[[ {
         function()
           if vim.b['visual_multi'] then
@@ -54,9 +55,9 @@ require('lualine').setup {
     lualine_y = { 'branch', 'diff', 'diagnostics' },
     lualine_z = { 'progress', 'location', 'selectioncount' }
   },
-  tabline = {
+  --[[ tabline = {
     lualine_c = { "buffers" }
-  },
-  extensions = { 'quickfix', 'nvim-tree' }
+  }, ]]
+  -- extensions = { 'quickfix', 'nvim-tree' }
 
 }
