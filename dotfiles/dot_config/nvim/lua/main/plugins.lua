@@ -58,12 +58,16 @@ local plugins = {
   { 'nvim-lualine/lualine.nvim' },
   -- { "SmiteshP/nvim-navic" },
   { 'mrjones2014/smart-splits.nvim' },
-  { 'akinsho/bufferline.nvim',                   version = "*" },
+  { 'akinsho/bufferline.nvim',            version = "*" },
   { "lukas-reineke/indent-blankline.nvim" },
   { 'yamatsum/nvim-cursorline' },
   { 'rcarriga/nvim-notify' },
   { 'levouh/tint.nvim' }, -- dim inactive window
-
+  {
+    "nvim-zh/colorful-winsep.nvim",
+    config = true,
+    event = { "WinNew" },
+  },
 
   -- navigation
   -- {

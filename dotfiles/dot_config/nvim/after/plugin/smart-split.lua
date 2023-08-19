@@ -30,7 +30,10 @@ vim.keymap.set('n', '<C-M-l>', require('smart-splits').resize_right, opts)
 
 local function swap_or_create_up()
   if vim.fn.winnr() == vim.fn.winnr('k') then
-    vim.cmd('wincmd ' .. '^')
+    local ok, _ = pcall(vim.cmd, 'wincmd ^')
+    if not ok then
+      vim.cmd('split')
+    end
     require('smart-splits').move_cursor_up()
   else
     require('smart-splits').swap_buf_up({ move_cursor = true })
@@ -39,7 +42,10 @@ end
 
 local function swap_or_create_down()
   if vim.fn.winnr() == vim.fn.winnr('j') then
-    vim.cmd('wincmd ' .. '^')
+    local ok, _ = pcall(vim.cmd, 'wincmd ^')
+    if not ok then
+      vim.cmd('split')
+    end
     require('smart-splits').swap_buf_up({ move_cursor = false })
   else
     require('smart-splits').swap_buf_down({ move_cursor = true })
@@ -49,7 +55,10 @@ end
 local function swap_or_create_left()
   if vim.fn.winnr() == vim.fn.winnr('h') then
     vim.cmd('vsplit')
-    vim.cmd('edit #')
+    local ok, _ = pcall(vim.cmd, 'edit #')
+    if not ok then
+      vim.cmd('edit %')
+    end
     require('smart-splits').move_cursor_left()
   else
     require('smart-splits').swap_buf_left({ move_cursor = true })
@@ -60,7 +69,10 @@ local function swap_or_create_right()
   if vim.fn.winnr() == vim.fn.winnr('l') then
     vim.cmd('vsplit')
     require('smart-splits').move_cursor_left()
-    vim.cmd('edit #')
+    local ok, _ = pcall(vim.cmd, 'edit #')
+    if not ok then
+      vim.cmd('edit %')
+    end
     require('smart-splits').move_cursor_right()
   else
     require('smart-splits').swap_buf_right({ move_cursor = true })
