@@ -87,8 +87,15 @@ local plugins = {
   { 'famiu/bufdelete.nvim' },
   { 'vim-scripts/BufOnly.vim' },
 
+  -- git
+  { 'sindrets/diffview.nvim' },
+  {
+    "NeogitOrg/neogit",
+    config = true
+  },
+
   -- treesitter
-  { "nvim-treesitter/nvim-treesitter",           build = ":TSUpdate" },
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   { 'nvim-treesitter/playground' },
 
   -- programming
