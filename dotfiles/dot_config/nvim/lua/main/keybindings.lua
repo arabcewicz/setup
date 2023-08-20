@@ -1,60 +1,130 @@
-local opts = { noremap = true, silent = true }
-
--- CTRL+S saves the buffer
-vim.keymap.set("n", "<C-s>", ":wa<CR>", opts)
-vim.keymap.set("i", "<C-s>", "<Esc>:wa<CR>", opts)
-
-
--- basic buffers ### handled by ++smart-split++ now
--- vim.keymap.set("n", "<S-h>", ":bprev<CR>", opts)
--- vim.keymap.set("n", "<S-l>", ":bnext<CR>", opts)
--- vim.keymap.set("n", "<A-w>", ":bdelete<CR>", opts)
-
-vim.keymap.set("n", "<A-s>", ":source %<CR>", opts)
-
-vim.keymap.set("n", "<A-q>", ":q<CR>", opts)
-vim.keymap.set("n", "<A-S-q>", ":qa!<CR>", opts)
-
--- Move around splits using Alt + {h,j,k,l}
---[[ vim.keymap.set("n", "<M-h>", "<C-w>h", opts)
-vim.keymap.set("n", "<M-l>", "<C-w>l", opts)
-vim.keymap.set("n", "<M-j>", "<C-w>j", opts)
-vim.keymap.set("n", "<M-k>", "<C-w>k", opts) ]]
-
--- vim.keymap.set("n", "<leader>fm", vim.cmd.Ex)
-
-
--- Stay in visual mode after indenting
-vim.keymap.set("v", "<", "<gv", opts)
-vim.keymap.set("v", ">", ">gv", opts)
-
--- Like 'J' but doesn't change the cursor position
-vim.keymap.set("n", "<leader>J", "mzJ`z", opts)
-
-
 -- do not loose yanked thing after pasting on any selected text
-vim.keymap.set("x", "<leader>p", "\"_dP", opts)
---
--- LSP mappings
-vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-vim.keymap.set("n", "K", vim.lsp.buf.hover)
-vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
-vim.keymap.set("n", "gr", vim.lsp.buf.references)
-vim.keymap.set("n", "gds", vim.lsp.buf.document_symbol)
-vim.keymap.set("n", "gws", vim.lsp.buf.workspace_symbol)
-vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run)
-vim.keymap.set("n", "<leader>sh", vim.lsp.buf.signature_help)
-vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
-vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format)
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
+-- vim.keymap.set("x", "<leader>p", "\"_dP", opts)
 
--- diagnostic
-vim.keymap.set("n", "<leader>aa", vim.diagnostic.setqflist)
--- all workspace errors
-vim.keymap.set("n", "<leader>ae", function() vim.diagnostic.setqflist({ severity = "E" }) end)
--- all workspace warnings
-vim.keymap.set("n", "<leader>aw", function() vim.diagnostic.setqflist({ severity = "W" }) end)
--- buffer diagnostics only
-vim.keymap.set("n", "<leader>d", vim.diagnostic.setloclist)
-vim.keymap.set("n", "[c", function() vim.diagnostic.goto_prev({ wrap = false }) end)
-vim.keymap.set("n", "]c", function() vim.diagnostic.goto_next({ wrap = false }) end)
+require('legendary').keymaps({
+  {
+    "<C-s>",
+    { n = ":wa<CR>", i = "<Esc>:wa<CR>" },
+    description = "Save current buffer",
+  },
+  {
+    "<A-s>",
+    ":source %<CR>",
+    description = "Source current file"
+  },
+  {
+    "<A-q>",
+    ":q<CR>",
+    description = "Close current window"
+  },
+  {
+    "<A-S-q>",
+    ":qa!<CR>",
+    description = "Quit"
+  },
+  {
+    "<",
+    "<gv",
+    description = "Unindent and stay in visual mode"
+  },
+  {
+    ">",
+    ">gv",
+    description = "Indent and stay in visual mode"
+  },
+  {
+    "<leader>J",
+    "mzJ`z",
+    description = "Merge lines, cursor positions stays unchanged"
+  },
+  {
+    "gd",
+    vim.lsp.buf.definition,
+    description = "lsp: Go to definition"
+  },
+  {
+    "<leader>gt",
+    vim.lsp.buf.type_definition,
+    description = "lsp: Go to type definition"
+  },
+  {
+    "K",
+    vim.lsp.buf.hover,
+    description = "lsp: Show hover"
+  },
+  {
+    "gi",
+    vim.lsp.buf.implementation,
+    description = "lsp: Go to implementation"
+  },
+  {
+    "gr",
+    vim.lsp.buf.references,
+    description = "lsp: Show references as quick list"
+  },
+  {
+    "gds",
+    vim.lsp.buf.document_symbol,
+    description = "lsp: Show file symbols"
+  },
+  {
+    "gws",
+    vim.lsp.buf.workspace_symbol,
+    description = "lsp: Show workspace symbols"
+  },
+  {
+    "<leader>cl",
+    vim.lsp.codelens.run,
+    description = "lsp: Codelens"
+  },
+  {
+    "<leader>sh",
+    vim.lsp.buf.signature_help,
+    description = "lsp: Show function parameters"
+  },
+  {
+    "<leader>rn",
+    vim.lsp.buf.rename,
+    description = "lsp: Rename"
+  },
+  {
+    "<leader>cf",
+    vim.lsp.buf.format,
+    description = "lsp: Format code"
+  },
+  {
+    "<leader>ca",
+    vim.lsp.buf.code_action,
+    description = "lsp: Show code actions"
+  },
+  {
+    "<leader>aa",
+    vim.diagnostic.setqflist,
+    description = "diagnostic: Open all as quick list"
+  },
+  {
+    "<leader>ae",
+    function() vim.diagnostic.setqflist({ severity = "E" }) end,
+    description = "diagnostic: Open errors as quicklist"
+  },
+  {
+    "<leader>aw",
+    function() vim.diagnostic.setqflist({ severity = "W" }) end,
+    description = "diagnostic: Open warnings as quicklist"
+  },
+  {
+    "<leader>d",
+    vim.diagnostic.setloclist,
+    description = "diagnostic: Show buffers diagnostics"
+  },
+  {
+    "[c",
+    function() vim.diagnostic.goto_prev({ wrap = false }) end,
+    description = "diagnostic: Go to next"
+  },
+  {
+    "]c",
+    function() vim.diagnostic.goto_next({ wrap = false }) end,
+    description = "diagnostic: Go to previous"
+  },
+})

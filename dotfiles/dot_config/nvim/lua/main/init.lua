@@ -1,4 +1,5 @@
 require("main.settings")
+require("main.plugin-manager")
 require("main.plugins")
 require('main.keybindings')
 
