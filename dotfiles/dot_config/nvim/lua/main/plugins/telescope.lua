@@ -17,6 +17,7 @@ telescope.setup {
         results_width = 0.8,
       },
     },
+    dynamic_preview_title = true,
     --[[ width = 0.87,
     height = 0.80,
     preview_cutoff = 120, ]]
@@ -115,7 +116,7 @@ require("legendary").keymaps({
     description = "telescope: Live grep"
   },
   {
-    '<leader>fs',
+    '<leader>fw',
     function() builtin.grep_string({ search = vim.fn.input("Grep > ") }) end,
     description = "telescope: Find word"
   },
@@ -135,12 +136,12 @@ require("legendary").keymaps({
     description = "telescope: List previously open files"
   },
   {
-    '<leader>fa',
+    '<leader><leader>fc',
     builtin.commands,
     description = "telescope: List available commands"
   },
   {
-    '<leader>fs',
+    '<leader>fc',
     builtin.command_history,
     description = "telescope: List recently executed commands"
   },
@@ -154,7 +155,22 @@ require("legendary").keymaps({
     builtin.resume,
     description = 'telescope: Open last picker'
   },
-
+  {
+    '<leader><leader>fk',
+    builtin.keymaps,
+    description = 'telescope: List normal mode keybindings'
+  },
+  -- lsp pickers
+  {
+    '<leader>fd',
+    builtin.lsp_type_definitions,
+    description = 'telescope-lsp: Go to type definition or list'
+  },
+  {
+    '<leader>fs',
+    builtin.lsp_dynamic_workspace_symbols,
+    description = 'telescope-lsp: Find workspace symbols'
+  },
 
   -- telescope-file-browser.nvim
   {

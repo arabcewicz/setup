@@ -30,7 +30,13 @@ local plugins = {
 
 
   -- editing
-  { "b3nj5m1n/kommentary" },
+  -- { "b3nj5m1n/kommentary" },
+  { 'gbprod/yanky.nvim' },
+  {
+    'numToStr/Comment.nvim',
+    opts = {},
+    lazy = false,
+  },
   { 'fedepujol/move.nvim' },
   {
     "mg979/vim-visual-multi",
@@ -80,7 +86,7 @@ local plugins = {
   },
 
   -- navigation
-  { 'nvim-telescope/telescope.nvim',             tag = '0.1.1' },
+  { 'nvim-telescope/telescope.nvim',              tag = '0.1.1' },
   { "nvim-telescope/telescope-file-browser.nvim" },
   { 'nvim-telescope/telescope-ui-select.nvim' }, -- more UI section
   { 'ThePrimeagen/harpoon' },
@@ -89,14 +95,13 @@ local plugins = {
 
   -- git
   { 'sindrets/diffview.nvim' },
-  {
-    "NeogitOrg/neogit",
-    config = true
-  },
+  { "NeogitOrg/neogit" },
 
   -- treesitter
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  { "nvim-treesitter/nvim-treesitter",            build = ":TSUpdate" },
   { 'nvim-treesitter/playground' },
+  { 'nvim-treesitter/nvim-treesitter-context' },
+  { 'nvim-treesitter/nvim-treesitter-textobjects' },
 
   -- programming
   -- completion
@@ -121,5 +126,9 @@ local plugins = {
 }
 
 
-local opts = {}
+local opts = {
+  ui = {
+    border = "single"
+  }
+}
 require("lazy").setup(plugins, opts)

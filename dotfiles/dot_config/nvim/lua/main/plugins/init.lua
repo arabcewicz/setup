@@ -9,3 +9,6 @@ for name, type in vim.fs.dir(module_directory) do
     require(module_name .. "." .. config_module)
   end
 end
+
+-- require('plugins.legendary')
+-- require('plugins.telescope')

@@ -67,18 +67,23 @@ vim.opt_global.completeopt = { "menuone", "noinsert", "noselect" }
 --vim.opt_global.shortmess:remove("F"):append("c")
 
 
+vim.opt.formatoptions:remove('r')
+vim.opt.formatoptions:remove('c')
+vim.opt.formatoptions:remove('o')
+
 -- Autogroups
 local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
 local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 
+-- managed by yanky.nvim now
 -- Highlight on yank
-augroup('YankHighlight', { clear = true })
-autocmd('TextYankPost', {
-  group = 'YankHighlight',
-  callback = function()
-    vim.highlight.on_yank({ higroup = 'IncSearch', timeout = '300' })
-  end
-})
+-- augroup('YankHighlight', { clear = true })
+-- autocmd('TextYankPost', {
+--   group = 'YankHighlight',
+--   callback = function()
+--     vim.highlight.on_yank({ higroup = 'IncSearch', timeout = '300' })
+--   end
+-- })
 
 -- Remove whitespace on save
 autocmd('BufWritePre', {
@@ -86,11 +91,12 @@ autocmd('BufWritePre', {
   command = ":%s/\\s\\+$//e"
 })
 
+
 -- Format on save
-autocmd('BufWritePre', {
-  pattern = '*',
-  command = "lua vim.lsp.buf.format()"
-})
+-- vim.api.nvim_create_autocmd('BufWritePre', {
+--   pattern = '*',
+--   command = "lua vim.lsp.buf.format()"
+-- })
 
 -- Settings for fyletypes:
 -- Disable line lenght marker
