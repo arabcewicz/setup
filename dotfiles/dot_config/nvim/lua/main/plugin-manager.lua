@@ -30,13 +30,8 @@ local plugins = {
 
 
   -- editing
-  -- { "b3nj5m1n/kommentary" },
   { 'gbprod/yanky.nvim' },
-  {
-    'numToStr/Comment.nvim',
-    opts = {},
-    lazy = false,
-  },
+  { 'gbprod/substitute.nvim' },
   { 'fedepujol/move.nvim' },
   {
     "mg979/vim-visual-multi",
@@ -104,7 +99,12 @@ local plugins = {
   { 'nvim-treesitter/nvim-treesitter-textobjects' },
 
   -- programming
-  -- completion
+  {
+    'numToStr/Comment.nvim',
+    opts = {},
+    lazy = false,
+  },
+  -- programming: completion
   { "hrsh7th/nvim-cmp" },
   { "hrsh7th/cmp-buffer" },
   { "hrsh7th/cmp-path" },
@@ -114,7 +114,7 @@ local plugins = {
   { "L3MON4D3/LuaSnip" },
   { "saadparwaiz1/cmp_luasnip" },
 
-  -- lsp
+  -- programming: lsp
   { "neovim/nvim-lspconfig" },
   { "scalameta/nvim-metals" },
   { "mfussenegger/nvim-dap" },
