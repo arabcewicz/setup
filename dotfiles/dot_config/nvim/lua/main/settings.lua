@@ -3,11 +3,27 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- disable netrw
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+--vim.g.loaded_netrw = 1
+--vim.g.loaded_netrwPlugin = 1
 
 vim.opt.mouse = 'a'
-vim.opt.clipboard = 'unnamedplus'                         -- copy/paste to system clipboard
+
+if vim.fn.has('wsl2') then
+  vim.g.clipboard = {
+    name = 'WslClipboard',
+    copy = {
+      ['+'] = 'clip.exe',
+      ['*'] = 'clip.exe',
+    },
+    paste = {
+      ['+'] = 'powershell.exe -NoProfile -NoLogo -NonInteractive -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      ['*'] = 'powershell.exe -NoProfile -NoLogo -NonInteractive -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    },
+    cache_enabled = 0,
+  }
+end
+
+--vim.opt.clipboard = 'unnamedplus'                         -- copy/paste to system clipboard
 vim.opt.completeopt = 'longest,menuone,noinsert,noselect' -- autocomplete options
 vim.opt.encoding = 'utf8'
 vim.opt.ambiwidth = 'single'
