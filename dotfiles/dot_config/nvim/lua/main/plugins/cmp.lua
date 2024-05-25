@@ -67,6 +67,9 @@ return {
         'confirm_done',
         cmp_autopairs.on_confirm_done()
       )
+
+
+      require("luasnip.loaders.from_vscode").lazy_load()
     end
   },
   { "hrsh7th/cmp-buffer" },
@@ -74,7 +77,10 @@ return {
   { "hrsh7th/cmp-nvim-lsp" },
   { "hrsh7th/cmp-cmdline" },
   { "hrsh7th/cmp-nvim-lua" },
-  { "L3MON4D3/LuaSnip" },
+  {
+    "L3MON4D3/LuaSnip",
+    dependencies = { "rafamadriz/friendly-snippets" },
+  },
   { "saadparwaiz1/cmp_luasnip" },
   { 'onsails/lspkind-nvim' },
 }

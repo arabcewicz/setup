@@ -2,10 +2,10 @@ return {
   { 'nvim-telescope/telescope-file-browser.nvim' },
   { 'nvim-telescope/telescope-ui-select.nvim' },
   {
-    'nvim-telescope/telescope.nvim', branch = '0.1.x',
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
-
       local telescope = require("telescope")
       local actions = require "telescope.actions"
       local fb_actions = telescope.extensions.file_browser.actions
@@ -37,7 +37,7 @@ return {
             grouped = true,
             -- collapse_dirs = true,
             hidden = true,
-            initial_mode = 'normal',
+            --initial_mode = 'normal',
             mappings = {
               ["n"] = {
                 ["G"] = function(bufnr) fb_actions.toggle_respect_gitignore(bufnr) end,
@@ -45,7 +45,7 @@ return {
                 ["h"] = fb_actions.goto_parent_dir,
                 ["l"] = actions.select_default,
               },
-           },
+            },
             --   ["i"] = {
             --     ["<A-c>"] = fb_actions.create,
             --     ["<S-CR>"] = fb_actions.create_from_prompt,
@@ -192,7 +192,6 @@ return {
           description = "telescope-file-browser: Show current file in file explorer"
         },
       })
-
     end
   }
 }

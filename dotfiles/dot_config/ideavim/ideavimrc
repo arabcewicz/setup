@@ -58,6 +58,8 @@ nmap <S-A-n> <Plug>AllWholeOccurrences
 xmap <S-A-n> <Plug>AllWholeOccurrences
 nmap <C-S-A-n> <Plug>AllOccurrences
 xmap <C-S-A-n> <Plug>AllOccurrences
+nmap <C-S-J> :action EditorCloneCaretBelow<CR>
+nmap <C-S-K> :action EditorCloneCaretAbove<CR>
 
 set commentary "commands: gc{m}, gcc, gcgc
 set surround
@@ -217,22 +219,22 @@ nnoremap zh 50zh
 nnoremap zl 50zl
 map <S-H> gT
 map <S-l> gt
-map <A-S-H> <C-W>h
-map <A-S-L> <C-W>l
-map <A-S-J> <C-W>j
-map <A-S-K> <C-W>k
-map <A-S-I> <Action>(NextWindow)
-map <A-S-O> <Action>(PreviousWindow)
+map <A-H> <C-W>h
+map <A-L> <C-W>l
+map <A-J> <C-W>j
+map <A-K> <C-W>k
+map <A-I> <Action>(NextWindow)
+map <A-O> <Action>(PreviousWindow)
 
-map <C-A-S-H> <Action>(StretchSplitToLeft)
-map <C-A-S-L> <Action>(StretchSplitToRight)
-map <C-A-S-J> <Action>(StretchSplitToBottom)
-map <C-A-S-K> <Action>(StretchSplitToTop)
+map <C-A-H> <Action>(StretchSplitToLeft)
+map <C-A-L> <Action>(StretchSplitToRight)
+map <C-A-J> <Action>(StretchSplitToBottom)
+map <C-A-K> <Action>(StretchSplitToTop)
 
-map <C-S-H> <Action>(TabShiftActions.ShiftLeft)
-map <C-S-L> <Action>(TabShiftActions.ShiftRight)
-map <C-S-J> <Action>(TabShiftActions.ShiftDown)
-map <C-S-K> <Action>(TabShiftActions.ShiftUp)
+map <A-S-H> <Action>(TabShiftActions.ShiftLeft)
+map <A-S-L> <Action>(TabShiftActions.ShiftRight)
+map <A-S-J> <Action>(TabShiftActions.ShiftDown)
+map <A-S-K> <Action>(TabShiftActions.ShiftUp)
 
 map <leader>wb <Action>(JumpToLastWindow)
 map <leader>wf <Action>(ToggleDistractionFreeMode)

@@ -1,3 +1,5 @@
 [user]
 	name = adrab
 	email = adam.rabcewicz@ewolwe.pl
+[credential "helperselector"]
+	selected = <no helper>

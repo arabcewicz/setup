@@ -4,8 +4,13 @@ return {
     build = ":TSUpdate",
     config = function()
       require("nvim-treesitter.configs").setup {
-        ensure_installed = { "scala", "javascript", "typescript", "lua", "vim", "vimdoc", "query", "markdown", "yaml",
-          "latex" },
+        autotag = {
+          enable = true,
+          enable_rename = true,
+        },
+        ensure_installed = {
+          "scala", "rust", "html", "css", "javascript", "typescript", "tsx", "json", "lua", "vim", "vimdoc", "query", "markdown", "yaml", "toml", "latex"
+        },
         sync_install = false,
         auto_install = true,
         highlight = {
@@ -13,6 +18,8 @@ return {
           additional_vim_regex_highlighting = false,
         },
       }
+
+      -- require('nvim-ts-autotag').setup()
     end
   },
   { 'nvim-treesitter/playground' },
