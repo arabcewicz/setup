@@ -29,6 +29,7 @@ return {
           --[[ width = 0.87,
           height = 0.80,
           preview_cutoff = 120, ]]
+          file_ignore_patterns = { "node_modules", "target" },
         },
         extensions = {
           ["file_browser"] = {
@@ -124,7 +125,7 @@ return {
           description = "telescope: Live grep"
         },
         {
-          '<leader>fw',
+          '<leader>F',
           function() builtin.grep_string({ search = vim.fn.input("Grep > ") }) end,
           description = "telescope: Find word"
         },
@@ -139,7 +140,7 @@ return {
           description = "telescope: List help tags"
         },
         {
-          '<leader>fe',
+          '<leader>fo',
           builtin.oldfiles,
           description = "telescope: List previously open files"
         },
@@ -154,7 +155,7 @@ return {
           description = "telescope: List recently executed commands"
         },
         {
-          '<leader>fr',
+          '<leader>fR',
           builtin.registers,
           description = 'telescope: List registers'
         },
@@ -170,24 +171,39 @@ return {
         },
         -- lsp pickers
         {
-          '<leader>fd',
+          '<leader>gd',
           builtin.lsp_type_definitions,
           description = 'telescope-lsp: Go to type definition or list'
         },
         {
-          '<leader>fs',
+          '<leader>fw',
           builtin.lsp_dynamic_workspace_symbols,
           description = 'telescope-lsp: Find workspace symbols'
+        },
+        {
+          '<leader>fs',
+          builtin.lsp_document_symbols,
+          description = 'telescope-lsp: Show symbols in current file'
+        },
+        {
+          '<leader>fr',
+          builtin.lsp_references,
+          description = 'telescope-lsp: List symbol references'
+        },
+        {
+          '<leader>fd',
+          builtin.diagnostics,
+          description = 'telescope: Show diagnostics'
         },
 
         -- telescope-file-browser.nvim
         {
-          "<space>fm",
+          "<leader>fe",
           ":Telescope file_browser<CR>",
           description = "telescope-file-browser: File explorer"
         },
         {
-          "<space>fc",
+          "<leader>fa",
           ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
           description = "telescope-file-browser: Show current file in file explorer"
         },

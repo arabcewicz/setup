@@ -16,11 +16,11 @@ return {
     require('telescope').load_extension('possession')
 
     require("legendary").keymaps({
-    {
-      '<leader>fp',
-      ':Telescope possession list<CR>',
-      description = 'possession: List sessions'
-    },
-  })
+      {
+        '<leader>fp',
+        ':Telescope possession list<CR>',
+        description = 'possession: List sessions'
+      },
+    })
   end
 }

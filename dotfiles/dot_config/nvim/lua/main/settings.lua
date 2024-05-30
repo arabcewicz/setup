@@ -8,7 +8,7 @@ vim.g.maplocalleader = ' '
 
 vim.opt.mouse = 'a'
 
-if vim.fn.has('wsl2') then
+if vim.fn.has('wsl2') == 1 then
   vim.g.clipboard = {
     name = 'WslClipboard',
     copy = {
@@ -16,8 +16,10 @@ if vim.fn.has('wsl2') then
       ['*'] = 'clip.exe',
     },
     paste = {
-      ['+'] = 'powershell.exe -NoProfile -NoLogo -NonInteractive -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-      ['*'] = 'powershell.exe -NoProfile -NoLogo -NonInteractive -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      ['+'] =
+      'powershell.exe -NoProfile -NoLogo -NonInteractive -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+      ['*'] =
+      'powershell.exe -NoProfile -NoLogo -NonInteractive -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
     },
     cache_enabled = 0,
   }

@@ -37,9 +37,7 @@ return {
         },
         lualine_c = {
           {
-            --   require('auto-session.lib').current_session_name
-            function() return require('possession.session').session_name or '' end
-            -- session_name
+            function() return require('possession.session').get_session_name() or '' end
           },
           -- "navic",
           metals_status,

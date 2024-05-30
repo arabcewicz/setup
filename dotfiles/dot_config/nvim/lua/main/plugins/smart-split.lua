@@ -3,6 +3,7 @@ return {
   config = function()
     require('smart-splits').setup({
       at_edge = 'split',
+      multiplexer_integration = nil,
       cursor_follows_swapped_bufs = true,
       --[[ resize_mode = {
         hooks = {
