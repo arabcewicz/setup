@@ -5,6 +5,7 @@ return {
       at_edge = 'split',
       multiplexer_integration = nil,
       cursor_follows_swapped_bufs = true,
+      ignored_filetypes = { 'neo-tree' },
       --[[ resize_mode = {
         hooks = {
           on_leave = require('bufresize').register,

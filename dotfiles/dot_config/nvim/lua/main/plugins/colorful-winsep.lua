@@ -1,14 +1,15 @@
-return {
-  "nvim-zh/colorful-winsep.nvim",
-  event = { "WinNew" },
-  config = function()
-    require("colorful-winsep").setup({
-      highlight = {
-        -- bg = "#1d2021",
-        fg = "#928374",
-      },
-      interval = 30,
-      symbols = { "━", "┃", "┏", "┓", "┗", "┛" },
-    })
-  end
-}
+return {}
+-- return {
+--   "nvim-zh/colorful-winsep.nvim",
+--   event = { "WinNew" },
+--   config = function()
+--     require("colorful-winsep").setup({
+--       hi = {
+--         -- bg = "#1d2021",
+--         fg = "#928374",
+--       },
+--       no_exec_files = { "packer", "TelescopePrompt", "mason", "CompetiTest", "NvimTree", "neo-tree" },
+--       symbols = { "━", "┃", "┏", "┓", "┗", "┛" },
+--     })
+--   end
+-- }
