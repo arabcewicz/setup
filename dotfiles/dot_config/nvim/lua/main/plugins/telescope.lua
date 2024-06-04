@@ -29,7 +29,7 @@ return {
           --[[ width = 0.87,
           height = 0.80,
           preview_cutoff = 120, ]]
-          file_ignore_patterns = { "node_modules", "target" },
+          file_ignore_patterns = { "node_modules", "target", "%.semanticdb" },
         },
         extensions = {
           ["file_browser"] = {
@@ -38,6 +38,7 @@ return {
             grouped = true,
             -- collapse_dirs = true,
             hidden = true,
+            depth = false,
             --initial_mode = 'normal',
             mappings = {
               ["n"] = {

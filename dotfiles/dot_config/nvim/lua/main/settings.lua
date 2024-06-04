@@ -25,7 +25,7 @@ if vim.fn.has('wsl2') == 1 then
   }
 end
 
---vim.opt.clipboard = 'unnamedplus'                         -- copy/paste to system clipboard
+vim.opt.clipboard = 'unnamedplus'                         -- copy/paste to system clipboard
 vim.opt.completeopt = 'longest,menuone,noinsert,noselect' -- autocomplete options
 vim.opt.encoding = 'utf8'
 vim.opt.ambiwidth = 'single'
