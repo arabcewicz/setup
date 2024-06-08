@@ -9,34 +9,66 @@
 # create key HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsInkWorkspace and value AllowWindowsInkWorkspace (DWORD32), set to 0
 #
 #
+
+
+# Install scoop
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+
+scoop add bucket extras
+#scoop add bucket java
+
+scoop install npiperelay
+scoop install git
+scoop install chezmoi
+scoop install vcredist2022
+scoop install neovim
+scoop install ripgrep
+scoop install fd
+scoop install eza
+scoop install bat
+scoop install zoxide
+scoop install fzf
+scoop install winfetch
+scoop install gdu
+scoop install btop
+scoop install gcc
+scoop install sudo
+scoop install pwsh
+scoop install powership
+scoop install biodiff
+scoop install openssh
+
+scoop install wezterm
+scoop install vcxsrv
+scoop install 7zip
+scoop install autohotkey
+scoop install coretemp
+scoop install keepassxc
+scoop install resilio-sync-np
+scoop install powertoys
+scoop install sumatrapdf
+scoop install sysinternals
+scoop install quicklook
+
+
+scoop install mvn
+scoop install coursier
+scoop install rustup
+scoop install sqlite
+
+
+
+
 # Some env used by various command line apps
 [System.Environment]::SetEnvironmentVariable('HOME',$Env:USERPROFILE,[System.EnvironmentVariableTarget]::User)
 [System.Environment]::SetEnvironmentVariable('XDG_CONFIG_HOME', $Env:USERPROFILE +'\.config',[System.EnvironmentVariableTarget]::User)
-[System.Environment]::SetEnvironmentVariable('VIFM2', $Env:USERPROFILE +'\.config\vifm',[System.EnvironmentVariableTarget]::User)
+[System.Environment]::SetEnvironmentVariable('VIFM', $Env:USERPROFILE +'\.config\vifm',[System.EnvironmentVariableTarget]::User)
 #[System.Environment]::SetEnvironmentVariable('KOMOREBI_CONFIG_HOME', $Env:USERPROFILE +'\.config\komorebi',[System.EnvironmentVariableTarget]::User)
 [System.Environment]::SetEnvironmentVariable('GIT_SSH_COMMAND', "'" + $Env:USERPROFILE +"\scoop\shims\ssh.exe' -T",[System.EnvironmentVariableTarget]::User)
  # $env:GIT_SSH_COMMAND = "'$env:HOME\scoop\shims\ssh.exe' -T"
 [System.Environment]::SetEnvironmentVariable('OS_ICON','',[System.EnvironmentVariableTarget]::User)
 #[System.Environment]::SetEnvironmentVariable('COMSPEC','powershell.exe',[System.EnvironmentVariableTarget]::User)
-
-scoop add bucket extras
-#scoop add bucket java
-
-scoop install 7zip:
-scoop install autohotkey
-scoop install chezmoi
-scoop install git
-#scoop install komorebi
-scoop install neovim
-scoop install poppler      # pdftotext used by vifm
-scoop install sumatrapdf
-scoop install vcredist2022 #suggested by neovim
-scoop install vifm
-scoop install wezterm
-scoop install sudo
-#scoop install win32yank // neovim has this
-#scoop install graalvm-jdk17
-#scoop install idea-ultimate
 
 
 #cd ~\scoop\apps\idea-ultimate\current\IDE\bin
