@@ -23,7 +23,7 @@ source $ZDOTDIR/starship
 
 #vi mode
 zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
-zvm_after_init_commands+=('source <(fzf --zsh) && bindkey '^p' history-beginning-search-backward && bindkey '^n' history-beginning-search-forward')
+zvm_after_init_commands+=("bindkey '^p' history-beginning-search-backward && bindkey '^n' history-beginning-search-forward && source <(fzf --zsh) && eval $(zoxide init --cmd cd zsh)")
 
 # autosuggestions
 zinit light zsh-users/zsh-autosuggestions
@@ -34,8 +34,8 @@ zinit light z-shell/F-Sy-H
 zinit snippet OMZP::sudo # Esc twice
 
 # completions
-#zinit light zsh-users/zsh-completions
-#autoloa -U compinit && compinit
+zinit light zsh-users/zsh-completions
+autoload -U compinit && compinit
 
 # fpath=(~/.nix-profile/share/zsh/site-functions $XDG_CACHE_HOME/zsh/completions $fpath)
 # compinit -i
@@ -76,9 +76,15 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
 zstyle ':completion:*' menu no
 # preview directory's content with eza when completing cd
+# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+#zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --color=always $realpath'
+# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1lh --icons --git-ignore --group-directories-first --sort=accessed --color=always $realpath'
+# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-flags --height=35% --preview-window=right:65%
+#eval "$(zoxide init --cmd cd zsh)"
 
 
 # +---------+
