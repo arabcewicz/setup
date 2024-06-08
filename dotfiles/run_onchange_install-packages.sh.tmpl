@@ -5,18 +5,22 @@ sudo snap install chezmoi --classic
 sudo apt install -y zsh
 sudo apt install -y neovim
 sudo apt install -y ripgrep
-sudo apt install -y fd
-sudo apt install -y fzf
+sudo apt install -y fd-find
+sudo apt install -y eza
+
+# more recent version needed
+# sudo apt install -y fzf
+wget -c https://github.com/junegunn/fzf/releases/download/0.53.0/fzf-0.53.0-linux_amd64.tar.gz -O - | tar -xz -C ~/bin
 
 #sudo apt install -y cmatrix
 #sudo apt install -y neofetch
-#sudo apt install -y bat
+sudo apt install -y bat
 #sudo apt install -y tldr
 #sudo apt install -y tree
 #sudo apt install -y gdu
 #sudo apt install -y btop
 
-sudo apt install gcc
+#sudo apt install -y gcc
 
 {{ else if eq .chezmoi.os "darwin" -}}
 
