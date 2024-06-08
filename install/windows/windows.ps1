@@ -11,22 +11,22 @@
 #
 # Some env used by various command line apps
 [System.Environment]::SetEnvironmentVariable('HOME',$Env:USERPROFILE,[System.EnvironmentVariableTarget]::User)
-[System.Environment]::SetEnvironmentVariable('XDG_CONFIG_HOME2', $Env:USERPROFILE +'\.config',[System.EnvironmentVariableTarget]::User)
+[System.Environment]::SetEnvironmentVariable('XDG_CONFIG_HOME', $Env:USERPROFILE +'\.config',[System.EnvironmentVariableTarget]::User)
 [System.Environment]::SetEnvironmentVariable('VIFM2', $Env:USERPROFILE +'\.config\vifm',[System.EnvironmentVariableTarget]::User)
-[System.Environment]::SetEnvironmentVariable('KOMOREBI_CONFIG_HOME', $Env:USERPROFILE +'\.config\komorebi',[System.EnvironmentVariableTarget]::User)
+#[System.Environment]::SetEnvironmentVariable('KOMOREBI_CONFIG_HOME', $Env:USERPROFILE +'\.config\komorebi',[System.EnvironmentVariableTarget]::User)
 [System.Environment]::SetEnvironmentVariable('GIT_SSH_COMMAND', "'" + $Env:USERPROFILE +"\scoop\shims\ssh.exe' -T",[System.EnvironmentVariableTarget]::User)
  # $env:GIT_SSH_COMMAND = "'$env:HOME\scoop\shims\ssh.exe' -T"
 [System.Environment]::SetEnvironmentVariable('OS_ICON','',[System.EnvironmentVariableTarget]::User)
-[System.Environment]::SetEnvironmentVariable('COMSPEC','powershell.exe',[System.EnvironmentVariableTarget]::User)
+#[System.Environment]::SetEnvironmentVariable('COMSPEC','powershell.exe',[System.EnvironmentVariableTarget]::User)
 
 scoop add bucket extras
-scoop add bucket java
+#scoop add bucket java
 
 scoop install 7zip:
 scoop install autohotkey
 scoop install chezmoi
 scoop install git
-scoop install komorebi
+#scoop install komorebi
 scoop install neovim
 scoop install poppler      # pdftotext used by vifm
 scoop install sumatrapdf
@@ -34,29 +34,29 @@ scoop install vcredist2022 #suggested by neovim
 scoop install vifm
 scoop install wezterm
 scoop install sudo
-scoop install win32yank
-scoop install graalvm-jdk17
-scoop install idea-ultimate
+#scoop install win32yank // neovim has this
+#scoop install graalvm-jdk17
+#scoop install idea-ultimate
 
 
-cd ~\scoop\apps\idea-ultimate\current\IDE\bin
+#cd ~\scoop\apps\idea-ultimate\current\IDE\bin
 # ideavim
-idea.exe installPlugins IdeaVIM
-idea.exe installPlugins com.joshestein.ideavim-quickscope
-idea.exe installPlugins AceJump
-idea.exe installPlugins org.jetbrains.IdeaVim-EasyMotion
-idea.exe installPlugins com.github.dankinsoid.multicursor
-# other
-idea.exe installPlugins com.github.copilot
-idea.exe installPlugins org.intellij.scala
-idea.exe installPlugins socrates.tabshifter
-idea.exe installPlugins com.intellij.plugins.xwinkeymap
-idea.exe installPlugins io.github.xiaopihai7256
+#idea.exe installPlugins IdeaVIM
+#idea.exe installPlugins com.joshestein.ideavim-quickscope
+##idea.exe installPlugins AceJump
+##idea.exe installPlugins org.jetbrains.IdeaVim-EasyMotion
+##idea.exe installPlugins com.github.dankinsoid.multicursor
+## other
+#idea.exe installPlugins com.github.copilot
+#idea.exe installPlugins org.intellij.scala
+#idea.exe installPlugins socrates.tabshifter
+#idea.exe installPlugins com.intellij.plugins.xwinkeymap
+#idea.exe installPlugins io.github.xiaopihai7256
 
-// installing idea plugins on WSL2 host (remote development):
-// cd ~/.cache/JetBrains/RemoteDev/dist
-// cd %instance%
-// bin/remote-dev-server.sh installPlugins PROJECT_PATH pluginId
+# installing idea plugins on WSL2 host (remote development):
+# cd ~/.cache/JetBrains/RemoteDev/dist
+# cd %instance%
+# bin/remote-dev-server.sh installPlugins PROJECT_PATH pluginId
 
 
 New-Item $env:USERPROFILE\Documents\PowerShell\Profile.ps1 -Force
@@ -65,11 +65,11 @@ Set-Content $env:USERPROFILE\Documents\PowerShell\Profile.ps1 ". ~\.config\power
 
 sudo New-Item -ItemType SymbolicLink -Path ~/.config/chezmoi -Target ~/setup/chezmoi
 
-sudo New-Item -ItemType SymbolicLink -Target "~\setup\jetbrains\keymaps" -Path "~\scoop\apps\idea-ultimate\current\profile\config\keymaps"
-sudo New-Item -ItemType SymbolicLink -Target "~\setup\jetbrains\templates" -Path "~\scoop\apps\idea-ultimate\current\profile\config\templates"
+#sudo New-Item -ItemType SymbolicLink -Target "~\setup\jetbrains\keymaps" -Path "~\scoop\apps\idea-ultimate\current\profile\config\keymaps"
+#sudo New-Item -ItemType SymbolicLink -Target "~\setup\jetbrains\templates" -Path "~\scoop\apps\idea-ultimate\current\profile\config\templates"
 
 sudo New-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run -Name xlaunch -Value "$Env:USERPROFILE\scoop\shims\xlaunch.exe -run $Env:USERPROFILE\.config\vcxsrv\config.xlaunch"
-sudo New-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run -Name komorebic -Value "$Env:USERPROFILE\scoop\shims\komorebic.exe start --await-configuration"
+#sudo New-ItemProperty -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run -Name komorebic -Value "$Env:USERPROFILE\scoop\shims\komorebic.exe start --await-configuration"
 
 
 # after installing Brave through scoop, it uses scoop's local User-Dir (see shortcut properties) via parameter. You want to add it to windows' "open by" default app:
