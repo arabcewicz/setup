@@ -2,9 +2,9 @@ function set_win_title(){
     echo -ne "\033]0; $(echo -n "$WSL_DISTRO_NAME") \007"
 }
 
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
 #freshfetch
 
 sleep 0.05 # command below doesn't work without that
 if [ -n "$WSL_DISTRO_NAME" ]; then set_win_title; fi
-cd ~
+#cd ~

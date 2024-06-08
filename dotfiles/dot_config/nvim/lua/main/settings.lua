@@ -8,7 +8,7 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.opt.mouse = 'a'
 
-if vim.fn.has('wsl2') == 1 then
+if vim.fn.has('wsl') == 1 then
   vim.g.clipboard = {
     name = 'WslClipboard',
     copy = {

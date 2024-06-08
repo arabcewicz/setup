@@ -9,7 +9,7 @@ return {
           enable_rename = true,
         },
         ensure_installed = {
-          "scala", "rust", "html", "css", "javascript", "typescript", "tsx", "json", "lua", "vim", "vimdoc", "query", "markdown", "yaml", "toml", "latex"
+          "scala", "rust", "html", "css", "javascript", "typescript", "tsx", "json", "lua", "vim", "vimdoc", "query", "markdown", "yaml", "toml"
         },
         sync_install = false,
         auto_install = true,

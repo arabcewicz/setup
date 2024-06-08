@@ -1,37 +1,98 @@
+#-- profiling
+# zmodload zsh/datetime
+# setopt PROMPT_SUBST
+# PS4='+$EPOCHREALTIME %N:%i> '
+#
+# logfile=$(mktemp zsh_profile.XXXXXXXX)
+# echo "Logging to $logfile"
+# exec 3>&2 2>$logfile
+#
+# setopt XTRACE
+#-----------------
 
-# vim - system clipboard integration in WSL
-# if [[ $(uname -r | sed -n 's/.*\( *Microsoft *\).*/\1/ip') ]]
-# then
-#     export DISPLAY="$(grep nameserver /etc/resolv.conf | sed 's/nameserver //'):0"
-#     if ! which win32yank.exe > /dev/null
-#     then
-#         echo "Installing win32yank.exe"
-#         curl -sLo/tmp/win32yank.zip https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip
-#         unzip -p /tmp/win32yank.zip win32yank.exe > ~/bin/win32yank.exe
-#         chmod +x ~/bin/win32yank.exe
-#     fi
-# fi
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
+
+
+# prompt
+zinit ice from"gh-r" as"command" atload'eval "$(starship init zsh)"'
+zinit light starship/starship
+source $ZDOTDIR/starship
+
+#vi mode
+zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
+zvm_after_init_commands+=('source <(fzf --zsh) && bindkey '^p' history-beginning-search-backward && bindkey '^n' history-beginning-search-forward')
+
+# autosuggestions
+zinit light zsh-users/zsh-autosuggestions
+
+# syntax-highlighting
+zinit light z-shell/F-Sy-H
+
+zinit snippet OMZP::sudo # Esc twice
+
+# completions
+#zinit light zsh-users/zsh-completions
+#autoloa -U compinit && compinit
+
+# fpath=(~/.nix-profile/share/zsh/site-functions $XDG_CACHE_HOME/zsh/completions $fpath)
+# compinit -i
+# compinit -d "$XDG_CACHE_HOME/zsh/.zcompdump"
+# _comp_options+=(globdots) # With hidden file
+
+
+# function generate-completions() {
+#   local COMPDIR=$XDG_CACHE_HOME/zsh/completions
+#
+#   # bloop
+#   curl -s https://raw.githubusercontent.com/scalacenter/bloop/master/etc/zsh-completions -o $COMPDIR/_bloop
+#
+#   # cs
+#   #cs --completions zsh > $COMPDIR/_cs
+#   echo '#compdef _cs cs
+# function _cs {
+#   eval "$(cs complete zsh-v1 $CURRENT $words[@])"
+# }' > $COMPDIR/_cs
+
+
+  # gh
+  #gh completion -s zsh > $COMPDIR/_gh
+
+  # scalafix
+  # scalafix --zsh > $COMPDIR/_scalafix
+
+  # scalafmt
+  # curl -s https://raw.githubusercontent.com/scalameta/scalafmt/master/bin/_scalafmt -o $DIR/_scalafmt
+# }
 
 # compinit -d ~/.cache/zsh/zcompdump-$ZSH_VERSION
-# +------------+
-# | NAVIGATION |
-# +------------+
-# setopt AUTO_CD              # Go to folder path without using cd.
-# setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
-# setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
-# setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
+
+
+zinit light Aloxaf/fzf-tab
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
 
 # +---------+
 # | HISTORY |
 # +---------+
-export HISTFILE="$XDG_CACHE_HOME/zsh/.zsh_history"
-export HISTSIZE=1000000000
-export SAVEHIST=$HISTSIZE
-export HISTFILESIZE=$HISTSIZE
+HISTSIZE=10000000
+HISTFILE="$XDG_CACHE_HOME/zsh/.zsh_history"
+SAVEHIST=$HISTSIZE
+#HISTDUP=erase
+HISTFILESIZE=$HISTSIZE
 setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
 setopt SHARE_HISTORY             # Share history between all sessions.
 setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
-#setopt HIST_IGNORE_DUPS          # Do not record an event that was just recorded again.
+setopt HIST_IGNORE_DUPS          # Do not record an event that was just recorded again.
 setopt HIST_IGNORE_ALL_DUPS      # Delete an old recorded event if a new event is a duplicate.
 setopt HIST_FIND_NO_DUPS         # Do not display a previously found event.
 setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
@@ -42,42 +103,7 @@ unsetopt BEEP
 
 source $ZDOTDIR/env
 source $ZDOTDIR/aliases
-source $ZDOTDIR/vimmode
-source $ZDOTDIR/starship
-
-
-# completions
-fpath=(~/.nix-profile/share/zsh/site-functions $XDG_CACHE_HOME/zsh/completions $fpath)
-autoload -U compinit
-compinit -i
-# compinit -d "$XDG_CACHE_HOME/zsh/.zcompdump"
-# _comp_options+=(globdots) # With hidden file
-
-
-function generate-completions() {
-  local COMPDIR=$XDG_CACHE_HOME/zsh/completions
-
-  # bloop
-  curl -s https://raw.githubusercontent.com/scalacenter/bloop/master/etc/zsh-completions -o $COMPDIR/_bloop
-
-  # cs
-  #cs --completions zsh > $COMPDIR/_cs
-  echo '#compdef _cs cs
-function _cs {
-  eval "$(cs complete zsh-v1 $CURRENT $words[@])"
-}' > $COMPDIR/_cs
-
-
-  # gh
-  #gh completion -s zsh > $COMPDIR/_gh
-
-  # scalafix
-  scalafix --zsh > $COMPDIR/_scalafix
-
-  # scalafmt
-  curl -s https://raw.githubusercontent.com/scalameta/scalafmt/master/bin/_scalafmt -o $DIR/_scalafmt
-}
-
+#source $ZDOTDIR/vimmode
 
 # local, non shared settings
 if [ -f "$ZDOTDIR/_local" ] ; then source "$ZDOTDIR/_local"; fi
@@ -89,28 +115,32 @@ if [ -f "$ZDOTDIR/_local" ] ; then source "$ZDOTDIR/_local"; fi
 # End Nix
 ###
 
-if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+#if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
 
-source $HOME/.nix-profile/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/.nix-profile/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-bindkey '^[;' autosuggest-accept
+# source $HOME/.nix-profile/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source $HOME/.nix-profile/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# bindkey '^[;' autosuggest-accept
 
 # change dir to current in vifm on exit
-vifm()
-{
-    local dst="$(command vifm --choose-dir - "$@")"
-    if [ -z "$dst" ]; then
-        echo 'Directory picking cancelled/failed'
-        return 1
-    fi
-    cd "$dst"
-}
+# vifm()
+# {
+#     local dst="$(command vifm --choose-dir - "$@")"
+#     if [ -z "$dst" ]; then
+#         echo 'Directory picking cancelled/failed'
+#         return 1
+#     fi
+#     cd "$dst"
+# }
 
 # fzf
-if [ -n "${commands[fzf-share]}" ]; then
-  source "$(fzf-share)/key-bindings.zsh"
-  source "$(fzf-share)/completion.zsh"
-fi
+# if [ -n "${commands[fzf-share]}" ]; then
+#   source "$(fzf-share)/key-bindings.zsh"
+#   source "$(fzf-share)/completion.zsh"
+# fi
 #source ~/.nix-profile/share/fzf-git-sh/fzf-git.sh
+
+#--- profiling
+# unsetopt XTRACE
+# exec 2>&3 3>&-
 
