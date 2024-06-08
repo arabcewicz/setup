@@ -1,0 +1,26 @@
+{{ if eq .chezmoi.os "linux" -}}
+
+#!/bin/sh
+sudo snap install chezmoi --classic
+sudo apt install zsh
+sudo apt install neovim
+sudo apt install ripgrep
+sudo apt install fd
+sudo apt install fzf
+
+#sudo apt install cmatrix
+#sudo apt install neofetch
+#sudo apt install bat
+#sudo apt install tldr
+#sudo apt install tree
+#sudo apt install gdu
+#sudo apt install btop
+
+sudo apt install gcc
+
+{{ else if eq .chezmoi.os "darwin" -}}
+
+#!/bin/sh
+brew install ripgrep
+
+{{ end -}}

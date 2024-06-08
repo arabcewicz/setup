@@ -30,12 +30,5 @@ EOF
 
 echo "if [ -e \$HOME/.setuprc ]; then . \$HOME/.setuprc; fi" >> ~/.bashrc
 
-echo "[SETUP1] Creating link-script ~/bin/win32yank.exe..."
-cat << EOF >> ~/bin/win32yank.exe
-#!/bin/sh
-\$WINHOME/scoop/apps/neovim/current/bin/win32yank.exe "\$@" 2>/dev/null
-EOF
-chmod +x ~/bin/win32yank.exe
-
 # reload shell now
 
