@@ -14,6 +14,16 @@ sudo apt install -y zoxide
 # sudo apt install -y fzf
 wget -c https://github.com/junegunn/fzf/releases/download/0.53.0/fzf-0.53.0-linux_amd64.tar.gz -O - | tar -xz -C ~/bin
 
+#no lazygit in apt
+if [ ! -f /usr/local/bin/lazygit ]; then
+  LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+  curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+  tar xf lazygit.tar.gz lazygit
+  sudo install lazygit /usr/local/bin
+fi
+
+sudo apt install -y git-delta
+
 sudo apt install -y cmatrix
 sudo apt install -y neofetch
 sudo apt install -y tldr
