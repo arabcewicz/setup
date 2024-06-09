@@ -38,6 +38,9 @@ scoop install pwsh
 scoop install powership
 scoop install biodiff
 scoop install openssh
+scoop install lazygit
+scoop install delta
+
 
 scoop install wezterm
 scoop install vcxsrv
