@@ -1,8 +1,10 @@
 # # find out which distribution we are running on
 MFILE="/System/Library/CoreServices/SystemVersion.plist"
-_distro=$(cat /etc/*-release | grep '^ID=' | cut -d '=' -f 2)
+_distro=""
 if [[ -f $MFILE ]]; then
   _distro="macos"
+else
+  _distro=$(cat /etc/*-release | grep '^ID=' | cut -d '=' -f 2)
 fi
 
 case $_distro in
@@ -27,7 +29,7 @@ case $_distro in
     *devuan*)                ICON="";;
     *manjaro*)               ICON="";;
     *rhel*)                  ICON="";;
-    *macos*)                 ICON="";;
+    *macos*)                 ICON="";;
     *)                       ICON="";;
 esac
 

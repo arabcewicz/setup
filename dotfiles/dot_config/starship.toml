@@ -9,18 +9,12 @@ $git_state\
 $git_metrics\
 $git_status\
 $docker_context\
-$package\
 $guix_shell\
-$haskell\
-$java\
-$kotlin\
-$gradle\
 $lua\
 $nodejs\
 $python\
 $rust\
 $scala\
-$nix_shell\
 $memory_usage\
 $sudo\
 $cmd_duration\
@@ -28,9 +22,6 @@ $line_break\
 $jobs\
 $time\
 $status\
-$os\
-$container\
-$shell\
 $character"""
 
 # format = """
@@ -126,6 +117,9 @@ format = "$env_value "
 style = "fg:#bbbbbb"
 variable = 'OS_ICON'
 default = "?"
+
+#[scala]
+#detect_folders = []
 
 # [custom.foo]
 # command = 'echo $WSL_DISTRO_NAME'

@@ -13,7 +13,7 @@ return {
   -- default_prog = { 'pwsh.exe' },
   color_scheme = 'Catppuccin Mocha',
   font = wezterm.font('JetBrainsMono NF'),
-  font_size = 9.9,
+  font_size = 12.5,
   line_height = 1.05,
   enable_tab_bar = true,
   use_ime = true,
@@ -40,7 +40,7 @@ return {
   --  text_background_opacity = 0.9,
   window_frame = {
     font = wezterm.font { family = 'Noto Sans', weight = 'Regular' },
-    font_size = 9,
+    font_size = 12,
     active_titlebar_bg = '#282828',
     inactive_titlebar_bg = '#928374',
   },

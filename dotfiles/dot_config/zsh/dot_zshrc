@@ -10,6 +10,9 @@
 # setopt XTRACE
 #-----------------
 
+# local, non shared settings
+if [ -f "$ZDOTDIR/_local" ] ; then source "$ZDOTDIR/_local"; fi
+
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
@@ -84,7 +87,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 #zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1 --color=always $realpath'
 # zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'eza -1lh --icons --git-ignore --group-directories-first --sort=accessed --color=always $realpath'
 # zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-flags --height=35% --preview-window=right:65%
-#eval "$(zoxide init --cmd cd zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
 
 # +---------+
@@ -111,8 +114,6 @@ source $ZDOTDIR/env
 source $ZDOTDIR/aliases
 #source $ZDOTDIR/vimmode
 
-# local, non shared settings
-if [ -f "$ZDOTDIR/_local" ] ; then source "$ZDOTDIR/_local"; fi
 
 ## Nix
 #if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
