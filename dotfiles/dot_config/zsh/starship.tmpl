@@ -1,0 +1,44 @@
+{{ if eq .chezmoi.os "darwin" }}
+
+export OS_ICON=""
+
+{{ else if eq .chezmoi.os "windows" }}
+
+# has to be set manually anyway
+export OS_ICON=""
+
+{{ else if eq .chezmoi.os "linux" }}
+
+  _distro=$(cat /etc/*-release | grep '^ID=' | cut -d '=' -f 2)
+  case $_distro in
+      *kali*)                  export OS_ICON="ﴣ";;
+      *arch*)                  export OS_ICON="";;
+      *debian*)                export OS_ICON="";;
+      *raspbian*)              export OS_ICON="";;
+      *ubuntu*)                export OS_ICON="";;
+      *elementary*)            export OS_ICON="";;
+      *fedora*)                export OS_ICON="";;
+      *coreos*)                export OS_ICON="";;
+      *gentoo*)                export OS_ICON="";;
+      *mageia*)                export OS_ICON="";;
+      *centos*)                export OS_ICON="";;
+      *opensuse*|*tumbleweed*) export OS_ICON="";;
+      *sabayon*)               export OS_ICON="";;
+      *slackware*)             export OS_ICON="";;
+      *linuxmint*)             export OS_ICON="";;
+      *alpine*)                export OS_ICON="";;
+      *aosc*)                  export OS_ICON="";;
+      *nixos*)                 export OS_ICON="";;
+      *devuan*)                export OS_ICON="";;
+      *manjaro*)               export OS_ICON="";;
+      *rhel*)                  export OS_ICON="";;
+      *)                       export OS_ICON="";;
+  esac
+
+{{ else }}
+
+# other operating system ???
+export OS_ICON="?"
+
+{{ end }}
+

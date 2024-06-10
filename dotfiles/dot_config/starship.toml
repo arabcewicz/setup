@@ -10,6 +10,8 @@ $git_metrics\
 $git_status\
 $docker_context\
 $guix_shell\
+$java\
+$kotlin\
 $lua\
 $nodejs\
 $python\
@@ -23,6 +25,17 @@ $jobs\
 $time\
 $status\
 $character"""
+
+
+[env_var.OS_ICON]
+format = "$env_value "
+style = "fg:#bbbbbb"
+variable = 'OS_ICON'
+default = "?"
+
+[scala]
+detect_folders = []
+
 
 # format = """
 #${env_var.OS_ICON}\
@@ -111,15 +124,6 @@ $character"""
 #$character"""
 
 # [ ]()
-
-[env_var.OS_ICON]
-format = "$env_value "
-style = "fg:#bbbbbb"
-variable = 'OS_ICON'
-default = "?"
-
-#[scala]
-#detect_folders = []
 
 # [custom.foo]
 # command = 'echo $WSL_DISTRO_NAME'

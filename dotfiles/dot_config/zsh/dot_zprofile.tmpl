@@ -1,0 +1,30 @@
+{{ if eq .chezmoi.os "darwin" }}
+
+export PATH="/opt/homebrew/bin:$PATH"
+
+# >>> coursier install directory >>>
+export PATH="$PATH:/Users/adrab/Library/Application Support/Coursier/bin:~/evolution/dex-login"
+# <<< coursier install directory <<<
+
+
+# >>> JVM installed by coursier >>>
+export JAVA_HOME="/Users/adrab/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin21-binaries/releases/download/jdk-21%252B35/OpenJDK21U-jdk_aarch64_mac_hotspot_21_35.tar.gz/jdk-21+35/Contents/Home"
+# <<< JVM installed by coursier <<<
+
+{{ else if eq .chezmoi.os "linux" }}
+
+export PATH="$PATH:/snap/bin"
+
+# >>> coursier install directory >>>
+#export PATH="$PATH:/home/adrab/.local/share/coursier/bin"
+# <<< coursier install directory <<<
+
+{{ else if eq .chezmoi.os "windows" }}
+
+
+{{ else }}
+
+
+{{ end }}
+
+
