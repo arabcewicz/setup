@@ -1,8 +1,20 @@
 [user]
-	name = adrab
-	email = adam.rabcewicz@ewolwe.pl
+{{ if eq .chezmoi.os "darwin" }}
+    name = Adam Rabcewicz
+    email = arabcewicz@evolution.com
+{{ else }}
+    name = adrab
+    email = adam.rabcewicz@ewolwe.pl
+{{ end}}
+
+[filter "lfs"]
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
 
 [core]
+    excludesfile = ~/.gitignore
     pager = delta
 
 [interactive]
