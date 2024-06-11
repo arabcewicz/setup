@@ -11,6 +11,10 @@ export PATH="$PATH:/Users/adrab/Library/Application Support/Coursier/bin:~/evolu
 export JAVA_HOME="/Users/adrab/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin21-binaries/releases/download/jdk-21%252B35/OpenJDK21U-jdk_aarch64_mac_hotspot_21_35.tar.gz/jdk-21+35/Contents/Home"
 # <<< JVM installed by coursier <<<
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
 {{ else if eq .chezmoi.os "linux" }}
 
 export PATH="$PATH:/snap/bin"

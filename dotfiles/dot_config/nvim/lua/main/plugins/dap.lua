@@ -12,17 +12,19 @@ return {
     require("dapui").setup()
     require("nvim-dap-virtual-text").setup()
 
-    dap.listeners.before.attach.dapui_config = function()
-      dapui.open()
-    end
-    dap.listeners.before.launch.dapui_config = function()
-      dapui.open()
-    end
-    dap.listeners.before.event_terminated.dapui_config = function()
-      dapui.close()
-    end
-    dap.listeners.before.event_exited.dapui_config = function()
-      dapui.close()
+    function dapui_autostart()
+      dap.listeners.before.attach.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.launch.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated.dapui_config = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited.dapui_config = function()
+        dapui.close()
+      end
     end
 
     dap.configurations.scala = {
@@ -61,6 +63,11 @@ return {
         description = "dap: Continue"
       },
       {
+        "<leader>dt",
+        function() require("dap").terminate() end,
+        description = "dap: Terminate"
+      },
+      {
         "<leader>dr",
         function() require("dap").repl.toggle() end,
         description = "dap: Toggle repl"
@@ -91,9 +98,14 @@ return {
         description = "dap: Run last debug session"
       },
       {
-        "<leader>dt",
+        "<leader>du",
         function() require("dapui").toggle() end,
         description = "dapui: Toggle dapui"
+      },
+      {
+        "<leader>da",
+        function() dapui_autostart() end,
+        description = "dapui: Toggle ui autostart"
       },
     })
   end

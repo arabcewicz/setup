@@ -12,7 +12,7 @@ return {
 
     require("legendary").keymaps({
       {
-        "<Enter>",
+        "<leader>;",
         {
           n = function() require('flash').jump() end,
           x = function() require('flash').jump() end,
