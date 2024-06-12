@@ -43,17 +43,17 @@ return {
         description = "diffview: Show git log"
       },
       {
-        '<M-[>',
+        '<A-[>',
         "[c",
         description = "previous chunk"
       },
       {
-        '<M-]>',
+        '<A-]>',
         "]c",
         description = "next chunk"
       },
       {
-        '<M-d>',
+        '<A-d>',
         ":DiffviewOpen HEAD --selected-file=% --imply-local<CR>",
         description = "diffview: Open with current file selected"
       },

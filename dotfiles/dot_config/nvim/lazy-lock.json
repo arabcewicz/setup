@@ -41,6 +41,7 @@
   "nvim-various-textobjs": { "branch": "main", "commit": "3ab25fe20f8f9c2035425d0cf5c9634a063cb98e" },
   "nvim-web-devicons": { "branch": "master", "commit": "b77921fdc44833c994fdb389d658ccbce5490c16" },
   "oil.nvim": { "branch": "master", "commit": "18272aba9d00a3176a5443d50dbb4464acc167bd" },
+  "output-panel.nvim": { "branch": "main", "commit": "65bb44a5d5dbd40f3793a8c591b65a0c5f260bd9" },
   "playground": { "branch": "master", "commit": "ba48c6a62a280eefb7c85725b0915e021a1a0749" },
   "plenary.nvim": { "branch": "master", "commit": "a3e3bc82a3f95c5ed0d7201546d5d2c19b20d683" },
   "possession.nvim": { "branch": "master", "commit": "46dd09d9d4bf95665eb05286f8fccc0093b10035" },

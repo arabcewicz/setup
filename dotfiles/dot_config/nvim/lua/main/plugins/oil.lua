@@ -1,11 +1,26 @@
 return {
   'stevearc/oil.nvim',
-  opts = {
-    view_options = {
-      show_hidden = true,
+  config = function()
+    require("oil").setup({
+      view_options = {
+        show_hidden = true,
 
-    }
-  },
-  -- Optional dependencies
+      },
+    })
+
+    require('legendary').keymaps({
+      {
+        '<A-e>',
+        ":Oil<CR>",
+        description = "oil: Start in normal windows",
+      },
+      {
+        '<S-A-e>',
+        ":Oil --float<CR>",
+        description = "oil: Start in floating windows",
+      },
+    })
+  end,
+
   dependencies = { "nvim-tree/nvim-web-devicons" },
 }
