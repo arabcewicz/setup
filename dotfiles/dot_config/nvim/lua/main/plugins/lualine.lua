@@ -23,17 +23,7 @@ return {
           'mode',
         },
         lualine_b = {
-          {
-            'filename',
-            newfile_status = true,
-            path = 0,
-            --[[ symbols = {
-          modified = " ? ",
-          readonly = " ? ",
-          unnamed = "[No name]"
-        }, ]]
-          },
-          'filesize'
+          'buffers',
         },
         lualine_c = {
           {
@@ -54,7 +44,17 @@ return {
         end
       }, ]]
         },
-        lualine_x = { 'encoding', 'fileformat', 'filetype' },
+        lualine_x = {
+          {
+            'filename',
+            newfile_status = true,
+            path = 0,
+          },
+          'filesize',
+          'encoding',
+          'fileformat',
+          'filetype'
+        },
         lualine_y = { 'branch', 'diff', 'diagnostics' },
         lualine_z = { 'progress', 'location', 'selectioncount' }
       },

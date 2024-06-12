@@ -5,6 +5,30 @@ local opts = { noremap = true, silent = true }
 
 require('legendary').keymaps({
   {
+    "<A-,>",
+    { n = ":bprev<CR>", i = "<Esc>:bprev<CR>" },
+    description = "Go to previous buffer",
+    opts = opts,
+  },
+  {
+    "<A-.>",
+    { n = ":bnext<CR>", i = "<Esc>:bnext<CR>" },
+    description = "Go to next buffer",
+    opts = opts,
+  },
+  {
+    "<S-A-,>",
+    { n = ":bfirst<CR>", i = "<Esc>:bfirst<CR>" },
+    description = "Go to first buffer",
+    opts = opts,
+  },
+  {
+    "<S-A-.>",
+    { n = ":blast<CR>", i = "<Esc>:blast<CR>" },
+    description = "Go to last buffer",
+    opts = opts,
+  },
+  {
     "<C-s>",
     { n = ":wa<CR>", i = "<Esc>:wa<CR>" },
     description = "Save current buffer",
