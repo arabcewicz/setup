@@ -12,7 +12,7 @@ return {
 
     require("legendary").keymaps({
       {
-        "<leader>;",
+        "<A-/>",
         {
           n = function() require('flash').jump() end,
           x = function() require('flash').jump() end,
@@ -21,7 +21,7 @@ return {
         description = "flash: Flash",
       },
       {
-        "<C-m>",
+        "<A-v>",
         {
           n = function() require('flash').treesitter() end,
           x = function() require('flash').treesitter() end,

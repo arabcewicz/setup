@@ -7,25 +7,25 @@ require('legendary').keymaps({
   {
     "<A-,>",
     { n = ":bprev<CR>", i = "<Esc>:bprev<CR>" },
-    description = "Go to previous buffer",
+    description = "Go to the previous buffer",
     opts = opts,
   },
   {
     "<A-.>",
     { n = ":bnext<CR>", i = "<Esc>:bnext<CR>" },
-    description = "Go to next buffer",
+    description = "Go to the next buffer",
     opts = opts,
   },
   {
     "<S-A-,>",
     { n = ":bfirst<CR>", i = "<Esc>:bfirst<CR>" },
-    description = "Go to first buffer",
+    description = "Go to the first buffer",
     opts = opts,
   },
   {
     "<S-A-.>",
     { n = ":blast<CR>", i = "<Esc>:blast<CR>" },
-    description = "Go to last buffer",
+    description = "Go to the last buffer",
     opts = opts,
   },
   {
@@ -35,15 +35,27 @@ require('legendary').keymaps({
     opts = opts,
   },
   {
-    "<A-p>",
+    "<A-o>",
     ":tabnext<CR>",
-    description = "Switch to next tab",
+    description = "Switch to the next tab",
+    opts = opts,
+  },
+  {
+    "<A-i>",
+    ":tabprevious<CR>",
+    description = "Switch to the previous tab",
     opts = opts,
   },
   {
     "<A-u>",
-    ":tabprevious<CR>",
-    description = "Switch to previous tab",
+    ":tabfirst<CR>",
+    description = "Switch to the first tab",
+    opts = opts,
+  },
+  {
+    "<A-i>",
+    ":tablasst<CR>",
+    description = "Switch to the last tab",
     opts = opts,
   },
   {

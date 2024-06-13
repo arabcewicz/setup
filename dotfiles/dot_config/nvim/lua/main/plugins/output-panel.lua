@@ -5,7 +5,7 @@ return {
     require("output_panel").setup()
     require('legendary').keymaps({
       {
-        '<A-o>',
+        '<A-|>',
         ":OutputPanel<CR>",
         description = "output-panel: Toggle output panel (lsp server logs)",
       },
