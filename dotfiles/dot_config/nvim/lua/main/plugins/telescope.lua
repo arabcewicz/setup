@@ -108,11 +108,16 @@ return {
       }
       telescope.load_extension("file_browser")
       telescope.load_extension("ui-select")
-
+      telescope.load_extension('chezmoi')
 
       local builtin = require('telescope.builtin')
 
       require("legendary").keymaps({
+        {
+          '<leader>f.',
+          telescope.extensions.chezmoi.find_files,
+          description = 'telescope: List files in current working directory'
+        },
         {
           '<leader>ff',
           builtin.find_files,

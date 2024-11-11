@@ -2,7 +2,7 @@ return {
   'mrjones2014/smart-splits.nvim',
   config = function()
     require('smart-splits').setup({
-      at_edge = 'split',
+      at_edge = 'stop',
       multiplexer_integration = nil,
       cursor_follows_swapped_bufs = true,
       ignored_filetypes = { 'neo-tree' },

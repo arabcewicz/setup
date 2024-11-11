@@ -1,5 +1,6 @@
 return {
   'rcarriga/nvim-notify',
+  enabled = false,
   config = function()
     require("notify").setup({
       -- background_colour = "#000000",
@@ -10,12 +11,12 @@ return {
     })
     vim.notify = require("notify")
 
-    require('legendary').keymaps({
-      {
-        "<leader>fn",
-        ":Telescope notify<CR>",
-        description = "notify: List recent notifications"
-      },
-    })
+    -- require('legendary').keymaps({
+    --   {
+    --     "<leader>fn",
+    --     ":Telescope notify<CR>",
+    --     description = "notify: List recent notifications"
+    --   },
+    -- })
   end
 }

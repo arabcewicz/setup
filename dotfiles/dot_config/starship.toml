@@ -34,6 +34,7 @@ variable = 'OS_ICON'
 default = "?"
 
 [scala]
+symbol = ' '
 detect_folders = []
 
 

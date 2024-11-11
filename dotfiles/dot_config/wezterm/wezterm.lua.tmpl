@@ -2,28 +2,31 @@ local wezterm = require "wezterm"
 
 local mux = wezterm.mux
 local act = wezterm.action
-local wsl_domains = wezterm.default_wsl_domains()
 
+{{ if eq .chezmoi.os "windos" }}
+local wsl_domains = wezterm.default_wsl_domains()
 for _, domain in ipairs(wsl_domains) do
   domain.default_cwd = "~"
 end
+{{ end }}
 
 
 return {
-  -- default_prog = { 'pwsh.exe' },
-  color_scheme = 'Catppuccin Mocha',
+  default_prog = { 'nu' },
+  color_scheme = 'catppuccin-macchiato',
   font = wezterm.font('JetBrainsMono NF'),
   font_size = {{ if eq .chezmoi.os "darwin" }} 12.5 {{ else }} 9.9 {{ end }},
   line_height = 1.05,
   enable_tab_bar = true,
   use_ime = true,
   -- treat_left_ctrlalt_as_altgr = true,
-  --[[ window_background_opacity = 0.9,
-  win32_system_backdrop = 'Acrylic', ]]
+  -- window_background_opacity = 0.9,
+  -- win32_system_backdrop = 'Acrylic',
   enable_csi_u_key_encoding = true,
   allow_win32_input_mode = false,
   -- debug_key_events = true,
   term = 'xterm-256color',
+  max_fps = 120,
   -- term = 'wezterm',
   inactive_pane_hsb = {
     brightness = 0.85,
@@ -36,8 +39,6 @@ return {
   -- force_reverse_video_cursor = true,
   force_reverse_video_cursor = false,
   window_close_confirmation = 'NeverPrompt',
-  --  window_background_opacity = 0.9,
-  --  text_background_opacity = 0.9,
   window_frame = {
     font = wezterm.font { family = 'Noto Sans', weight = 'Regular' },
     font_size = {{ if eq .chezmoi.os "darwin" }} 12 {{ else }} 9 {{ end }},
@@ -57,50 +58,84 @@ return {
   },
   disable_default_key_bindings = true,
   audible_bell = 'Disabled',
-  -- leader = { key = ' ', mods = 'ALT|WIN', timeout_milliseconds = 2000 },
+
+  leader = { key = 'Space', mods = 'WIN|ALT', timeout_milliseconds = 2000 },
   keys = {
-    { key = 'Space', mods = 'ALT|WIN',       action = act.ActivateCommandPalette },
-    { key = 'h',     mods = 'ALT|WIN',       action = act.ActivatePaneDirection 'Left', },
-    { key = 'l',     mods = 'ALT|WIN',       action = act.ActivatePaneDirection 'Right' },
-    { key = 'j',     mods = 'ALT|WIN',       action = act.ActivatePaneDirection 'Down' },
-    { key = 'k',     mods = 'ALT|WIN',       action = act.ActivatePaneDirection 'Up' },
-    { key = 'h',     mods = 'ALT|WIN|SHIFT', action = act.SplitPane { direction = 'Left' } },
-    { key = 'l',     mods = 'ALT|WIN|SHIFT', action = act.SplitPane { direction = 'Right' } },
-    { key = 'j',     mods = 'ALT|WIN|SHIFT', action = act.SplitPane { direction = 'Down' } },
-    { key = 'k',     mods = 'ALT|WIN|SHIFT', action = act.SplitPane { direction = 'Up' } },
-    { key = 'h',     mods = 'ALT|WIN|CTRL',  action = act.AdjustPaneSize { 'Left', 5 } },
-    { key = 'l',     mods = 'ALT|WIN|CTRL',  action = act.AdjustPaneSize { 'Right', 5 } },
-    { key = 'j',     mods = 'ALT|WIN|CTRL',  action = act.AdjustPaneSize { 'Down', 5 } },
-    { key = 'k',     mods = 'ALT|WIN|CTRL',  action = act.AdjustPaneSize { 'Up', 5 } },
-    { key = 'z',     mods = 'ALT|WIN',       action = act.TogglePaneZoomState },
-    { key = 's',     mods = 'ALT|WIN',       action = act.ReloadConfiguration },
-    { key = '=',     mods = 'ALT|WIN',       action = act.IncreaseFontSize },
-    { key = '-',     mods = 'ALT|WIN',       action = act.DecreaseFontSize },
-    { key = '0',     mods = 'ALT|WIN',       action = act.ResetFontSize },
-    { key = 'y',     mods = 'ALT|WIN',       action = act.CopyTo 'Clipboard' },
-    { key = 'p',     mods = 'ALT|WIN',       action = act.PasteFrom 'Clipboard' },
---    { key = 'N', mods = 'SHIFT|CTRL', action = act.SpawnWindow },
-    { key = 'o',     mods = 'ALT|WIN',       action = act.ActivateTabRelative(1) },
-    { key = 'i',     mods = 'ALT|WIN',       action = act.ActivateTabRelative(-1) },
-    { key = 'u',     mods = 'ALT|WIN',       action = act.ActivateTab(0) },
---    { key = 'p',     mods = 'ALT|WIN',       action = act.ActivateTab(-1) },
-    { key = '^',     mods = 'ALT|WIN',       action = act.ActivateLastTab },
-    { key = '1',     mods = 'ALT|WIN',       action = act.ActivateTab(0) },
-    { key = '2',     mods = 'ALT|WIN',       action = act.ActivateTab(1) },
-    { key = '3',     mods = 'ALT|WIN',       action = act.ActivateTab(2) },
-    { key = '4',     mods = 'ALT|WIN',       action = act.ActivateTab(3) },
-    { key = '5',     mods = 'ALT|WIN',       action = act.ActivateTab(4) },
-    { key = '6',     mods = 'ALT|WIN',       action = act.ActivateTab(5) },
-    { key = '7',     mods = 'ALT|WIN',       action = act.ActivateTab(6) },
-    { key = '8',     mods = 'ALT|WIN',       action = act.ActivateTab(7) },
-    { key = '9',     mods = 'ALT|WIN',       action = act.ActivateTab(8) },   { key = ',',     mods = 'ALT|WIN',       action = act.ActivateTabRelative(-1) },
-    { key = 'v',     mods = 'ALT|WIN',       action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
-    { key = 't',     mods = 'ALT|WIN',       action = act.SpawnTab 'CurrentPaneDomain' },
-    { key = 'w',     mods = 'ALT|WIN',       action = act.CloseCurrentTab { confirm = false } },
-    { key = 'x',     mods = 'ALT|WIN',       action = act.CloseCurrentPane { confirm = false } },
+    { key = ';',     mods = 'LEADER',             action = act.ActivateCommandPalette },
+    { key = ';',     mods = 'WIN|ALT',            action = act.ActivateCommandPalette },
+
+    { key = 'h',     mods = 'WIN|ALT',            action = act.ActivatePaneDirection 'Left', },
+    { key = 'l',     mods = 'WIN|ALT',            action = act.ActivatePaneDirection 'Right' },
+    { key = 'j',     mods = 'WIN|ALT',            action = act.ActivatePaneDirection 'Down' },
+    { key = 'k',     mods = 'WIN|ALT',            action = act.ActivatePaneDirection 'Up' },
+    { key = 'h',     mods = 'WIN|ALT|SHIFT',      action = act.SplitPane { direction = 'Left' } },
+    { key = 'l',     mods = 'WIN|ALT|SHIFT',      action = act.SplitPane { direction = 'Right' } },
+    { key = 'j',     mods = 'WIN|ALT|SHIFT',      action = act.SplitPane { direction = 'Down' } },
+    { key = 'k',     mods = 'WIN|ALT|SHIFT',      action = act.SplitPane { direction = 'Up' } },
+    { key = 'h',     mods = 'WIN|ALT|CTRL',       action = act.AdjustPaneSize { 'Left', 5 } },
+    { key = 'l',     mods = 'WIN|ALT|CTRL',       action = act.AdjustPaneSize { 'Right', 5 } },
+    { key = 'j',     mods = 'WIN|ALT|CTRL',       action = act.AdjustPaneSize { 'Down', 5 } },
+    { key = 'k',     mods = 'WIN|ALT|CTRL',       action = act.AdjustPaneSize { 'Up', 5 } },
+    { key = 'z',     mods = 'WIN|ALT',            action = act.TogglePaneZoomState },
+    { key = '=',     mods = 'WIN|ALT',            action = act.IncreaseFontSize },
+    { key = '-',     mods = 'WIN|ALT',            action = act.DecreaseFontSize },
+    { key = '0',     mods = 'WIN|ALT',            action = act.ResetFontSize },
+
+    { key = 'y',     mods = 'WIN|ALT',            action = act.CopyTo 'Clipboard' },
+    { key = 'p',     mods = 'WIN|ALT',            action = act.PasteFrom 'Clipboard' },
+
+    { key = 'n',     mods = 'WIN|ALT',            action = act.SpawnWindow },
+
+    { key = 't',     mods = 'LEADER',             action = act.SpawnTab 'CurrentPaneDomain' },
+    { key = 't',     mods = 'LEADER|SHIFT',       action = act.SpawnTab 'DefaultDomain' },
+    { key = 't',     mods = 'WIN|ALT|CTRL',       action = act.SpawnTab 'CurrentPaneDomain' }, -- Windows workaround; AutoHotkey mapping WIN+ALT+T -> WIN+ALT+CTRL+t
+    { key = 't',     mods = 'WIN|ALT|CTRL|SHIFT', action = act.SpawnTab 'DefaultDomain' },     -- Windows workaround; AutoHotkey mapping WIN+ALT+T -> WIN+ALT+CTRL+SHIFT+t
+    { key = 't',     mods = 'WIN|ALT',            action = act.SpawnTab 'CurrentPaneDomain' }, -- doesn't work in Windows
+    { key = 't',     mods = 'WIN|ALT|SHIFT',      action = act.SpawnTab 'DefaultDomain' },     -- doesn't work in Windows
+    { key = 'o',     mods = 'WIN|ALT',            action = act.ActivateTabRelative(1) },
+    { key = 'i',     mods = 'WIN|ALT',            action = act.ActivateTabRelative(-1) },
+    { key = '1',     mods = 'LEADER',             action = act.ActivateTab(0) },
+    { key = '1',     mods = 'WIN|ALT',            action = act.ActivateTab(0) },
+    { key = '2',     mods = 'LEADER',             action = act.ActivateTab(1) },
+    { key = '2',     mods = 'WIN|ALT',            action = act.ActivateTab(1) },
+    { key = '3',     mods = 'LEADER',             action = act.ActivateTab(2) },
+    { key = '3',     mods = 'WIN|ALT',            action = act.ActivateTab(2) },
+    { key = '4',     mods = 'LEADER',             action = act.ActivateTab(3) },
+    { key = '4',     mods = 'WIN|ALT',            action = act.ActivateTab(3) },
+    { key = '5',     mods = 'LEADER',             action = act.ActivateTab(4) },
+    { key = '5',     mods = 'WIN|ALT',            action = act.ActivateTab(4) },
+    { key = '6',     mods = 'WIN|ALT',            action = act.ActivateTab(5) },
+    { key = '7',     mods = 'WIN|ALT',            action = act.ActivateTab(6) },
+    { key = '8',     mods = 'WIN|ALT',            action = act.ActivateTab(7) },
+    { key = '9',     mods = 'WIN|ALT',            action = act.ActivateTab(8) },
+
+    -- { key = 'x',     mods = 'WIN|ALT',            action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
+    -- { key = 'v',     mods = 'WIN|ALT',            action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
+    { key = 'w',     mods = 'WIN|ALT',            action = act.CloseCurrentTab { confirm = false } },
+    { key = 'q',     mods = 'WIN|ALT',            action = act.CloseCurrentPane { confirm = false } },
+
+    { key = 'u',     mods = 'WIN|ALT|CTRL',       action = act.ScrollByPage(-1) },
+    { key = 'd',     mods = 'WIN|ALT|CTRL',       action = act.ScrollByPage(1) },
+    { key = 'd',     mods = 'WIN|ALT|CTRL|SHIFT', action = act.ScrollByPage(1) }, -- Windows workaround
+
     -- { key = 'b', mods = 'LEADER|CTRL', action = act.SendString '\x02', },
-    { key = 'Enter', mods = 'ALT|WIN',       action = act.ActivateCopyMode, },
-    { key = 'Enter', mods = 'ALT|WIN|CTRL',  action = act.QuickSelect, },
+    { key = 'v',     mods = 'WIN|ALT',            action = act.ActivateCopyMode },
+    { key = 's',     mods = 'WIN|ALT',            action = act.Search("CurrentSelectionOrEmptyString") },
+    { key = 'Enter', mods = 'WIN|ALT',            action = act.QuickSelect },
+    {
+      key = "'",
+      mods = "WIN|ALT",
+      action = wezterm.action { QuickSelectArgs = {
+        patterns = {
+          "https?://\\S+"
+        },
+        action = wezterm.action_callback(function(window, pane)
+          local url = window:get_selection_text_for_pane(pane)
+          wezterm.log_info("opening: " .. url)
+          wezterm.open_with(url)
+        end)
+      } }
+    },
     --[[ { key = 'k', mods = 'CTRL|ALT', action = act.Multiple
       {
         act.ClearScrollback 'ScrollbackAndViewport'
@@ -109,5 +144,7 @@ return {
     } ]]
     -- { key = 'r', mods = 'LEADER', action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false, } },
   },
+{{ if eq .chezmoi.os "windos" }}
   wsl_domains = wsl_domains,
+{{ end }}
 }

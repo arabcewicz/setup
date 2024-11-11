@@ -41,6 +41,10 @@ scoop install openssh
 scoop install lazygit
 scoop install delta
 
+# install rust
+#scoop install protobuf
+#cargo install atuin
+
 
 scoop install wezterm
 scoop install vcxsrv

@@ -12,22 +12,26 @@ return {
     local opts = { noremap = true, silent = true }
     require("legendary").keymaps({
       {
-        "s",
-        -- "gr", -- doesn't work, hmm
-        { n = require('substitute').operator, x = require('substitute').visual },
+        "gr",
+        -- { n = require('substitute').operator, x = require('substitute').visual },
+        { n = require('substitute').operator },
         description = "substitue: Operator",
         opts = opts,
       },
+      -- {
+      --   "s",
+      --   { x = require('substitute').visual },
+      --   description = "substitue: Operator",
+      --   opts = opts,
+      -- },
       {
-        -- "grr",
-        "ss",
+        "grr",
         require('substitute').line,
         description = "substitue: Line",
         opts = opts,
       },
       {
-        -- "gR",
-        "S",
+        "gR",
         require('substitute').eol,
         description = "substitue: eol",
         opts = opts,
