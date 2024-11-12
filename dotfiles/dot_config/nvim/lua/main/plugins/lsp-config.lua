@@ -145,10 +145,10 @@ return {
             })
 
             vim.api.nvim_create_autocmd('LspDetach', {
-              group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
+              group = vim.api.nvim_create_augroup('lsp-detach', { clear = true }),
               callback = function(event2)
                 vim.lsp.buf.clear_references()
-                vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+                vim.api.nvim_clear_autocmds { group = 'lsp-highlight', buffer = event2.buf }
               end,
             })
           end
@@ -185,6 +185,9 @@ return {
               completion = {
                 callSnippet = 'Replace',
               },
+              diagnostics = {
+                globals = { 'vim' }
+              }
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
             },
@@ -210,6 +213,7 @@ return {
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for ts_ls)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            server.on_attach = common_on_attach
             require('lspconfig')[server_name].setup(server)
           end,
         },
@@ -265,9 +269,90 @@ return {
 
       metals.on_attach = function(client, bufnr)
         require("metals").setup_dap()
-        common_on_attach(client)
-
+        -- common_on_attach(client)
         local opts = { noremap = true, silent = true }
+        require('legendary').keymaps({
+          {
+            "gd",
+            vim.lsp.buf.definition,
+            description = "lsp: Go to definition",
+            opts = opts,
+          },
+          {
+            "gD",
+            vim.lsp.buf.declaration,
+            description = "lsp: Go to definition",
+            opts = opts,
+          },
+          {
+            "<leader>gt",
+            vim.lsp.buf.type_definition,
+            description = "lsp: Go to type definition",
+            opts = opts,
+          },
+          {
+            "K",
+            vim.lsp.buf.hover,
+            description = "lsp: Show hover",
+            opts = opts,
+          },
+          {
+            "gi",
+            vim.lsp.buf.implementation,
+            description = "lsp: Go to implementation",
+            opts = opts,
+          },
+          {
+            "gr",
+            vim.lsp.buf.references,
+            description = "lsp: Show references as quick list",
+            opts = opts,
+          },
+          {
+            "<leader>gs",
+            vim.lsp.buf.document_symbol,
+            description = "lsp: Show file symbols",
+            opts = opts,
+          },
+          {
+            "<leader>gw",
+            vim.lsp.buf.workspace_symbol,
+            description = "lsp: Show workspace symbols",
+            opts = opts,
+          },
+          {
+            "<leader>cl",
+            vim.lsp.codelens.run,
+            description = "lsp: Codelens",
+            opts = opts,
+          },
+          {
+            "<leader>sh",
+            vim.lsp.buf.signature_help,
+            description = "lsp: Show function parameters",
+            opts = opts,
+          },
+          {
+            "<leader>rn",
+            vim.lsp.buf.rename,
+            description = "lsp: Rename",
+            opts = opts,
+          },
+          {
+            "<leader>cf",
+            vim.lsp.buf.format({ timeout_ms = 5000 }),
+            description = "lsp: Format code",
+            opts = opts,
+          },
+          {
+            "<leader>ca",
+            vim.lsp.buf.code_action,
+            description = "lsp: Show code actions",
+            opts = opts,
+          },
+        })
+
+        -- local opts = { noremap = true, silent = true }
         require('legendary').keymaps({
           {
             '<leader>ss',

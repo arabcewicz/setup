@@ -9,6 +9,10 @@ $env.config = {
   edit_mode: vi
 }
 
+alias ll = ls -l
+alias v = nvim
+alias scalanew3 = sbt new scala/scala3.g8
+
 use ~/.cache/starship/init.nu
 source ~/.cache/carapace/init.nu
 source ~/.cache/zoxide/init.nu
