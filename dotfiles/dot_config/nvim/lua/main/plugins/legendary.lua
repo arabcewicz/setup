@@ -34,7 +34,7 @@ return {
       default_opts = {
         keymap = { noremap = true, silent = true },
       },
-      include_builtin = true,
+      include_builtin = false,
 
       lazy_nvim = { auto_register = true },
       extensions = {

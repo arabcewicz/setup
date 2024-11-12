@@ -14,7 +14,7 @@ return {
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
           ['<C-Space>'] = cmp.mapping.complete(),
-          ['<C-e>'] = cmp.mapping.abort(),
+          ['<A-Esc>'] = cmp.mapping.abort(),
           ['<C-y>'] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Insert,
             select = true,
@@ -62,7 +62,19 @@ return {
           { name = 'buffer' }
         }
       })
-
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = 'path' }
+        }, {
+          {
+            name = 'cmdline',
+            option = {
+              ignore_cmds = { 'Man', '!' }
+            }
+          }
+        })
+      })
       -- If you want insert `(` after select function or method item
       local cmp_autopairs = require('nvim-autopairs.completion.cmp')
       cmp.event:on(
