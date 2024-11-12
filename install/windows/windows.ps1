@@ -103,6 +103,7 @@ Set-Content $env:USERPROFILE\Documents\PowerShell\Profile.ps1 ". ~\.config\power
 # change ComSpec env var into "pwsh.exe"
 
 sudo New-Item -ItemType SymbolicLink -Path ~/.config/chezmoi -Target ~/setup/chezmoi
+sudo New-Item -ItemType SymbolicLink -Path $Env.HOME\AppData\Roaming\yazi\config -Target $Env:HOME\.config\yazi\
 
 #sudo New-Item -ItemType SymbolicLink -Target "~\setup\jetbrains\keymaps" -Path "~\scoop\apps\idea-ultimate\current\profile\config\keymaps"
 #sudo New-Item -ItemType SymbolicLink -Target "~\setup\jetbrains\templates" -Path "~\scoop\apps\idea-ultimate\current\profile\config\templates"

@@ -11,8 +11,8 @@ end
 {{ end }}
 
 
-return {
-  {{ if eq .chezmoi.os "windos" }} default_prog = { 'nu' }, {{ end }}
+local config = {
+  {{ if eq .chezmoi.os "windows" }} default_prog = { 'nu' }, {{ end }}
   color_scheme = 'catppuccin-macchiato',
   font = wezterm.font('JetBrainsMono NF'),
   font_size = {{ if eq .chezmoi.os "darwin" }} 12.5 {{ else }} 9.9 {{ end }},
@@ -148,3 +148,11 @@ return {
   wsl_domains = wsl_domains,
 {{ end }}
 }
+
+wezterm.on('gui-startup', function(cmd)
+  local tab, pane, window = mux.spawn_window(cmd or {})
+  window:gui_window():maximize()
+end)
+
+return config
+
