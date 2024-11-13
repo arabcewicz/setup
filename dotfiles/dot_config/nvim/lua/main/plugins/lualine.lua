@@ -13,7 +13,7 @@ return {
 
     require('lualine').setup {
       options = {
-        theme = "gruvbox",
+        theme = "catppuccin",
         -- section_separators = '',
         -- component_separators = '',
         globalstatus = true,

@@ -35,9 +35,12 @@ $env.JAVA_HOME = (
   match $nu.os-info.name {
     "macos" =>  ($env.HOME | path join "Library/Caches/Coursier/arc/https/github.com/adoptium/temurin21-binaries/releases/download/jdk-21%252B35/OpenJDK21U-jdk_aarch64_mac_hotspot_21_35.tar.gz/jdk-21+35/Contents/Home")
     "linux" => "todo"
-    "windows" => "todo"
+    "windows" => ($env.HOME | path join "scoop/apps/graalvm-jdk17/current")
   }
 )
+
+$env.BAT_CONFIG_DIR = ($env.HOME | path join .config bat)
+$env.BAT_THEME = "Catppuccin-Mocha"
 
 $env.OS_ICON = (
   match $nu.os-info.name {

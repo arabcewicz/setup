@@ -1,85 +1,90 @@
+local common_on_attach_run = false
+
 local common_on_attach = function(client)
-  local opts = { noremap = true, silent = true }
-  require('legendary').keymaps({
-    {
-      "gd",
-      vim.lsp.buf.definition,
-      description = "lsp: Go to definition",
-      opts = opts,
-    },
-    {
-      "gD",
-      vim.lsp.buf.declaration,
-      description = "lsp: Go to definition",
-      opts = opts,
-    },
-    {
-      "<leader>gt",
-      vim.lsp.buf.type_definition,
-      description = "lsp: Go to type definition",
-      opts = opts,
-    },
-    {
-      "K",
-      vim.lsp.buf.hover,
-      description = "lsp: Show hover",
-      opts = opts,
-    },
-    {
-      "gi",
-      vim.lsp.buf.implementation,
-      description = "lsp: Go to implementation",
-      opts = opts,
-    },
-    {
-      "gr",
-      vim.lsp.buf.references,
-      description = "lsp: Show references as quick list",
-      opts = opts,
-    },
-    {
-      "<leader>gs",
-      vim.lsp.buf.document_symbol,
-      description = "lsp: Show file symbols",
-      opts = opts,
-    },
-    {
-      "<leader>gw",
-      vim.lsp.buf.workspace_symbol,
-      description = "lsp: Show workspace symbols",
-      opts = opts,
-    },
-    {
-      "<leader>cl",
-      vim.lsp.codelens.run,
-      description = "lsp: Codelens",
-      opts = opts,
-    },
-    {
-      "<leader>sh",
-      vim.lsp.buf.signature_help,
-      description = "lsp: Show function parameters",
-      opts = opts,
-    },
-    {
-      "<leader>rn",
-      vim.lsp.buf.rename,
-      description = "lsp: Rename",
-      opts = opts,
-    },
-    {
-      "<leader>cf",
-      vim.lsp.buf.format({ timeout_ms = 5000 }),
-      description = "lsp: Format code",
-      opts = opts,
-    },
-    {
-      "<leader>ca",
-      vim.lsp.buf.code_action,
-      description = "lsp: Show code actions",
-      opts = opts,
-    },
-  })
+  if not common_on_attach_run then
+    local opts = { noremap = true, silent = true }
+    require('legendary').keymaps({
+      {
+        "gd",
+        vim.lsp.buf.definition,
+        description = "lsp: Go to definition",
+        opts = opts,
+      },
+      {
+        "gD",
+        vim.lsp.buf.declaration,
+        description = "lsp: Go to definition",
+        opts = opts,
+      },
+      {
+        "<leader>gt",
+        vim.lsp.buf.type_definition,
+        description = "lsp: Go to type definition",
+        opts = opts,
+      },
+      {
+        "K",
+        vim.lsp.buf.hover,
+        description = "lsp: Show hover",
+        opts = opts,
+      },
+      {
+        "gi",
+        vim.lsp.buf.implementation,
+        description = "lsp: Go to implementation",
+        opts = opts,
+      },
+      {
+        "gr",
+        vim.lsp.buf.references,
+        description = "lsp: Show references as quick list",
+        opts = opts,
+      },
+      {
+        "<leader>gs",
+        vim.lsp.buf.document_symbol,
+        description = "lsp: Show file symbols",
+        opts = opts,
+      },
+      {
+        "<leader>gw",
+        vim.lsp.buf.workspace_symbol,
+        description = "lsp: Show workspace symbols",
+        opts = opts,
+      },
+      {
+        "<leader>cl",
+        vim.lsp.codelens.run,
+        description = "lsp: Codelens",
+        opts = opts,
+      },
+      {
+        "<leader>sh",
+        vim.lsp.buf.signature_help,
+        description = "lsp: Show function parameters",
+        opts = opts,
+      },
+      {
+        "<leader>rn",
+        vim.lsp.buf.rename,
+        description = "lsp: Rename",
+        opts = opts,
+      },
+      {
+        "<leader>cf",
+        vim.lsp.buf.format({ timeout_ms = 5000 }),
+        description = "lsp: Format code",
+        opts = opts,
+      },
+      {
+        "<leader>ca",
+        vim.lsp.buf.code_action,
+        description = "lsp: Show code actions",
+        opts = opts,
+      },
+    })
+  end
+  common_on_attach_run = true
 end
 
 
@@ -269,90 +274,9 @@ return {
 
       metals.on_attach = function(client, bufnr)
         require("metals").setup_dap()
-        -- common_on_attach(client)
-        local opts = { noremap = true, silent = true }
-        require('legendary').keymaps({
-          {
-            "gd",
-            vim.lsp.buf.definition,
-            description = "lsp: Go to definition",
-            opts = opts,
-          },
-          {
-            "gD",
-            vim.lsp.buf.declaration,
-            description = "lsp: Go to definition",
-            opts = opts,
-          },
-          {
-            "<leader>gt",
-            vim.lsp.buf.type_definition,
-            description = "lsp: Go to type definition",
-            opts = opts,
-          },
-          {
-            "K",
-            vim.lsp.buf.hover,
-            description = "lsp: Show hover",
-            opts = opts,
-          },
-          {
-            "gi",
-            vim.lsp.buf.implementation,
-            description = "lsp: Go to implementation",
-            opts = opts,
-          },
-          {
-            "gr",
-            vim.lsp.buf.references,
-            description = "lsp: Show references as quick list",
-            opts = opts,
-          },
-          {
-            "<leader>gs",
-            vim.lsp.buf.document_symbol,
-            description = "lsp: Show file symbols",
-            opts = opts,
-          },
-          {
-            "<leader>gw",
-            vim.lsp.buf.workspace_symbol,
-            description = "lsp: Show workspace symbols",
-            opts = opts,
-          },
-          {
-            "<leader>cl",
-            vim.lsp.codelens.run,
-            description = "lsp: Codelens",
-            opts = opts,
-          },
-          {
-            "<leader>sh",
-            vim.lsp.buf.signature_help,
-            description = "lsp: Show function parameters",
-            opts = opts,
-          },
-          {
-            "<leader>rn",
-            vim.lsp.buf.rename,
-            description = "lsp: Rename",
-            opts = opts,
-          },
-          {
-            "<leader>cf",
-            vim.lsp.buf.format({ timeout_ms = 5000 }),
-            description = "lsp: Format code",
-            opts = opts,
-          },
-          {
-            "<leader>ca",
-            vim.lsp.buf.code_action,
-            description = "lsp: Show code actions",
-            opts = opts,
-          },
-        })
+        common_on_attach(client)
 
-        -- local opts = { noremap = true, silent = true }
+        local opts = { noremap = true, silent = true }
         require('legendary').keymaps({
           {
             '<leader>ss',
@@ -373,15 +297,9 @@ return {
             opts,
           },
           {
-            '<leader>sf',
+            '<leader>sc',
             ":MetalsCompileClean<CR>",
             description = "metals: Clean & compile",
-            opts,
-          },
-          {
-            '<leader>sc',
-            ":MetalsCompileCascade<CR>",
-            description = "metals: Compile cascade",
             opts,
           },
           {
@@ -398,12 +316,24 @@ return {
           },
           {
             '<leader>si',
+            "MetalsImportBuild<CR>",
+            description = "metals: Import build",
+            opts,
+          },
+          {
+            '<leader>sr',
+            "MetalsRestartMetals<CR>",
+            description = "metals: Restart metals",
+            opts,
+          },
+          {
+            '<leader>sj',
             function() require("metals").toggle_settings("showImplicitArguments") end,
             description = "metals: Toggle 'show implicit arguments'",
             opts,
           },
           {
-            'K',
+            '<leader>K',
             function() require("metals").type_of_range() end,
             mode = { 'v' },
             description = "metals: Type of selected code",

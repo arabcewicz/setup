@@ -4,7 +4,21 @@ return {
   priority = 1000,
   config = function()
     require("catppuccin").setup({
-      flavour = "macchiato", -- latte, frappe, macchiato, mocha
+      flavour = "mocha", -- latte, frappe, macchiato, mocha
+      term_colors = true,
+      integrations = {
+        cmp = true,
+        treesitter = true,
+        fidget = true,
+        indent_blankline = {
+          enabled = true,
+          scope_color = "lavender", -- catppuccin color (eg. `lavender`) Default: text
+          colored_indent_levels = false,
+        },
+        mason = true,
+        neotest = true,
+        nvim_surround = true,
+      }
     })
     vim.cmd.colorscheme("catppuccin")
   end

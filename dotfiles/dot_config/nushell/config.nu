@@ -12,6 +12,8 @@ $env.config = {
 alias ll = ls -l
 alias v = nvim
 alias scalanew3 = sbt new scala/scala3.g8
+alias chap = chezmoi apply
+alias chra = chezmoi re-add
 
 def --env y [...args] {
 	let tmp = (mktemp -t "yazi-cwd.XXXXXX")

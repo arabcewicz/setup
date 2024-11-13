@@ -5,7 +5,7 @@ return {
     require("flash").setup({
       modes = {
         char = {
-          jump_labels = true
+          jump_labels = false
         }
       }
     })
