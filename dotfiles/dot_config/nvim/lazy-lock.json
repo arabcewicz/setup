@@ -60,5 +60,6 @@
   "toggleterm.nvim": { "branch": "main", "commit": "48be57eaba817f038d61bbf64d2c597f578c0827" },
   "tree-sitter-hocon": { "branch": "master", "commit": "c390f10519ae69fdb03b3e5764f5592fb6924bcc" },
   "vim-visual-multi": { "branch": "master", "commit": "a6975e7c1ee157615bbc80fc25e4392f71c344d4" },
-  "yanky.nvim": { "branch": "main", "commit": "73215b77d22ebb179cef98e7e1235825431d10e4" }
+  "yanky.nvim": { "branch": "main", "commit": "73215b77d22ebb179cef98e7e1235825431d10e4" },
+  "yazi.nvim": { "branch": "main", "commit": "caaebf12464d80d479be497c97d92c1c71b16e94" }
 }
