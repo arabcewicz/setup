@@ -1,7 +1,7 @@
 return {
   'mrjones2014/legendary.nvim',
   version = 'v2.1.0',
-  priority = 10000,
+  priority = 1005,
   lazy = false,
   -- sqlite is only needed if you want to use frecency sorting
   -- dependencies = { 'kkharji/sqlite.lua' }

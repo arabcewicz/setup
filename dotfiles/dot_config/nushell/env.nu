@@ -1,5 +1,6 @@
 $env.EDITOR = "nvim"
 
+
  $env.PATH = (
   match $nu.os-info.name {
     "macos" => {
@@ -30,6 +31,12 @@ $env.EDITOR = "nvim"
     }
   }
 )
+
+fnm env --json | from json | load-env
+use std *
+path add ($env.FNM_MULTISHELL_PATH | path join bin)
+
+
 
 $env.JAVA_HOME = (
   match $nu.os-info.name {

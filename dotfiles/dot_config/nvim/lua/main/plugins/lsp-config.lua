@@ -198,6 +198,21 @@ return {
             },
           },
         },
+        jsonls = {
+          -- lazy-load schemastore when needed
+          on_new_config = function(new_config)
+            new_config.settings.json.schemas = new_config.settings.json.schemas or {}
+            vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
+          end,
+          settings = {
+            json = {
+              format = {
+                enable = true,
+              },
+              validate = { enable = true },
+            },
+          },
+        },
       }
 
       require('mason').setup()
@@ -228,7 +243,6 @@ return {
 
   {
     "scalameta/nvim-metals",
-    ft = { "scala", "sbt" }, -- "java"
     opts = function()
       local metals = require("metals").bare_config()
       metals.settings = {
@@ -352,7 +366,7 @@ return {
         -- NOTE: You may or may not want java included here. You will need it if you
         -- want basic Java support but it may also conflict if you are using
         -- something like nvim-jdtls which also works on a java filetype autocmd.
-        pattern = self.ft,
+        pattern = { "scala", "sbt" }, -- "java"
         callback = function()
           require("metals").initialize_or_attach(metals_config)
         end,
