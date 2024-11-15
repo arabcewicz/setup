@@ -34,7 +34,8 @@ $env.EDITOR = "nvim"
 
 fnm env --json | from json | load-env
 use std *
-path add ($env.FNM_MULTISHELL_PATH | path join bin)
+path add ($env.FNM_MULTISHELL_PATH | path join bin) # macos
+path add ($env.FNM_MULTISHELL_PATH) # windows
 
 
 
