@@ -34,12 +34,12 @@ local common_on_attach = function(client)
         description = "lsp: Go to implementation",
         opts = opts,
       },
-      {
-        "gr",
-        vim.lsp.buf.references,
-        description = "lsp: Show references as quick list",
-        opts = opts,
-      },
+      -- {
+      --   "gr",
+      --   vim.lsp.buf.references,
+      --   description = "lsp: Show references as quick list",
+      --   opts = opts,
+      -- },
       {
         "<leader>gs",
         vim.lsp.buf.document_symbol,
