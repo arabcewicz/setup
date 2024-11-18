@@ -4,7 +4,7 @@ $env.config = {
     osc133: false
   }
   history: {
-    max_size: 0
+    max_size: 20
   }
   edit_mode: vi
 }
