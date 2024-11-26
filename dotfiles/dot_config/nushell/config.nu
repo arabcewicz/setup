@@ -9,6 +9,9 @@ $env.config = {
   edit_mode: vi
 }
 
+alias npen = open
+alias open = ^open
+
 alias ll = ls -l
 alias v = nvim
 alias scalanew3 = sbt new scala/scala3.g8
