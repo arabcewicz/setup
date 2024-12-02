@@ -14,10 +14,13 @@ alias open = ^open
 
 alias ll = ls -l
 alias v = nvim
+alias g = lazygit
 alias scalanew3 = sbt new scala/scala3.g8
 alias chap = chezmoi apply
+alias chad = chezmoi add
 alias chra = chezmoi re-add
 alias chst = chezmoi status
+alias chdf = chezmoi diff
 alias chcd = chezmoi cd
 
 def --env y [...args] {
