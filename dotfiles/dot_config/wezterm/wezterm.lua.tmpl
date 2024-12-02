@@ -18,6 +18,7 @@ local config = {
   font_size = {{ if eq .chezmoi.os "darwin" }} 12.5 {{ else }} 9.9 {{ end }},
   line_height = 1.05,
   enable_tab_bar = true,
+  tab_bar_at_bottom = true,
   use_ime = true,
   -- treat_left_ctrlalt_as_altgr = true,
   -- window_background_opacity = 0.9,
@@ -136,6 +137,9 @@ local config = {
         end)
       } }
     },
+    { key = '[',  mods = 'WIN|ALT', action = act.SwitchWorkspaceRelative(-1) },
+    { key = ']',  mods = 'WIN|ALT', action = act.SwitchWorkspaceRelative(1) },
+    { key = '\\', mods = 'WIN|ALT', action = act.ShowLauncherArgs { flags = 'FUZZY|WORKSPACES' } },
     --[[ { key = 'k', mods = 'CTRL|ALT', action = act.Multiple
       {
         act.ClearScrollback 'ScrollbackAndViewport'
