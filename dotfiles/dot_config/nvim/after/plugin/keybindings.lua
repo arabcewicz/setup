@@ -3,6 +3,8 @@
 
 local opts = { noremap = true, silent = true }
 
+print("keybindings.lua")
+
 require('legendary').keymaps({
   {
     "<A-,>",

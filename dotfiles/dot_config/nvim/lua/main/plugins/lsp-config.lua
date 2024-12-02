@@ -190,9 +190,6 @@ return {
               completion = {
                 callSnippet = 'Replace',
               },
-              diagnostics = {
-                globals = { 'vim' }
-              }
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
             },
@@ -249,7 +246,8 @@ return {
         showImplicitArguments = true,
         showInferredType = true,
         superMethodLensesEnabled = true,
-        showImplicitConversionsAndClasses = true
+        showImplicitConversionsAndClasses = true,
+        testUserInterface = "Test Explorer",
       }
 
       -- *READ THIS*

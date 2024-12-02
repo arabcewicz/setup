@@ -1,10 +1,18 @@
--- general
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 -- disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+vim.g.have_nerd_font = true
+--
+-- Don't have `o` add a comment
+vim.opt.formatoptions:remove "o"
+
+-- vim.o.shell = "nu"
+-- vim.o.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+-- vim.o.shellredir = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
+-- vim.o.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
+-- vim.o.shellquote = ""
+-- vim.o.shellxquote = ""
 
 vim.opt.mouse = 'a'
 
@@ -25,10 +33,19 @@ if vim.fn.has('wsl') == 1 then
   }
 end
 
-vim.opt.clipboard = 'unnamedplus'                         -- copy/paste to system clipboard
+-- Sync clipboard between OS and Neovim.
+--  Schedule the setting after `UiEnter` because it can increase startup-time.
+--  Remove this option if you want your OS clipboard to remain independent.
+--  See `:help 'clipboard'`
+vim.schedule(function()
+  vim.opt.clipboard = 'unnamedplus'
+end)
 vim.opt.completeopt = 'longest,menuone,noinsert,noselect' -- autocomplete options
 vim.opt.encoding = 'utf8'
 vim.opt.ambiwidth = 'single'
+
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
 vim.opt.swapfile = false -- don't use swapfile
 vim.opt.undofile = true  -- save undo history
@@ -60,9 +77,19 @@ vim.opt.laststatus = 3        -- set global statusline
 vim.opt.signcolumn = 'yes'
 vim.opt.wrap = true
 vim.opt.linebreak = true -- wrap on word boundary
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
+-- Clear highlights on search when pressing <Esc> in normal mode
+--  See `:help hlsearch`
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
 vim.opt.incsearch = true
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 10
+
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = true
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- memory, cPU
 vim.opt.hidden = true     -- enable background buffers
@@ -85,9 +112,9 @@ vim.opt_global.completeopt = { "menuone", "noinsert", "noselect" }
 --vim.opt_global.shortmess:remove("F"):append("c")
 
 
-vim.opt.formatoptions:remove('r')
-vim.opt.formatoptions:remove('c')
-vim.opt.formatoptions:remove('o')
+-- vim.opt.formatoptions:remove('r')
+-- vim.opt.formatoptions:remove('c')
+-- vim.opt.formatoptions:remove('o')
 
 -- Autogroups
 local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
