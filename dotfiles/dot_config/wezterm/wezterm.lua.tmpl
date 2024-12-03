@@ -158,5 +158,9 @@ wezterm.on('gui-startup', function(cmd)
   window:gui_window():maximize()
 end)
 
+wezterm.on('update-right-status', function(window, pane)
+  window:set_right_status(window:active_workspace())
+end)
+
 return config
 
