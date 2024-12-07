@@ -7,30 +7,24 @@ return {
     "nvim-treesitter/nvim-treesitter",
 
     "stevanmilic/neotest-scala",
+    -- { dir = "~/dev/nvim/neotest-metals" },
   },
   config = function()
     require("neotest").setup({
       default_strategy = "dap",
+      -- log_level = "trace",
       status = { virtual_text = true },
       output = { open_on_run = true },
       adapters = {
+        -- require("neotest-metals")
         require("neotest-scala")({
-          -- Command line arguments for runner
-          -- Can also be a function to return dynamic values
-          -- args = { "--no-color" },
           args = {},
-          -- Runner to use. Will use bloop by default.
-          -- Can be a function to return dynamic value.
-          -- For backwards compatibility, it also tries to read the vim-test scala config.
-          -- Possibly values bloop|sbt.
           runner = "bloop",
-          -- Test framework to use. Will use utest by default.
-          -- Can be a function to return dynamic value.
-          -- Possibly values utest|munit|scalatest.
           framework = "munit",
         })
       },
     })
+
     require("legendary").keymaps({
       -- { "<leader>t",  "",                                                                                 desc = "+test" },
       { "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end,                      description = "neotest: Run File" },
