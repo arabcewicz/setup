@@ -1,9 +1,4 @@
 [[manager.prepend_keymap]]
-on   = "p"
-run  = "plugin --sync smart-paste"
-desc = "Paste into the hovered directory or CWD"
-
-[[manager.prepend_keymap]]
 on  = "<A-k>"
 run = "plugin --sync parent-arrow --args=-1"
 
