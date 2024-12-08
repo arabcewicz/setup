@@ -23,6 +23,8 @@ alias chst = chezmoi status
 alias chdf = chezmoi diff
 alias chcd = chezmoi cd
 
+def killjps [] { jps | detect columns --no-headers | where column1 != Jps | get column0 |into int | each { |it| kill -f $it } }
+
 def --env y [...args] {
 	let tmp = (mktemp -t "yazi-cwd.XXXXXX")
 	yazi ...$args --cwd-file $tmp

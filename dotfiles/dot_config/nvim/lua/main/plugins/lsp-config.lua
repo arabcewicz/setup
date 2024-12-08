@@ -240,8 +240,10 @@ return {
 
   {
     "scalameta/nvim-metals",
+    commit = "f861db9fda55939797ac1b05238c49b0dcdc3bdb",
     opts = function()
       local metals = require("metals").bare_config()
+      metals.init_options.disableColorOutput = false
       metals.settings = {
         verboseCompilation = true,
         -- superMethodLensesEnabled = true,
