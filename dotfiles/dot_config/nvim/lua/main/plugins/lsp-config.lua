@@ -243,10 +243,8 @@ return {
     opts = function()
       local metals = require("metals").bare_config()
       metals.settings = {
-        showImplicitArguments = true,
-        showInferredType = true,
-        superMethodLensesEnabled = true,
-        showImplicitConversionsAndClasses = true,
+        verboseCompilation = true,
+        -- superMethodLensesEnabled = true,
         testUserInterface = "Test Explorer",
       }
 
