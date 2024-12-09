@@ -23,7 +23,8 @@ return {
           'mode',
         },
         lualine_b = {
-          'buffers',
+          -- 'buffers',
+          'branch',
         },
         lualine_c = {
           {
