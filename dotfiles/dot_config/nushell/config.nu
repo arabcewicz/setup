@@ -39,3 +39,18 @@ use ~/.cache/starship/init.nu
 source ~/.cache/carapace/init.nu
 source ~/.cache/zoxide/init.nu
 source ~/.cache/atuin/init.nu
+
+def "from env" []: string -> record {
+  lines
+    | split column '#' # remove comments
+    | get column1
+    | parse "{key}={value}"
+    | str replace "export" "" key
+    | str trim value -c '"' # unquote values
+    | str trim value -c "'" # unquote values
+    | str trim value -r -c ";"
+    | str trim key
+    | str trim value
+    | transpose -r -d
+}
+
