@@ -121,7 +121,7 @@ require('legendary').keymaps({
     opts = opts,
   },
   {
-    "<leader>d",
+    "<leader>dd",
     vim.diagnostic.setloclist,
     description = "diagnostic: Show buffers diagnostics",
     opts = opts,

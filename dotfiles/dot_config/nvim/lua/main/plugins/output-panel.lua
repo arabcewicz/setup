@@ -1,7 +1,7 @@
 return {
   "mhanberg/output-panel.nvim",
   event = "VeryLazy",
-  enable = false,
+  enabled = false,
   config = function()
     require("output_panel").setup()
     require('legendary').keymaps({
