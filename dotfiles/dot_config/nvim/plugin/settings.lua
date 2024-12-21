@@ -7,12 +7,16 @@ vim.g.have_nerd_font = true
 -- Don't have `o` add a comment
 vim.opt.formatoptions:remove "o"
 
--- vim.o.shell = "nu"
--- vim.o.shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
--- vim.o.shellredir = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
--- vim.o.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
--- vim.o.shellquote = ""
--- vim.o.shellxquote = ""
+-- https://github.com/nushell/integrations/blob/main/nvim/init.lua
+vim.o.shell = "nu"
+vim.o.shellcmdflag = "--login --stdin --no-newline -c"
+vim.o.shellredir = "out+err> %s"
+vim.o.shellpipe = "| complete | update stderr { ansi strip } | tee { get stderr | save --force --raw %s } | into record"
+vim.o.shellslash = true
+vim.o.shelltemp = false
+vim.o.shellxescape = ""
+vim.o.shellxquote = ""
+vim.o.shellquote = ""
 
 vim.opt.mouse = 'a'
 

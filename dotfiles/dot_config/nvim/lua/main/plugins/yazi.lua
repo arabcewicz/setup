@@ -24,11 +24,26 @@ return
     },
   },
   opts = {
+    log_level = vim.log.levels.DEBUG,
     -- if you want to open yazi instead of netrw, see below for more info
     open_for_directories = false,
     -- open_multiple_tabs = true,
     keymaps = {
       show_help = '<f1>',
+    },
+    -- open_file_function = function(chosen_file)
+    --   P("asfas")
+    --   P(vim.fn.fnameescape(chosen_file))
+    -- end,
+    future_features = {
+      -- Whether to use `ya emit reveal` to reveal files in the file manager.
+      -- Requires yazi 0.4.0 or later (from 2024-12-08).
+      ya_emit_reveal = true,
+
+      -- Use `ya emit open` as a more robust implementation for opening files
+      -- in yazi. This can prevent conflicts with custom keymappings for the enter
+      -- key. Requires yazi 0.4.0 or later (from 2024-12-08).
+      ya_emit_open = true,
     },
   },
 }

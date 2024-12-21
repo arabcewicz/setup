@@ -3,9 +3,21 @@
 
 local opts = { noremap = true, silent = true }
 
-print("keybindings.lua")
+
 
 require('legendary').keymaps({
+  {
+    "<leader><leader>",
+    "<cmd>source%<CR>",
+    description = "Source a file",
+    opts = opts,
+  },
+  {
+    "<leader>l",
+    { n = ":.lua<CR>", v = ":lua<CR>" },
+    description = "Run lua code",
+    opts = opts,
+  },
   {
     "<A-,>",
     { n = ":bprev<CR>", i = "<Esc>:bprev<CR>" },
@@ -102,24 +114,24 @@ require('legendary').keymaps({
     description = "Merge lines, cursor positions stays unchanged",
     opts = opts,
   },
-  {
-    "<leader>aa",
-    vim.diagnostic.setqflist,
-    description = "diagnostic: Open all as quick list",
-    opts = opts,
-  },
-  {
-    "<leader>ae",
-    function() vim.diagnostic.setqflist({ severity = "E" }) end,
-    description = "diagnostic: Open errors as quicklist",
-    opts = opts,
-  },
-  {
-    "<leader>aw",
-    function() vim.diagnostic.setqflist({ severity = "W" }) end,
-    description = "diagnostic: Open warnings as quicklist",
-    opts = opts,
-  },
+  -- {
+  --   "<leader>aa",
+  --   vim.diagnostic.setqflist,
+  --   description = "diagnostic: Open all as quick list",
+  --   opts = opts,
+  -- },
+  -- {
+  --   "<leader>ae",
+  --   function() vim.diagnostic.setqflist({ severity = "E" }) end,
+  --   description = "diagnostic: Open errors as quicklist",
+  --   opts = opts,
+  -- },
+  -- {
+  --   "<leader>aw",
+  --   function() vim.diagnostic.setqflist({ severity = "W" }) end,
+  --   description = "diagnostic: Open warnings as quicklist",
+  --   opts = opts,
+  -- },
   {
     "<leader>dd",
     vim.diagnostic.setloclist,

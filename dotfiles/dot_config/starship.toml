@@ -26,15 +26,16 @@ $time\
 $status\
 $character"""
 
+[character]
+format = "\n\n"
 
 [env_var.OS_ICON]
-format = "$env_value "
-style = "fg:#bbbbbb"
+format = "[$env_value](white) "
 variable = 'OS_ICON'
 default = "?"
 
 [scala]
-symbol = ' '
+symbol = '[](red) '
 detect_folders = []
 
 
