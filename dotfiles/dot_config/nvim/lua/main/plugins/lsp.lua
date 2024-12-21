@@ -91,12 +91,14 @@ end
 return {
   {
     "williamboman/mason.nvim",
+    enabled = true,
     opts = {
       PATH = "append",
     }
   },
   {
     "williamboman/mason-lspconfig.nvim",
+    enabled = true,
     -- opts = {
     -- ensure_installed = { "lua_ls", "rust_analyzer", "tsserver", "tailwindcss" },
     -- ensure_installed = { "lua_ls", "tailwindcss" },
@@ -104,9 +106,11 @@ return {
   },
   {
     'WhoIsSethDaniel/mason-tool-installer.nvim',
+    enabled = true,
   },
   {
     "neovim/nvim-lspconfig",
+    enabled = true,
     config = function()
       -- border for :LspInfo window
       require('lspconfig.ui.windows').default_options.border = 'single'
@@ -240,6 +244,7 @@ return {
 
   {
     "scalameta/nvim-metals",
+    enabled = true,
     commit = "f861db9fda55939797ac1b05238c49b0dcdc3bdb",
     opts = function()
       local metals = require("metals").bare_config()

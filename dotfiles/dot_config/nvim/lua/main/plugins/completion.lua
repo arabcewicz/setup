@@ -1,6 +1,7 @@
 return {
   {
     "hrsh7th/nvim-cmp",
+    enabled = true,
     config = function()
       local lspkind = require('lspkind')
       local cmp = require('cmp')
@@ -19,7 +20,7 @@ return {
           ['<C-n>'] = cmp.mapping.select_next_item(),
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-y>'] = cmp.mapping.confirm({
+          ['<C-;>'] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Insert,
             select = true,
           }),
@@ -101,11 +102,11 @@ return {
         })
       })
       -- If you want insert `(` after select function or method item
-      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-      cmp.event:on(
-        'confirm_done',
-        cmp_autopairs.on_confirm_done()
-      )
+      -- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+      -- cmp.event:on(
+      --   'confirm_done',
+      --   cmp_autopairs.on_confirm_done()
+      -- )
 
 
       require("luasnip.loaders.from_vscode").lazy_load()
