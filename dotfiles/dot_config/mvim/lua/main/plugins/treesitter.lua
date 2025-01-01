@@ -1,6 +1,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    enabled = true,
     build = ":TSUpdate",
     config = function()
       require("nvim-treesitter.configs").setup {
@@ -9,7 +10,24 @@ return {
           enable_rename = true,
         },
         ensure_installed = {
-          "scala", "rust", "html", "css", "javascript", "typescript", "tsx", "json", "lua", "vim", "vimdoc", "query", "markdown", "yaml", "toml"
+          "scala",
+          "rust",
+          "html",
+          "css",
+          "javascript",
+          "typescript",
+          "tsx",
+          "json",
+          "lua",
+          "vim",
+          "vimdoc",
+          "query",
+          "markdown",
+          "yaml",
+          "toml",
+          "gitignore",
+          "dockerfile",
+          "vimdoc",
         },
         sync_install = false,
         auto_install = true,
@@ -22,5 +40,8 @@ return {
       -- require('nvim-ts-autotag').setup()
     end
   },
-  { 'nvim-treesitter/playground' },
+  {
+    'nvim-treesitter/playground',
+    enabled = true,
+  },
 }

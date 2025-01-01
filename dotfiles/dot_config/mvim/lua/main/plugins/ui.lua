@@ -102,7 +102,7 @@ return {
   },
   {
     'nvim-lualine/lualine.nvim',
-    enabled = false,
+    enabled = true,
     config = function()
       local function metals_status()
         return vim.g["metals_status"] or ""

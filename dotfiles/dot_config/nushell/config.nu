@@ -89,6 +89,7 @@ alias chst = chezmoi status
 alias chdf = chezmoi diff
 alias chcd = chezmoi cd
 
+def mvim [...args] = { with-env { NVIM_APPNAME: "mvim" } { nvim ...$args } }
 def ovim [...args] = { with-env { NVIM_APPNAME: "ovim" } { nvim ...$args } }
 
 def killjps [] { jps | detect columns --no-headers | where column1 != Jps | get column0 |into int | each { |it| kill -f $it } }

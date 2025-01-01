@@ -5,8 +5,6 @@ P = function(v)
   return v
 end
 
-vim.keymap.set('n', '<leader><leader>f', '<cmd>luafile %<cr>')
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({

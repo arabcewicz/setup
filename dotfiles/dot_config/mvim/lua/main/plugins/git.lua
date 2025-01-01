@@ -1,6 +1,7 @@
 return {
   {
     'lewis6991/gitsigns.nvim',
+    enabled = true,
     config = function()
       require('gitsigns').setup {
         on_attach = function(bufnr)
@@ -52,8 +53,31 @@ return {
       }
     end
   },
+  -- {
+  --   "NeogitOrg/neogit",
+  --   enabled = false,
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",  -- required
+  --     "sindrets/diffview.nvim", -- optional - Diff integration
+  --   },
+  --   config = function()
+  --     require('neogit').setup()
+  --     local opts = { noremap = true, silent = true }
+  --     require('legendary').keymaps({
+  --       {
+  --         '<leader>rr',
+  --         ":Neogit<CR>",
+  --         description = "neogit: Open",
+  --         opts,
+  --       },
+  --
+  --     })
+  --   end
+  -- },
+
   {
     "sindrets/diffview.nvim",
+    enabled = true,
     config = function()
       require('diffview').setup({
         default_args = {

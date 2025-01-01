@@ -1,6 +1,5 @@
 $env.EDITOR = "nvim"
 
-
  $env.PATH = (
   match $nu.os-info.name {
     "macos" => {

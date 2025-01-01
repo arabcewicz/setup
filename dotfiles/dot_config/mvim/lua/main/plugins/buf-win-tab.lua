@@ -25,7 +25,7 @@ return {
   },
   {
     "nvim-zh/colorful-winsep.nvim",
-    enabled = false,
+    enabled = true,
     event = { "WinNew" },
     config = function()
       require("colorful-winsep").setup({
@@ -108,62 +108,62 @@ return {
 
       require('legendary').keymaps({
         {
-          '<A-h>',
+          '<M-h>',
           require('smart-splits').move_cursor_left,
           description = "smart-split: Move focus to the left adjacent window",
         },
         {
-          '<A-j>',
+          '<M-j>',
           require('smart-splits').move_cursor_down,
           description = "smart-split: Move focus to the down adjacent window",
         },
         {
-          '<A-k>',
+          '<M-k>',
           require('smart-splits').move_cursor_up,
           description = "smart-split: Move focus to the up adjacent window",
         },
         {
-          '<A-l>',
+          '<M-l>',
           require('smart-splits').move_cursor_right,
           description = "smart-split: Move focus to the right adjacent window",
         },
         {
-          '<C-A-h>',
+          '<C-M-h>',
           require('smart-splits').resize_left,
           description = "smart-split: Resize window left",
         },
         {
-          '<C-A-j>',
+          '<C-M-j>',
           require('smart-splits').resize_down,
           description = "smart-split: Resize window up",
         },
         {
-          '<C-A-k>',
+          '<C-M-k>',
           require('smart-splits').resize_up,
           description = "smart-split: Resize window down",
         },
         {
-          '<C-A-l>',
+          '<C-M-l>',
           require('smart-splits').resize_right,
           description = "smart-split: Resize window right",
         },
         {
-          '<S-A-h>',
+          '<S-M-h>',
           swap_or_create_left,
           description = "smart-split: Swap window with its left adjacent one or create a new one",
         },
         {
-          '<S-A-j>',
+          '<S-M-j>',
           swap_or_create_down,
           description = "smart-split: Swap window with its down adjacent one or create a new one",
         },
         {
-          '<S-A-k>',
+          '<S-M-k>',
           swap_or_create_up,
           description = "smart-split: Swap window with its up adjacent one or create a new one",
         },
         {
-          '<S-A-l>',
+          '<S-M-l>',
           swap_or_create_right,
           description = "smart-split: Swap window with its right adjacent one or create a new one",
         },

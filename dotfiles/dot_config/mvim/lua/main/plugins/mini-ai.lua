@@ -1,5 +1,6 @@
 return {
   'echasnovski/mini.ai',
+  enabled = true,
   version = '*',
   opts = {
 

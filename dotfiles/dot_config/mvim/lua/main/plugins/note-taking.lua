@@ -1,6 +1,7 @@
 return {
   {
     "epwalsh/obsidian.nvim",
+    enabled = true,
     version = "*", -- recommended, use latest release instead of latest commit
     lazy = false,
     ft = "markdown",
@@ -22,6 +23,18 @@ return {
       ui = {
         enable = false,
       },
+      note_id_func = function(title)
+        local suffix = ""
+        if title ~= nil then
+          suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+        else
+          -- If title is nil, just add 4 random uppercase letters to the suffix.
+          for _ = 1, 4 do
+            suffix = suffix .. string.char(math.random(65, 90))
+          end
+        end
+        return tostring(os.time()) .. "-" .. suffix
+      end,
       workspaces = {
         {
           name = "personal",
@@ -33,5 +46,13 @@ return {
         },
       },
     },
+  },
+  {
+    'Kicamon/markdown-table-mode.nvim',
+    enabled = false,
+    config = function()
+      require('markdown-table-mode').setup()
+    end
   }
+
 }

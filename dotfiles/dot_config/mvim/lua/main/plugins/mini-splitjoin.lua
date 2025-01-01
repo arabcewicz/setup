@@ -1,5 +1,6 @@
 return {
   'echasnovski/mini.splitjoin',
+  enabled = true,
   version = '*',
   opts = {
     -- Module mappings. Use `''` (empty string) to disable one.

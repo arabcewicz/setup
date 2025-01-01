@@ -1,5 +1,6 @@
 return {
   'antosha417/tree-sitter-hocon',
+  enabled = true,
   lazy = false,
   config = function()
     local hocon_group = vim.api.nvim_create_augroup("hocon", { clear = true })

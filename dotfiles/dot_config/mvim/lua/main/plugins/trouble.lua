@@ -1,12 +1,13 @@
 return {
   "folke/trouble.nvim",
+  enabled = true,
   opts = {
-    auto_close = true,
-    auto_refresh = true,
-    auto_jump = false,
-    modes = {
-      diagnostics = { auto_open = true },
-    }
+    --   auto_close = true,
+    --   auto_refresh = true,
+    --   auto_jump = false,
+    --   modes = {
+    --     diagnostics = { auto_open = true },
+    --   }
   },
   cmd = "Trouble",
   keys = {

@@ -182,8 +182,6 @@ return {
 
       local servers = {
         -- pyright = {},
-        rust_analyzer = {},
-        -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 
         lua_ls = {
           -- cmd = {...},
@@ -265,97 +263,22 @@ return {
       -- Example if you are using cmp how to make sure the correct capabilities for snippets are set
       metals.capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      metals.tvp = {
-        panel_width = 50,
-        panel_alignment = "right",
-        toggle_node_mapping = "l",
-        node_command_mapping = "o",
-        collapsed_sign = "▸",
-        expanded_sign = "▾",
-        icons = {
-          enabled = true,
-          symbols = {
-            object = "",
-            trait = "",
-            class = "ﭰ",
-            interface = "",
-            val = "",
-            var = "",
-            method = "ﬦ",
-            enum = "",
-            field = "",
-            package = "",
-          },
-        },
-      }
-
       metals.on_attach = function(client, bufnr)
         require("metals").setup_dap()
         common_on_attach(client)
 
         local opts = { noremap = true, silent = true }
         require('legendary').keymaps({
-          {
-            '<leader>ss',
-            ":Telescope metals commands<CR>",
-            description = "metals: Show commands in telescope picker",
-            opts,
-          },
-          {
-            '<leader>sl',
-            ":MetalsToggleLogs<CR>",
-            description = "metals: Toggle logs",
-            opts,
-          },
-          {
-            '<leader>gu',
-            ":MetalsGotoSuperMethod<CR>",
-            description = "metals: Go to super method",
-            opts,
-          },
-          {
-            '<leader>sc',
-            ":MetalsCompileClean<CR>",
-            description = "metals: Clean & compile",
-            opts,
-          },
-          {
-            '<leader>sa',
-            function() require("metals.tvp").reveal_in_tree() end,
-            description = "metals: Show in tree view",
-            opts,
-          },
-          {
-            '<leader>se',
-            function() require("metals.tvp").toggle_tree_view() end,
-            description = "metals: Toggle tree view",
-            opts,
-          },
-          {
-            '<leader>si',
-            "MetalsImportBuild<CR>",
-            description = "metals: Import build",
-            opts,
-          },
-          {
-            '<leader>sr',
-            "MetalsRestartMetals<CR>",
-            description = "metals: Restart metals",
-            opts,
-          },
-          {
-            '<leader>sj',
-            function() require("metals").toggle_settings("showImplicitArguments") end,
-            description = "metals: Toggle 'show implicit arguments'",
-            opts,
-          },
-          {
-            '<leader>K',
-            function() require("metals").type_of_range() end,
-            mode = { 'v' },
-            description = "metals: Type of selected code",
-            opts,
-          },
+          { '<leader>ss', ":Telescope metals commands<CR>",                                          description = "metals: Show commands in telescope picker", opts },
+          { '<leader>sl', ":MetalsToggleLogs<CR>",                                                   description = "metals: Toggle logs",                       opts },
+          { '<leader>gu', ":MetalsGotoSuperMethod<CR>",                                              description = "metals: Go to super method",                opts },
+          { '<leader>sc', ":MetalsCompileClean<CR>",                                                 description = "metals: Clean & compile",                   opts },
+          { '<leader>sa', function() require("metals.tvp").reveal_in_tree() end,                     description = "metals: Show in tree view",                 opts },
+          { '<leader>se', function() require("metals.tvp").toggle_tree_view() end,                   description = "metals: Toggle tree view",                  opts },
+          { '<leader>si', "MetalsImportBuild<CR>",                                                   description = "metals: Import build",                      opts },
+          { '<leader>sr', "MetalsRestartMetals<CR>",                                                 description = "metals: Restart metals",                    opts },
+          { '<leader>sj', function() require("metals").toggle_settings("showImplicitArguments") end, description = "metals: Toggle 'show implicit arguments'",  opts },
+          { '<leader>K',  function() require("metals").type_of_range() end,                          description = "metals: Type of selected code",             mode = { 'v' }, opts }
         })
       end
 
@@ -376,6 +299,12 @@ return {
         group = nvim_metals_group,
       })
     end
+  },
+
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^5', -- Recommended
+    lazy = false,   -- This plugin is already lazy
   }
 
 }

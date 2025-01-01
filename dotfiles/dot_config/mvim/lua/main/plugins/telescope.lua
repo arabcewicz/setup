@@ -1,5 +1,4 @@
 return {
-  { 'nvim-telescope/telescope-file-browser.nvim' },
   { 'nvim-telescope/telescope-ui-select.nvim' },
   {
     'nvim-telescope/telescope.nvim',
@@ -11,7 +10,7 @@ return {
     config = function()
       local telescope = require("telescope")
       local actions = require "telescope.actions"
-      local fb_actions = telescope.extensions.file_browser.actions
+      -- local fb_actions = telescope.extensions.file_browser.actions
       telescope.setup {
         defaults = {
           prompt_prefix = "   ",
@@ -35,89 +34,17 @@ return {
           file_ignore_patterns = { "node_modules", "target", "%.semanticdb" },
         },
         extensions = {
-          ["file_browser"] = {
-            hijack_netrw = false,
-            select_buffer = true,
-            grouped = true,
-            -- collapse_dirs = true,
-            hidden = true,
-            depth = false,
-            --initial_mode = 'normal',
-            mappings = {
-              ["n"] = {
-                ["G"] = function(bufnr) fb_actions.toggle_respect_gitignore(bufnr) end,
-                ["H"] = fb_actions.toggle_hidden,
-                ["h"] = fb_actions.goto_parent_dir,
-                ["l"] = actions.select_default,
-              },
-            },
-            --   ["i"] = {
-            --     ["<A-c>"] = fb_actions.create,
-            --     ["<S-CR>"] = fb_actions.create_from_prompt,
-            --     ["<A-r>"] = fb_actions.rename,
-            --     ["<A-m>"] = fb_actions.move,
-            --     ["<A-y>"] = fb_actions.copy,
-            --     ["<A-d>"] = fb_actions.remove,
-            --     ["<C-o>"] = fb_actions.open,
-            --     ["<C-g>"] = fb_actions.goto_parent_dir,
-            --     ["<C-e>"] = fb_actions.goto_home_dir,
-            --     ["<C-w>"] = fb_actions.goto_cwd,
-            --     ["<C-t>"] = fb_actions.change_cwd,
-            --     ["<C-f>"] = fb_actions.toggle_browser,
-            --     ["<C-h>"] = fb_actions.toggle_hidden,
-            --     ["<C-s>"] = fb_actions.toggle_all,
-            --     ["<bs>"] = fb_actions.backspace,
-            --   },
-            --   ["n"] = {
-            --     ["c"] = fb_actions.create,
-            --     ["r"] = fb_actions.rename,
-            --     ["m"] = fb_actions.move,
-            --     ["y"] = fb_actions.copy,
-            --     ["d"] = fb_actions.remove,
-            --     ["o"] = fb_actions.open,
-            --     ["g"] = fb_actions.goto_parent_dir,
-            --     ["e"] = fb_actions.goto_home_dir,
-            --     ["w"] = fb_actions.goto_cwd,
-            --     ["t"] = fb_actions.change_cwd,
-            --     ["f"] = fb_actions.toggle_browser,
-            --     ["h"] = fb_actions.toggle_hidden,
-            --     ["s"] = fb_actions.toggle_all,
-            --   },
-            -- theme = "ivy",
-            -- display_stat = { date = false, size = false, mode = false },
-            -- display_stat = false,
-          },
           ["ui-select"] = {
             layout_strategy = "center",
-            -- require("telescope.themes").get_dropdown {
-            --   {
-            --     winblend = 25,
-            --     layout_config = {
-            --       prompt_position = "top",
-            --       -- width = 80,
-            --       -- height = 12,
-            --     },
-            --     -- borderchars = lvim.builtin.telescope.defaults.borderchars,
-            --     border = {},
-            --     previewer = false,
-            --     shorten_path = false,
-            --   }
-            -- },
           }
         },
       }
-      telescope.load_extension("file_browser")
       telescope.load_extension("ui-select")
-      telescope.load_extension('chezmoi')
+      -- telescope.load_extension('chezmoi')
 
       local builtin = require('telescope.builtin')
 
       require("legendary").keymaps({
-        {
-          '<leader>f.',
-          telescope.extensions.chezmoi.find_files,
-          description = 'telescope: List files in current working directory'
-        },
         {
           '<leader>ff',
           builtin.find_files,
@@ -145,7 +72,11 @@ return {
         },
         {
           '<leader>fh',
-          builtin.help_tags,
+          function()
+            vim.o.shellslash = false -- workaround o windows
+            builtin.help_tags()
+            vim.o.shellslash = true
+          end,
           description = "telescope: List help tags"
         },
         {
@@ -205,17 +136,6 @@ return {
           description = 'telescope: Show diagnostics'
         },
 
-        -- telescope-file-browser.nvim
-        {
-          "<leader>fe",
-          ":Telescope file_browser<CR>",
-          description = "telescope-file-browser: File explorer"
-        },
-        {
-          "<leader>fa",
-          ":Telescope file_browser path=%:p:h select_buffer=true<CR>",
-          description = "telescope-file-browser: Show current file in file explorer"
-        },
       })
     end
   }
