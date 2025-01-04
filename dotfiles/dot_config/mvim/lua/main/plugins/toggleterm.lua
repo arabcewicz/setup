@@ -22,22 +22,10 @@ return {
       hidden = true,
     })
 
-    require('legendary').keymaps({
-      {
-        '<A-Esc>',
-        { t = [[<C-\><C-n>]] },
-        description = "Exit terminal mode",
-      },
-      {
-        '<A-b>',
-        function() sbt:toggle() end,
-        description = "Run sbt in dedicated terminal",
-      },
-      {
-        '<A-r>',
-        function() lazygit:toggle() end,
-        description = "Run lazygit in dedicated terminal",
-      },
-    })
+    vim.keymap.set("t", [[<C-\><C-n>]], "<A-Esc>", { noremap = true, silent = true, desc = "Exit terminal mode" })
+    vim.keymap.set("n", "<A-b>", function() sbt:toggle() end,
+      { noremap = true, silent = true, desc = "Run sbt in dedicated terminal" })
+    vim.keymap.set("n", "<A-r>", function() lazygit:toggle() end,
+      { noremap = true, silent = true, desc = "Run lazygit in dedicated terminal" })
   end
 }

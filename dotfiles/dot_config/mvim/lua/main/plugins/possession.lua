@@ -22,15 +22,9 @@ return {
         tabby = false,
       }
     })
-
     require('telescope').load_extension('possession')
 
-    require("legendary").keymaps({
-      {
-        '<leader>fp',
-        ':Telescope possession list<CR>',
-        description = 'possession: List sessions'
-      },
-    })
-  end
+    vim.keymap.set("n", '<leader>fp', ':Telescope possession list<CR>',
+      { desc = 'possession: List sessions', silent = true })
+  end,
 }

@@ -20,6 +20,18 @@ return {
       "nvim-neotest/nvim-nio",
       "theHamsta/nvim-dap-virtual-text",
     },
+    keys = {
+      { "<leader>dc", function() require("dap").continue() end,          desc = "dap: Continue" },
+      { "<leader>dt", function() require("dap").terminate() end,         desc = "dap: Terminate" },
+      { "<leader>dr", function() require("dap").repl.toggle() end,       desc = "dap: Toggle repl" },
+      { "<leader>dK", function() require("dap.ui.widgets").hover() end,  desc = "dap.ui: Show hover" },
+      { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "dap: Toggle breakpoint" },
+      { "<leader>do", function() require("dap").step_over() end,         desc = "dap: Step over" },
+      { "<leader>di", function() require("dap").step_into() end,         desc = "dap: Step into" },
+      { "<leader>dl", function() require("dap").run_last() end,          desc = "dap: Run last debug session" },
+      { "<leader>du", function() require("dapui").toggle() end,          desc = "dapui: Toggle dapui" },
+      { "<leader>da", function() dapui_autostart() end,                  desc = "dapui: Toggle ui autostart" },
+    },
     config = function()
       local dap = require("dap")
       local dapui = require("dapui")
@@ -72,59 +84,6 @@ return {
       sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
       sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
       sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
-
-      require('legendary').keymaps({
-        {
-          "<leader>dc",
-          function() require("dap").continue() end,
-          description = "dap: Continue"
-        },
-        {
-          "<leader>dt",
-          function() require("dap").terminate() end,
-          description = "dap: Terminate"
-        },
-        {
-          "<leader>dr",
-          function() require("dap").repl.toggle() end,
-          description = "dap: Toggle repl"
-        },
-        {
-          "<leader>dK",
-          function() require("dap.ui.widgets").hover() end,
-          description = "dap.ui: Show hover"
-        },
-        {
-          "<leader>db",
-          function() require("dap").toggle_breakpoint() end,
-          description = "dap: Toggle breakpoint"
-        },
-        {
-          "<leader>do",
-          function() require("dap").step_over() end,
-          description = "dap: Step over"
-        },
-        {
-          "<leader>di",
-          function() require("dap").step_into() end,
-          description = "dap: Step into"
-        },
-        {
-          "<leader>dl",
-          function() require("dap").run_last() end,
-          description = "dap: Run last debug session"
-        },
-        {
-          "<leader>du",
-          function() require("dapui").toggle() end,
-          description = "dapui: Toggle dapui"
-        },
-        {
-          "<leader>da",
-          function() dapui_autostart() end,
-          description = "dapui: Toggle ui autostart"
-        },
-      })
     end
   }
 }

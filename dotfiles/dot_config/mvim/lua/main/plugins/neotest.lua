@@ -25,18 +25,16 @@ return {
         })
       },
     })
-
-    require("legendary").keymaps({
-      -- { "<leader>t",  "",                                                                                 desc = "+test" },
-      { "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end,                      description = "neotest: Run File" },
-      { "<leader>tT", function() require("neotest").run.run(vim.uv.cwd()) end,                            description = "neotest: Run All Test Files" },
-      { "<leader>tr", function() require("neotest").run.run() end,                                        description = "neotest: Run Nearest" },
-      { "<leader>tl", function() require("neotest").run.run_last() end,                                   description = "neotest: Run Last" },
-      { "<leader>ts", function() require("neotest").summary.toggle() end,                                 description = "neotest: Toggle Summary" },
-      { "<leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, description = "neotest: Show Output" },
-      { "<leader>tO", function() require("neotest").output_panel.toggle() end,                            description = "neotest: Toggle Output Panel" },
-      { "<leader>tS", function() require("neotest").run.stop() end,                                       description = "neotest: Stop" },
-      { "<leader>tw", function() require("neotest").watch.toggle(vim.fn.expand("%")) end,                 description = "neotest: Toggle Watch" },
-    })
-  end
+  end,
+  keys = {
+    { "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end,                      desc = "neotest: Run File" },
+    { "<leader>tT", function() require("neotest").run.run(vim.uv.cwd()) end,                            desc = "neotest: Run All Test Files" },
+    { "<leader>tr", function() require("neotest").run.run() end,                                        desc = "neotest: Run Nearest" },
+    { "<leader>tl", function() require("neotest").run.run_last() end,                                   desc = "neotest: Run Last" },
+    { "<leader>ts", function() require("neotest").summary.toggle() end,                                 desc = "neotest: Toggle Summary" },
+    { "<leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, desc = "neotest: Show Output" },
+    { "<leader>tO", function() require("neotest").output_panel.toggle() end,                            desc = "neotest: Toggle Output Panel" },
+    { "<leader>tS", function() require("neotest").run.stop() end,                                       desc = "neotest: Stop" },
+    { "<leader>tw", function() require("neotest").watch.toggle(vim.fn.expand("%")) end,                 desc = "neotest: Toggle Watch" },
+  }
 }
