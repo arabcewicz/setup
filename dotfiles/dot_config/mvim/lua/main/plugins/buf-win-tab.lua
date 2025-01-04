@@ -3,27 +3,22 @@ return {
     'famiu/bufdelete.nvim',
     keys = {
       { "<A-w>", ":Bdelete<CR>", desc = "bufdelete: Delete current buffer" },
+      { "bd",    ":Bdelete<CR>", desc = "bufdelete: Delete current buffer" },
     },
   },
   {
     'vim-scripts/BufOnly.vim',
     keys = {
-      { "<C-A-S-w>", ":BufOnly<CR>", desc = "BufOnly: Delete all buffers but current" },
+      { "bo", ":BufOnly<CR>", desc = "BufOnly: Delete all buffers but current" },
     },
   },
   {
     "nvim-zh/colorful-winsep.nvim",
     event = { "WinNew" },
-    config = function()
-      require("colorful-winsep").setup({
-        hi = {
-          -- bg = "#1d2021",
-          fg = "#928374",
-        },
-        no_exec_files = { "packer", "TelescopePrompt", "mason", "CompetiTest", "NvimTree", "neo-tree" },
-        symbols = { "━", "┃", "┏", "┓", "┗", "┛" },
-      })
-    end
+    opts = {
+      no_exec_files = { "TelescopePrompt", "mason", "CompetiTest", "neo-tree" },
+      symbols = { "━", "┃", "┏", "┓", "┗", "┛" },
+    }
   },
   {
     'mrjones2014/smart-splits.nvim',

@@ -37,8 +37,12 @@ return {
       }
     },
     keys = {
-      { "<A-/>", function() require('flash').jump() end,       mode = { "n", "x", "o" }, desc = "flash: Flash" },
-      { "<A-v>", function() require('flash').treesitter() end, mode = { "n", "x", "o" }, desc = "flash: Treesitter" },
+      -- { "<A-/>", function() require('flash').jump() end,       mode = { "n", "x", "o" },                            desc = "flash: Flash" },
+      { "s",     mode = { "n", "x", "o" },                     function() require("flash").jump() end,              desc = "Flash" },
+      { "S",     function() require('flash').treesitter() end, mode = { "n", "x", "o" },                            desc = "flash: Treesitter" },
+      { "r",     mode = "o",                                   function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "R",     mode = { "o", "x" },                          function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" },                               function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     }
   },
   {
@@ -56,47 +60,16 @@ return {
     init = function()
       vim.g.VM_default_mappings = 0
       vim.g.VM_maps = {
-        ['Find Under']         = '<M-n>',
-        ['Find Subword Under'] = '<M-n>',
-        ['Remove Region']      = '<M-p>',
-        ['Select All']         = '<M-S-n>',
-        ['Start Regex Search'] = '<M-/>',
+        ['Find Under']         = '<C-M-n>',
+        ['Find Subword Under'] = '<C-M-n>',
+        ['Remove Region']      = '<C-M-p>',
+        ['Select All']         = '<C-M-a>',
+        ['Start Regex Search'] = '<C-M-/>',
         ['Add Cursor Down']    = '<C-S-j>',
         ['Add Cursor Up']      = '<C-S-k>',
-        ['Skip Region']        = '<M-b>',
+        ['Skip Region']        = '<C-M-x>',
       }
     end,
-  },
-  {
-    'fedepujol/move.nvim',
-    opts = {
-      line = {
-        enable = true, -- Enables line movement
-        indent = true  -- Toggles indentation
-      },
-      block = {
-        enable = true, -- Enables block movement
-        indent = true  -- Toggles indentation
-      },
-      word = {
-        enable = true, -- Enables word movement
-      },
-      char = {
-        enable = true -- Enables char movement
-      }
-    },
-    keys = {
-      { '<C-j>',      ':MoveLine(1)<CR>',    desc = "move: Move line down" },
-      { '<C-k>',      ':MoveLine(-1)<CR>',   desc = "move: Move line up" },
-      { '<C-h>',      ':MoveHChar(-1)<CR>',  desc = "move: Move char left" },
-      { '<C-l>',      ':MoveHChar(1)<CR>',   desc = "move: Move char right" },
-      { '<leader>wf', ':MoveWord(1)<CR>',    desc = "move: Move word forward" },
-      { '<leader>wb', ':MoveWord(-1)<CR>',   desc = "move: Move work backward" },
-      { '<C-j>',      ':MoveBlock(1)<CR>',   desc = "move: Move selected block up",    mode = "v" },
-      { '<C-k>',      ':MoveBlock(-1)<CR>',  desc = "move: Move selected block down",  mode = "v" },
-      { '<C-h>',      ':MoveHBlock(-1)<CR>', desc = "move: Move selected block left",  mode = "v" },
-      { '<C-l>',      ':MoveHBlock(1)<CR>',  desc = "move: Move selected block right", mode = "v" },
-    }
   },
   {
     'gbprod/yanky.nvim',
@@ -158,5 +131,22 @@ return {
       { "<C-p>",     "<Plug>(YankyCycleBackward)",  desc = "yanky: Cycle yank buffer backward" },
       { "<space>fv", ":Telescope yank_history<CR>", desc = "yanky: List yank ring" },
     },
-  }
+  },
+  -- Finds and lists all of the TODO, HACK, BUG, etc comment
+  -- in your project and loads them into a browsable list.
+  {
+    "folke/todo-comments.nvim",
+    cmd = { "TodoTrouble", "TodoTelescope" },
+    -- event = "LazyFile",
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      { "]t",         function() require("todo-comments").jump_next() end,              desc = "Next Todo Comment" },
+      { "[t",         function() require("todo-comments").jump_prev() end,              desc = "Previous Todo Comment" },
+      { "<leader>xt", "<cmd>Trouble todo toggle<cr>",                                   desc = "Todo (Trouble)" },
+      { "<leader>xT", "<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
+      { "<leader>st", "<cmd>TodoTelescope<cr>",                                         desc = "Todo" },
+      { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",                 desc = "Todo/Fix/Fixme" },
+    },
+  },
 }
