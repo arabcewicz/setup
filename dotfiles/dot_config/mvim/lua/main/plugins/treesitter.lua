@@ -24,8 +24,6 @@ return {
         "gitignore",
         "javascript",
         "jsdoc",
-        "json",
-        "jsonc",
         "markdown",
         "markdown_inline",
         "printf",

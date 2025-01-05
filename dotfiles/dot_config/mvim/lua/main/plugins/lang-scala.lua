@@ -17,6 +17,18 @@ return {
     opts = {
       servers = {
         metals = {
+          keys = {
+            { '<leader>mm', ":Telescope metals commands<CR>",                                          desc = "metals: Show commands in telescope picker" },
+            { '<leader>ml', ":MetalsToggleLogs<CR>",                                                   desc = "metals: Toggle logs", },
+            { '<leader>mu', ":MetalsGotoSuperMethod<CR>",                                              desc = "metals: Go to super method", },
+            { '<leader>mc', ":MetalsCompileClean<CR>",                                                 desc = "metals: Clean & compile", },
+            { '<leader>ma', function() require("metals.tvp").reveal_in_tree() end,                     desc = "metals: Show in tree view", },
+            { '<leader>me', function() require("metals.tvp").toggle_tree_view() end,                   desc = "metals: Toggle tree view", },
+            { '<leader>mi', "MetalsImportBuild<CR>",                                                   desc = "metals: Import build", },
+            { '<leader>mr', "MetalsRestartMetals<CR>",                                                 desc = "metals: Restart metals", },
+            { '<leader>mj', function() require("metals").toggle_settings("showImplicitArguments") end, desc = "metals: Toggle 'show implicit arguments'", },
+            { '<leader>mt', function() require("metals").type_of_range() end,                          desc = "metals: Type of selected code",            mode = { 'v' } }
+          }
         },
       },
       setup = {
@@ -53,9 +65,6 @@ return {
             -- LazyVim.has("nvim-dap") and metals.setup_dap or nil
 
             require("metals").setup_dap()
-
-            vim.keymap.set("n", '<leader>c:', ":Telescope metals commands<CR>",
-              { desc = "metals: Show commands in telescope picker", silent = true, noremap = true })
 
             return metals_config
           end

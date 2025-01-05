@@ -157,6 +157,8 @@ return {
             -- },
           }
 
+          local server_maps = opts.servers[client.name] and opts.servers[client.name].keys or {}
+          vim.list_extend(keymaps, server_maps)
           for _, keys in pairs(keymaps) do
             -- local has = not keys.has or M.has(buffnr, keys.has)
             -- local cond = not (keys.cond == false or ((type(keys.cond) == "function") and not keys.cond()))
