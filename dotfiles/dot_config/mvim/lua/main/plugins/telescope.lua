@@ -53,7 +53,8 @@ return {
     init = function()
       require("telescope").load_extension("ui-select")
     end,
-    keys = {
+    keys = function()
+      return {
       -- files
       -- { "<leader><space>", LazyVim.pick("files"),                desc = "Find Files (Root Dir)" },
       -- { "<leader>ff", LazyVim.pick("files"),                                            desc = "Find Files (Root Dir)" },
@@ -77,7 +78,7 @@ return {
       -- { "<leader>fR", LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }),                 desc = "Recent (cwd)" },
       {
         '<leader>fL',
-        function() require('telescope.builtin').old_files({ root = false }) end,
+        function() require('telescope.builtin').oldfiles({ root = false }) end,
         desc = 'telescope: Recent files (cwd)'
       },
 
@@ -191,8 +192,8 @@ return {
       --   end,
       --   desc = "Goto Symbol (Workspace)",
       -- },
-
-    },
+    }
+  end,
   },
   { 'nvim-telescope/telescope-ui-select.nvim' },
 }

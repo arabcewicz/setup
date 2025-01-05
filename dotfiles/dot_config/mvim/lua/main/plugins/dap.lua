@@ -1,7 +1,6 @@
 return {
   {
     'm00qek/baleia.nvim',
-    enabled = true,
     config = function()
       vim.g.baleia = require("baleia").setup({})
       vim.api.nvim_create_autocmd({ "FileType" }, {
@@ -14,7 +13,6 @@ return {
   },
   {
     "mfussenegger/nvim-dap",
-    enabled = true,
     dependencies = {
       "rcarriga/nvim-dap-ui",
       "nvim-neotest/nvim-nio",
@@ -53,32 +51,6 @@ return {
           dapui.close()
         end
       end
-
-      dap.configurations.scala = {
-        {
-          type = "scala",
-          request = "launch",
-          name = "Run",
-          metalsRunType = "run",
-        },
-        {
-          type = "scala",
-          request = "launch",
-          name = "RunOrTest",
-          metals = {
-            runType = "runOrTestFile",
-            --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
-          },
-        },
-        {
-          type = "scala",
-          request = "launch",
-          name = "Test Target",
-          metals = {
-            runType = "testTarget",
-          },
-        },
-      }
 
       local sign = vim.fn.sign_define
       sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })

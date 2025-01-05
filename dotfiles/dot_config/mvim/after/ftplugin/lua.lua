@@ -21,4 +21,3 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   end,
   desc = "Reload the current module on save",
 })
-

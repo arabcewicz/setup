@@ -2,6 +2,8 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+vim.o.keywordprg = ':help' -- solves 'K' error on widows
+
 vim.g.have_nerd_font = true
 
 -- https://github.com/nushell/integrations/blob/main/nvim/init.lua

@@ -1,122 +1,49 @@
-local common_on_attach_run = false
-
--- local common_on_attach = function(client)
---   if not common_on_attach_run then
---     local opts = { noremap = true, silent = true }
---     require('legendary').keymaps({
---       {
---         "gd",
---         vim.lsp.buf.definition,
---         description = "lsp: Go to definition",
---         opts = opts,
---       },
---       {
---         "gD",
---         vim.lsp.buf.declaration,
---         description = "lsp: Go to definition",
---         opts = opts,
---       },
---       {
---         "<leader>gt",
---         vim.lsp.buf.type_definition,
---         description = "lsp: Go to type definition",
---         opts = opts,
---       },
---       {
---         "K",
---         vim.lsp.buf.hover,
---         description = "lsp: Show hover",
---         opts = opts,
---       },
---       {
---         "gi",
---         vim.lsp.buf.implementation,
---         description = "lsp: Go to implementation",
---         opts = opts,
---       },
---       -- {
---       --   "gr",
---       --   vim.lsp.buf.references,
---       --   description = "lsp: Show references as quick list",
---       --   opts = opts,
---       -- },
---       {
---         "<leader>gs",
---         vim.lsp.buf.document_symbol,
---         description = "lsp: Show file symbols",
---         opts = opts,
---       },
---       {
---         "<leader>gw",
---         vim.lsp.buf.workspace_symbol,
---         description = "lsp: Show workspace symbols",
---         opts = opts,
---       },
---       {
---         "<leader>cl",
---         vim.lsp.codelens.run,
---         description = "lsp: Codelens",
---         opts = opts,
---       },
---       {
---         "<leader>sh",
---         vim.lsp.buf.signature_help,
---         description = "lsp: Show function parameters",
---         opts = opts,
---       },
---       {
---         "<leader>rn",
---         vim.lsp.buf.rename,
---         description = "lsp: Rename",
---         opts = opts,
---       },
---       {
---         "<leader>cf",
---         vim.lsp.buf.format({ timeout_ms = 5000 }),
---         description = "lsp: Format code",
---         opts = opts,
---       },
---       {
---         "<leader>ca",
---         vim.lsp.buf.code_action,
---         description = "lsp: Show code actions",
---         opts = opts,
---       },
---     })
---   end
---   common_on_attach_run = true
--- end
-
-
 return {
   {
     "williamboman/mason.nvim",
     enabled = true,
+    cmd = "Mason",
     opts = {
-      PATH = "append",
-    }
+      ui = {
+        border = "rounded",
+      }
+    },
+    keys = {
+      { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" }
+    },
   },
   {
     "williamboman/mason-lspconfig.nvim",
     enabled = true,
-    -- opts = {
-    -- ensure_installed = { "lua_ls", "rust_analyzer", "tsserver", "tailwindcss" },
-    -- ensure_installed = { "lua_ls", "tailwindcss" },
-    -- }
-  },
-  {
-    'WhoIsSethDaniel/mason-tool-installer.nvim',
-    enabled = true,
+    opts = {
+      ensure_installed = {}, -- servers will be added automatically
+      automatic_installation = true,
+    }
   },
   {
     "neovim/nvim-lspconfig",
-    enabled = true,
-    config = function()
-      -- border for :LspInfo window
-      require('lspconfig.ui.windows').default_options.border = 'single'
+    opts = {
+      capabilities = {
+        workspace = {
+          fileOperations = {
+            didRename = true,
+            willRename = true,
+          },
+        },
+      },
+      -- codelens = {
+      --   enabled = false,
+      -- },
+
+      servers = {},
+      setup = {
+      },
+    },
+    config = function(_, opts)
+      require('lspconfig.ui.windows').default_options.border = 'rounded'
       vim.api.nvim_set_hl(0, "LspInfoBorder", { link = "FloatBorder" })
 
-      local _border = "single"
+      local _border = "rounded"
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
         vim.lsp.handlers.hover, {
           border = _border
@@ -128,8 +55,10 @@ return {
         }
       )
       vim.diagnostic.config {
+        virtual_text = true,
         float = { border = _border }
       }
+
 
       local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
@@ -162,6 +91,7 @@ return {
             })
           end
 
+
           if client.supports_method("textDocument/formatting") then
             vim.api.nvim_clear_autocmds({
               group = augroup,
@@ -171,140 +101,121 @@ return {
             vim.api.nvim_create_autocmd('BufWritePre', {
               group = augroup,
               buffer = bufnr,
-              callback = function() vim.lsp.buf.format({ bufnr = bufnr }) end,
+              callback = function()
+                vim.lsp.buf.format({ bufnr = bufnr })
+                vim.diagnostic.show() -- TODO: workaround as diagnostics disappear after save ??
+              end,
             })
           end
-        end,
+
+          -- TODO: set only if server has such capablity (see LazyVim)
+          -- TODO: put this outside and cache
+          local keymaps = {
+            { "<leader>cl", "<cmd>LspInfo<cr>",                                 desc = "lsp: Lsp Info" },
+            { "gd",         vim.lsp.buf.definition,                             desc = "lsp: Goto Definition",            has = "definition" },
+            -- { "gr",         vim.lsp.buf.references,                          desc = "lsp: References",                 nowait = true },
+            { "gI",         vim.lsp.buf.implementation,                         desc = "lsp: Goto Implementation" },
+            { "gy",         vim.lsp.buf.type_definition,                        desc = "lsp: Goto T[y]pe Definition" },
+            { "gD",         vim.lsp.buf.declaration,                            desc = "lsp: Goto Declaration" },
+            { "K",          function() return vim.lsp.buf.hover() end,          desc = "lsp: Hover" },
+            { "gK",         function() return vim.lsp.buf.signature_help() end, desc = "lsp: Signature Help",             has = "signatureHelp" },
+            { "<C-p>",      function() return vim.lsp.buf.signature_help() end, mode = "i",                               desc = "Signature Help", has = "signatureHelp" },
+            { "<leader>ca", vim.lsp.buf.code_action,                            desc = "lsp: Code Action",                mode = { "n", "v" },     has = "codeAction" },
+            { "<leader>cc", vim.lsp.codelens.run,                               desc = "lsp: Run Codelens",               mode = { "n", "v" },     has = "codeLens" },
+            { "<leader>cC", vim.lsp.codelens.refresh,                           desc = "lsp: Refresh & Display Codelens", mode = { "n" },          has = "codeLens" },
+            -- { "<leader>cR", function() Snacks.rename.rename_file() end,      desc = "lsp: Rename File",                mode = { "n" },          has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
+            { "<leader>cr", vim.lsp.buf.rename,                                 desc = "lsp: Rename",                     has = "rename" },
+            { "<leader>cf", vim.lsp.buf.format,                                 desc = "lsp: Format",                     has = "format??" },
+            -- { "<leader>cA", LazyVim.lsp.action.source,                          desc = "lsp: Source Action",              has = "codeAction" },
+            -- {
+            --   "]]",
+            --   function() Snacks.words.jump(vim.v.count1) end,
+            --   has = "documentHighlight",
+            --   desc = "Next Reference",
+            --   cond = function() return Snacks.words.is_enabled() end
+            -- },
+            -- {
+            --   "[[",
+            --   function() Snacks.words.jump(-vim.v.count1) end,
+            --   has = "documentHighlight",
+            --   desc = "Prev Reference",
+            --   cond = function() return Snacks.words.is_enabled() end
+            -- },
+            -- {
+            --   "<a-n>",
+            --   function() Snacks.words.jump(vim.v.count1, true) end,
+            --   has = "documentHighlight",
+            --   desc = "Next Reference",
+            --   cond = function() return Snacks.words.is_enabled() end
+            -- },
+            -- {
+            --   "<a-p>",
+            --   function() Snacks.words.jump(-vim.v.count1, true) end,
+            --   has = "documentHighlight",
+            --   desc = "Prev Reference",
+            --   cond = function() return Snacks.words.is_enabled() end
+            -- },
+          }
+
+          for _, keys in pairs(keymaps) do
+            -- local has = not keys.has or M.has(buffnr, keys.has)
+            -- local cond = not (keys.cond == false or ((type(keys.cond) == "function") and not keys.cond()))
+            --
+            -- if has and cond then
+            -- local opts = Keys.opts(keys)
+            opts.cond = nil
+            opts.has = nil
+            opts.silent = opts.silent ~= false
+            opts.buffer = bufnr
+            vim.keymap.set(keys.mode or "n", keys[1] or "", keys[2],
+              { silent = true, noremap = true, desc = keys.desc })
+            -- end
+          end
+          -- LspAttach
+        end
       })
 
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+      local servers = opts.servers
+      local cmp_nvim_lsp = require("cmp_nvim_lsp")
+      local capabilities = vim.tbl_deep_extend(
+        "force",
+        {},
+        vim.lsp.protocol.make_client_capabilities(),
+        cmp_nvim_lsp.default_capabilities() or {},
+        opts.capabilities or {}
+      )
 
-      local servers = {
-        -- pyright = {},
+      local function setup(server)
+        local server_opts = vim.tbl_deep_extend("force", { capabilities = vim.deepcopy(capabilities), },
+          servers[server] or {})
 
-        lua_ls = {
-          -- cmd = {...},
-          -- filetypes = { ...},
-          -- capabilities = {},
-          settings = {
-            Lua = {
-              completion = {
-                callSnippet = 'Replace',
-              },
-              -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
-            },
-          },
-        },
-        jsonls = {
-          -- lazy-load schemastore when needed
-          on_new_config = function(new_config)
-            new_config.settings.json.schemas = new_config.settings.json.schemas or {}
-            vim.list_extend(new_config.settings.json.schemas, require("schemastore").json.schemas())
-          end,
-          settings = {
-            json = {
-              format = {
-                enable = true,
-              },
-              validate = { enable = true },
-            },
-          },
-        },
-      }
-
-      require('mason').setup()
-
-      -- You can add other tools here that you want Mason to install
-      -- for you, so that they are available from within Neovim.
-      local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
-      })
-      require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-      require('mason-lspconfig').setup {
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            -- server.on_attach = common_on_attach
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
-      }
-    end
-  },
-
-  {
-    "scalameta/nvim-metals",
-    enabled = true,
-    commit = "f861db9fda55939797ac1b05238c49b0dcdc3bdb",
-    opts = function()
-      local metals = require("metals").bare_config()
-      metals.init_options.disableColorOutput = false
-      metals.settings = {
-        verboseCompilation = true,
-        -- superMethodLensesEnabled = true,
-        testUserInterface = "Test Explorer",
-      }
-
-      -- *READ THIS*
-      -- I *highly* recommend setting statusBarProvider to true, however if you do,
-      -- you *have* to have a setting to display this in your statusline or else
-      -- you'll not see any messages from metals. There is more info in the help
-      -- docs about this
-      metals.init_options.statusBarProvider = "off"
-
-      -- Example if you are using cmp how to make sure the correct capabilities for snippets are set
-      metals.capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-      metals.on_attach = function(client, bufnr)
-        require("metals").setup_dap()
-        -- common_on_attach(client)
-
-        -- local opts = { noremap = true, silent = true }
-        -- require('legendary').keymaps({
-        --   { '<leader>ss', ":Telescope metals commands<CR>",                                          description = "metals: Show commands in telescope picker", opts },
-        --   { '<leader>sl', ":MetalsToggleLogs<CR>",                                                   description = "metals: Toggle logs",                       opts },
-        --   { '<leader>gu', ":MetalsGotoSuperMethod<CR>",                                              description = "metals: Go to super method",                opts },
-        --   { '<leader>sc', ":MetalsCompileClean<CR>",                                                 description = "metals: Clean & compile",                   opts },
-        --   { '<leader>sa', function() require("metals.tvp").reveal_in_tree() end,                     description = "metals: Show in tree view",                 opts },
-        --   { '<leader>se', function() require("metals.tvp").toggle_tree_view() end,                   description = "metals: Toggle tree view",                  opts },
-        --   { '<leader>si', "MetalsImportBuild<CR>",                                                   description = "metals: Import build",                      opts },
-        --   { '<leader>sr', "MetalsRestartMetals<CR>",                                                 description = "metals: Restart metals",                    opts },
-        --   { '<leader>sj', function() require("metals").toggle_settings("showImplicitArguments") end, description = "metals: Toggle 'show implicit arguments'",  opts },
-        --   { '<leader>K',  function() require("metals").type_of_range() end,                          description = "metals: Type of selected code",             mode = { 'v' }, opts }
-        -- })
+        if opts.setup[server] then
+          if opts.setup[server](server, server_opts) then
+            return
+          end
+        else
+          require("lspconfig")[server].setup(server_opts)
+        end
       end
 
-      return metals
-    end,
 
-    config = function(self, metals_config)
-      -- Autocmd that will actually be in charging of starting the whole thing
-      local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
-      vim.api.nvim_create_autocmd("FileType", {
-        -- NOTE: You may or may not want java included here. You will need it if you
-        -- want basic Java support but it may also conflict if you are using
-        -- something like nvim-jdtls which also works on a java filetype autocmd.
-        pattern = { "scala", "sbt" }, -- "java"
-        callback = function()
-          require("metals").initialize_or_attach(metals_config)
-        end,
-        group = nvim_metals_group,
+      local all_mlsp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
+      local ensure_installed = {} ---@type string[]
+      for server, server_opts in pairs(servers) do
+        setup(server)
+        -- local fts = require("lspconfig")["lua_ls"].filetypes
+        if vim.tbl_contains(all_mlsp_servers, server, {}) then
+          ensure_installed[#ensure_installed + 1] = server
+        end
+      end
+      require("mason-lspconfig").setup({
+        ensure_installed = vim.tbl_deep_extend(
+          "force",
+          ensure_installed,
+          require("lazy.core.plugin").values("mason-lspconfig.nvim", "opts", false).ensure_installed or {}
+        ),
+        handlers = { setup }
       })
     end
   },
-
-  {
-    'mrcjkb/rustaceanvim',
-    version = '^5', -- Recommended
-    lazy = false,   -- This plugin is already lazy
-  }
-
 }
