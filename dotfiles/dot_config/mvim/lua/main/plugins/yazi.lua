@@ -3,23 +3,34 @@ return
   "mikavilpas/yazi.nvim",
   event = "VeryLazy",
   keys = {
-    -- 👇 in this section, choose your own keymappings!
     {
       "<leader>ea",
-      "<cmd>Yazi<cr>",
+      function ()
+        vim.o.shellslash = true
+        require("yazi").yazi()
+        vim.o.shellslash = false
+      end,
       desc = "Open yazi at the current file",
     },
     {
       -- Open in the current working directory
       "<leader>er",
-      "<cmd>Yazi cwd<cr>",
+      function ()
+        vim.o.shellslash = true
+        require("yazi").yazi(nil, vim.fn.getcwd())
+        vim.o.shellslash = false
+      end,
       desc = "Open the file manager in nvim's working directory",
     },
     {
       -- NOTE: this requires a version of yazi that includes
       -- https://github.com/sxyazi/yazi/pull/1305 from 2024-07-18
       '<leader>ee',
-      "<cmd>Yazi toggle<cr>",
+      function ()
+        vim.o.shellslash = true
+        require("yazi").toggle()
+        vim.o.shellslash = false
+      end,
       desc = "Resume the last yazi session",
     },
   },
@@ -30,6 +41,9 @@ return
     -- open_multiple_tabs = true,
     keymaps = {
       show_help = '<f1>',
+      open_file_in_horizontal_split = '<c-s>',
+      grep_in_directory = '<c-g>',
+      replace_in_directory = '<c-r>',
     },
     -- open_file_function = function(chosen_file)
     --   P("asfas")
