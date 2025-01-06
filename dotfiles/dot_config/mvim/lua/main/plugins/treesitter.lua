@@ -18,12 +18,8 @@ return {
         "bash",
         "c",
         "diff",
-        "html",
-        "css",
         "dockerfile",
         "gitignore",
-        "javascript",
-        "jsdoc",
         "markdown",
         "markdown_inline",
         "printf",
@@ -32,8 +28,6 @@ return {
         "regex",
         "rust",
         "toml",
-        "tsx",
-        "typescript",
         "vim",
         "vimdoc",
         "xml",
@@ -64,16 +58,5 @@ return {
       sync_install = false,
       auto_install = true,
     },
-  },
-  -- Automatically add closing tags for HTML and JSX
-  {
-    "windwp/nvim-ts-autotag",
-    event = "LazyFile",
-    opts = {},
-  },
-
-  {
-    'nvim-treesitter/playground',
-    enabled = true,
   },
 }
