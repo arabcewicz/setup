@@ -10,6 +10,9 @@ map('n', '<Esc>', '<cmd>nohlsearch<CR>', "Clear search highlights")
 map("n", "<leader><leader>", "<cmd>source%<CR>", "Source the current file")
 map("n", "<leader>c<space>", ":.lua<CR>", "Run lua code")
 
+map("i", "<M-h>", "<BS>", "Remove the character before the cursor")
+map("i", "<M-l>", "<Del>", "Remove the character under the cursor")
+
 -- buffers
 map("n", "<S-h>", ":bprev<CR>", "Go to the previous buffer")
 map("n", "<S-l>", ":bnext<CR>", "Go to the next buffer")

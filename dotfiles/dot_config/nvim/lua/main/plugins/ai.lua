@@ -20,9 +20,15 @@ return {
         },
       },
     },
-    -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-    -- build = "make",
-    build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false", -- for windows
+    build =
+        function()
+          if LazyVim.is_win() then
+            return "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+          else
+            -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+            return "make"
+          end
+        end,
     dependencies = {
       "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",

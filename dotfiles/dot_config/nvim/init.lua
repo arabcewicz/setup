@@ -6,8 +6,11 @@ P = function(v)
   return v
 end
 
-
 _G.LazyVim = {
+  is_win = function()
+    return vim.uv.os_uname().sysname:find("Windows") ~= nil
+  end,
+
   lsp = {
     execute = function(opts)
       local params = {

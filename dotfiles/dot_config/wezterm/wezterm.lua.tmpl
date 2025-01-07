@@ -149,6 +149,9 @@ local config = {
       }
     } ]]
     -- { key = 'r', mods = 'LEADER', action = act.ActivateKeyTable { name = 'resize_pane', one_shot = false, } },
+
+    -- disabling openinng menu on windows menu
+    { key = 'Space', mods = 'ALT',     action = wezterm.action.SendKey { key = 'Space', mods = 'ALT' } },
   },
 {{ if eq .chezmoi.os "windos" }}
   wsl_domains = wsl_domains,

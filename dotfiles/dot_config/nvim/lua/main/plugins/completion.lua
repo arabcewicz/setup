@@ -20,12 +20,12 @@ return {
           ['<C-n>'] = cmp.mapping.select_next_item(),
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-;>'] = cmp.mapping.confirm({
+          ['<C-y>'] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Insert,
             select = true,
           }),
           ['<C-Space>'] = cmp.mapping.complete(),
-          ['<A-Esc>'] = cmp.mapping.abort(),
+          ['<C-a>'] = cmp.mapping.abort(),
         }),
         -- Think of <c-l> as moving to the right of your snippet expansion.
         --  So if you have a snippet that's like:

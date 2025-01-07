@@ -4,8 +4,8 @@ return {
     build = ":TSUpdate",
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     keys = {
-      { "<c-space>", desc = "Increment Selection" },
-      { "<bs>",      desc = "Decrement Selection", mode = "x" },
+      { "<M-Space>", desc = "Increment Selection" },
+      { "<BS>",      desc = "Decrement Selection", mode = "x" },
     },
     opts = {
       highlight = {
@@ -20,6 +20,7 @@ return {
         "diff",
         "dockerfile",
         "gitignore",
+        "hocon",
         "markdown",
         "markdown_inline",
         "printf",
@@ -36,10 +37,10 @@ return {
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
+          init_selection = "<M-SPACE>",
+          node_incremental = "<M-SPACE>",
           scope_incremental = false,
-          node_decremental = "<bs>",
+          node_decremental = "<BS>",
         },
       },
       textobjects = {
@@ -58,5 +59,9 @@ return {
       sync_install = false,
       auto_install = true,
     },
+    config = function(_, opts)
+      require("nvim-treesitter.configs").setup(opts)
+    end,
+
   },
 }
