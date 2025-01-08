@@ -131,6 +131,11 @@ return {
       { "<space>fv", ":Telescope yank_history<CR>", desc = "yanky: List yank ring" },
     },
   },
+  {
+    'numToStr/Comment.nvim',
+    opts = {
+    }
+  },
   -- Finds and lists all of the TODO, HACK, BUG, etc comment
   -- in your project and loads them into a browsable list.
   {

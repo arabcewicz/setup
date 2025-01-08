@@ -27,7 +27,6 @@ return {
         "python",
         "query",
         "regex",
-        "rust",
         "toml",
         "vim",
         "vimdoc",
@@ -60,7 +59,14 @@ return {
       auto_install = true,
     },
     config = function(_, opts)
+      opts.ensure_installed = LazyVim.dedup(opts.ensure_installed)
       require("nvim-treesitter.configs").setup(opts)
+
+      local hocon_group = vim.api.nvim_create_augroup("hocon", { clear = true })
+      vim.api.nvim_create_autocmd(
+        { 'BufNewFile', 'BufRead' },
+        { group = hocon_group, pattern = '*/resources/*.conf', command = 'set ft=hocon' }
+      )
     end,
 
   },
