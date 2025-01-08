@@ -7,8 +7,9 @@ end
 -- map("x", "<leader>p", "\"_dP", "Paste without yanking")
 
 map('n', '<Esc>', '<cmd>nohlsearch<CR>', "Clear search highlights")
-map("n", "<leader><leader>", "<cmd>source%<CR>", "Source the current file")
-map("n", "<leader>c<space>", ":.lua<CR>", "Run lua code")
+map("n", "<leader><leader>s", "<cmd>source%<CR>", "Source the current file")
+map("n", "<leader><space>x", ":.lua<CR>", "Run lua code")
+map("v", "<leader><space>x", ":lua<CR>", "Run lua code")
 
 map("i", "<M-h>", "<BS>", "Remove the character before the cursor")
 map("i", "<M-l>", "<Del>", "Remove the character under the cursor")
