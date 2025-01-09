@@ -40,6 +40,21 @@ edit = [
 #
 # ]
 
+# [plugin]
+# prepend_previewers = [
+# 	# Archive previewer
+# 	{ mime = "application/*zip",            run = "ouch" },
+# 	{ mime = "application/x-tar",           run = "ouch" },
+# 	{ mime = "application/x-bzip2",         run = "ouch" },
+# 	{ mime = "application/x-7z-compressed", run = "ouch" },
+# 	{ mime = "application/x-rar",           run = "ouch" },
+# 	{ mime = "application/x-xz",            run = "ouch" },
+# ]
 
 
-
+# This plugin does not provide a decompression feature because it already is supported by Yazi. To decompress with ouch, configure the opener in yazi.toml.
+# [opener]
+# extract = [
+# 	{ run = 'ouch d -y "%*"', desc = "Extract here with ouch", for = "windows" },
+# 	{ run = 'ouch d -y "$@"', desc = "Extract here with ouch", for = "unix" },
+# ]

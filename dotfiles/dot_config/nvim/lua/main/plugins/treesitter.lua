@@ -56,7 +56,6 @@ return {
         enable_rename = true,
       },
       sync_install = false,
-      auto_install = true,
     },
     config = function(_, opts)
       opts.ensure_installed = LazyVim.dedup(opts.ensure_installed)
