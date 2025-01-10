@@ -51,11 +51,11 @@ return {
           goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
         },
       },
-      autotag = {
-        enable = true,
-        enable_rename = true,
-      },
-      sync_install = false,
+      -- autotag = {
+      --   enable = true,
+      --   enable_rename = true,
+      -- },
+      -- sync_install = false,
     },
     config = function(_, opts)
       opts.ensure_installed = LazyVim.dedup(opts.ensure_installed)

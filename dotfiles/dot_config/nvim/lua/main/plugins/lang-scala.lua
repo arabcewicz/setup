@@ -55,6 +55,7 @@ return {
           vim.api.nvim_create_autocmd("FileType", {
             pattern = { "scala", "sbt" },
             callback = function()
+              if vim.loop.fs_stat(vim.fn.getcwd() .. "/src/main/g8") then return end -- do not attach to giter8 projects
               metals.initialize_or_attach(metals_config)
             end,
             group = nvim_metals_group,
