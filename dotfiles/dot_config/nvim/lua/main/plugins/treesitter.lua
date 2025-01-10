@@ -9,7 +9,7 @@ return {
       { "<M-Space>", desc = "Increment Selection" },
       { "<BS>",      desc = "Decrement Selection", mode = "x" },
     },
-    opts_extend = { "ensure_installed" },
+    -- opts_extend = { "ensure_installed" },
     opts = {
       highlight = {
         enable = true,

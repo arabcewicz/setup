@@ -98,6 +98,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = {
     { import = "main.plugins" },
+    { import = "main.plugins.lang" },
   },
   ui = {
     border = "single"
