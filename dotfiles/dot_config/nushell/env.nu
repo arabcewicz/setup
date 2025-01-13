@@ -47,9 +47,6 @@ use std *
 path add ($env.FNM_MULTISHELL_PATH | path join bin) # macos
 path add ($env.FNM_MULTISHELL_PATH) # windows
 
-
-source ~/.config/.local.nu
-
 $env.JAVA_HOME = (
   match $nu.os-info.name {
     "macos" =>  ($env.HOME | path join "Library/Caches/Coursier/arc/https/github.com/adoptium/temurin21-binaries/releases/download/jdk-21%252B35/OpenJDK21U-jdk_aarch64_mac_hotspot_21_35.tar.gz/jdk-21+35/Contents/Home")
@@ -85,3 +82,7 @@ carapace _carapace nushell | save --force ~/.cache/carapace/init.nu
 
 mkdir ~/.cache/atuin/
 atuin init nu --disable-up-arrow | save -f ~/.cache/atuin/init.nu
+
+const local = '~/.config/.local.nu'
+source (if ($local | path expand | path exists) { $local } else "empty.nu")
+

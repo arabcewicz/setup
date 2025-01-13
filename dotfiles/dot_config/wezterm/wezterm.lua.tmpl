@@ -167,5 +167,10 @@ wezterm.on('update-right-status', function(window, pane)
   window:set_right_status(window:active_workspace())
 end)
 
+local haslayout, layout = pcall(require, "layout")
+if haslayout then
+  layout.apply_to_config(config)
+end
+
 return config
 
