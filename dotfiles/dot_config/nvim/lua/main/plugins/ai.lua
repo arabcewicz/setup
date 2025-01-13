@@ -1,7 +1,7 @@
 return {
   {
     'github/copilot.vim',
-    enabled = true,
+    enabled = false,
   },
   {
     "yetone/avante.nvim",
@@ -16,7 +16,7 @@ return {
           __inherited_from = "openai",
           api_key_name = "DEEPSEEK_API_KEY",
           endpoint = "https://api.deepseek.com",
-          model = "deepseek-coder",
+          model = "deepseek-chat",
         },
       },
     },
@@ -57,7 +57,7 @@ return {
       {
         -- Make sure to set this up properly if you have lazy=true
         'MeanderingProgrammer/render-markdown.nvim',
-        enabled = false,
+        enabled = true,
         opts = {
           file_types = { "markdown", "Avante" },
         },

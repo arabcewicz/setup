@@ -33,11 +33,11 @@ map("n", "<M-p>", ":tablast<CR>", "Switch to the last tab")
 map("v", "<", "<gv", "Unindent and stay in visual mode")
 map("v", ">", ">gv", "Indent and stay in visual mode")
 map("n", "<leader>J", "mzJ`z", "Merge lines, cursor positions stays unchanged")
-map("n", "<leader>aa", vim.diagnostic.setqflist, "diagnostic: Open all as quick list")
-map("n", "<leader>ae", function() vim.diagnostic.setqflist({ severity = "E" }) end,
-  "diagnostic: Open errors as quick list")
-map("n", "<leader>aw", function() vim.diagnostic.setqflist({ severity = "W" }) end,
-  "diagnostic: Open warnings as quick list")
+-- map("n", "<leader>aa", vim.diagnostic.setqflist, "diagnostic: Open all as quick list")
+-- map("n", "<leader>ae", function() vim.diagnostic.setqflist({ severity = "E" }) end,
+--   "diagnostic: Open errors as quick list")
+-- map("n", "<leader>aw", function() vim.diagnostic.setqflist({ severity = "W" }) end,
+--   "diagnostic: Open warnings as quick list")
 map("n", "<leader>dd", vim.diagnostic.setloclist, "diagnostic: Show buffers diagnostics")
 map("n", "[d", function() vim.diagnostic.goto_prev({ wrap = false }) end, "diagnostic: Go to next")
 map("n", "]d", function() vim.diagnostic.goto_next({ wrap = false }) end, "diagnostic: Go to previous")

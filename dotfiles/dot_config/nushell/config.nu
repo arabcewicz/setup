@@ -88,6 +88,9 @@ alias chra = chezmoi re-add
 alias chst = chezmoi status
 alias chdf = chezmoi diff
 alias chcd = chezmoi cd
+alias p =  sumatrapdf.exe -print-to "Brother DCP-L2530DW series"
+
+# def p [...args] ] { sumatrapdf.exe -print-to "Brother DCP-L2530DW series" ...$args }
 
 def mvim [...args] = { with-env { NVIM_APPNAME: "mvim" } { nvim ...$args } }
 def ovim [...args] = { with-env { NVIM_APPNAME: "ovim" } { nvim ...$args } }

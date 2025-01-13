@@ -48,6 +48,7 @@ path add ($env.FNM_MULTISHELL_PATH | path join bin) # macos
 path add ($env.FNM_MULTISHELL_PATH) # windows
 
 
+source ~/.config/.local.nu
 
 $env.JAVA_HOME = (
   match $nu.os-info.name {
