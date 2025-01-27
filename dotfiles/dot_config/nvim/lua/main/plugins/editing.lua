@@ -49,9 +49,19 @@ return {
     lazy = false,
     opts = {
       keymaps = {
-        useDefaults = true
+        useDefaults = false
       },
+      textobjs = {
+        subword = {
+          noCamelToPascalCase = false,
+        },
+      },
+
     },
+    keys = {
+      { "ac", mode = { "o", "x" }, function() require("various-textobjs").subword("outer") end },
+      { "ic", mode = { "o", "x" }, function() require("various-textobjs").subword("inner") end },
+    }
   },
   {
     "mg979/vim-visual-multi",
