@@ -142,7 +142,8 @@ return {
     },
   },
   {
-    'numToStr/Comment.nvim',
+    'echasnovski/mini.comment',
+    version = '*',
     opts = {
     }
   },
