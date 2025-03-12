@@ -18,5 +18,5 @@ desc = "Jump to char"
 
 [[manager.prepend_keymap]]
 on = ["C"]
-run = "plugin ouch --args=zip"
+run = "plugin ouch 'zip'"
 desc = "Compress with ouch"

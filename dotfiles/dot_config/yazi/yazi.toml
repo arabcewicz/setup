@@ -5,21 +5,51 @@ show_symlink   = true
 
 [preview]
 tab_size        = 2
-max_width       = 4600
-max_height      = 4600
-image_filter    = "triangle"
-image_quality   = 80
-sixel_fraction  = 15
-ueberzug_scale  = 3
-ueberzug_offset = [ 0, 0, 0, 0 ]
+# max_width       = 600
+# max_height      = 600
+# image_filter    = "triangle"
+# image_quality   = 80
+# sixel_fraction  = 15
+# ueberzug_scale  = 3
+# ueberzug_offset = [ 0, 0, 0, 0 ]
 
 [opener]
 edit = [
-	{ run = 'nvim "%*"',                              block = true, for = "windows" },
+    { run = 'nvim "$@"', block = true, for = "unix" },
+  	{ run = 'nvim "%*"', block = true, for = "windows" },
+]
+open = [
+    { run = 'xdg-open "$1"', desc = "Open", for = "linux" },
+    { run = 'open "$@"', desc = "Open", for = "macos" },
+    { run = 'start "" "%1"', orphan = true, desc = "Open", for = "windows" },
+]
+reveal = [
+    { run = 'xdg-open "$(dirname "$1")"', desc = "Reveal", for = "linux" },
+    { run = 'open -R "$1"', desc = "Reveal", for = "macos" },
+    { run = 'explorer /select,"%1"', orphan = true, desc = "Reveal", for = "windows" },
+    { run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
+]
+extract = [
+    { run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
+    { run = 'ya pub extract --list %*', desc = "Extract here", for = "windows" },
+]
+play = [
+    { run = 'mpv --force-window "$@"', orphan = true, for = "unix" },
+    { run = 'mpv --force-window %*', orphan = true, for = "windows" },
+    { run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
 ]
 
-# [open]
-# rules = [
+[open]
+rules = [
+     # Folder
+    { name = "*/", use = ["edit", "open", "reveal"] },
+    # Text
+    { mime = "text/*", use = ["edit", "reveal"] },
+    # Image
+    { mime = "image/*", use = ["open", "reveal"] },
+    # Media
+    { mime = "{audio,video}/*", use = ["play", "reveal"] },
+
 # 	{ mime = "image/vnd.djvu", use = [ "zathura" ] },
 # 	{ mime = "image/vnd.djvu+multipage", use = [ "zathura" ] },
 # 	{ mime = "image/*", use = [ "imv" ] },
@@ -29,21 +59,29 @@ edit = [
 # 	{ mime = "application/pdf", use = [ "zathura" ] },
 # 	{ mime = "*/javascript",     use = [ "edit", "reveal" ] },
 #
-# 	{ mime = "application/zip",             use = [ "extract", "reveal" ] },
-# 	{ mime = "application/gzip",            use = [ "extract", "reveal" ] },
-# 	{ mime = "application/x-tar",           use = [ "extract", "reveal" ] },
-# 	{ mime = "application/x-bzip",          use = [ "extract", "reveal" ] },
-# 	{ mime = "application/x-bzip2",         use = [ "extract", "reveal" ] },
-# 	{ mime = "application/x-7z-compressed", use = [ "extract", "reveal" ] },
-# 	{ mime = "application/x-rar",           use = [ "extract", "reveal" ] },
-# 	{ mime = "application/xz",              use = [ "extract", "reveal" ] },
+	{ mime = "application/zip",             use = [ "extract", "reveal" ] },
+	{ mime = "application/gzip",            use = [ "extract", "reveal" ] },
+	{ mime = "application/x-tar",           use = [ "extract", "reveal" ] },
+	{ mime = "application/x-bzip",          use = [ "extract", "reveal" ] },
+	{ mime = "application/x-bzip2",         use = [ "extract", "reveal" ] },
+	{ mime = "application/x-7z-compressed", use = [ "extract", "reveal" ] },
+	{ mime = "application/x-rar",           use = [ "extract", "reveal" ] },
+	{ mime = "application/xz",              use = [ "extract", "reveal" ] },
+
+  { mime = "application/{json,x-ndjson}", use = ["edit", "reveal"] },
+  { mime = "*/javascript", use = ["edit", "reveal"] },
+  # Empty file
+  { mime = "inode/x-empty", use = ["edit", "reveal"] },
+  # Fallback
+  { name = "*", use = ["open", "reveal"] },
 #
-# ]
+]
 
 [plugin]
 prepend_previewers = [
 	# Archive previewer
-	{ mime = "application/*zip",            run = "ouch" },
+	{ mime = "application/zip",             run = "ouch" },
+	{ mime = "application/gzip",            run = "ouch" },
 	{ mime = "application/x-tar",           run = "ouch" },
 	{ mime = "application/x-bzip2",         run = "ouch" },
 	{ mime = "application/x-7z-compressed", run = "ouch" },
