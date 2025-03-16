@@ -189,6 +189,7 @@ return {
   },
   {
     "LunarVim/bigfile.nvim",
+    enabled = true,
     opts = {
       filesize = 2,      -- size of the file in MiB, the plugin round file sizes to the closest MiB
       pattern = { "*" }, -- autocmd pattern or function see <### Overriding the detection of big files>
@@ -200,7 +201,7 @@ return {
         "syntax",
         "matchparen",
         "vimopts",
-        "filetype",
+        -- "filetype",
       }
     },
   },
