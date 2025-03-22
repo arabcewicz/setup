@@ -1,34 +1,21 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, {
+    opts = {
+      ensure_installed = {
         "json",
         "jsonc",
         "json5",
-      })
-    end,
-
-  },
-
-  {
-    "b0o/SchemaStore.nvim",
-    lazy = true,
-    version = false, -- last release is way too old
+      }
+    }
   },
   {
-    'phelipetls/jsonpath.nvim',
-    config = function(_, opts)
-      -- show json path in the winbar
-      -- if vim.fn.exists("+winbar") == 1 then
-      --   vim.opt_local.winbar = "%{%v:lua.require'jsonpath'.get()%}"
-      -- end
-
-      -- send json path to clipboard
-      -- vim.keymap.set("n", "y<C-p>", function()
-      --   vim.fn.setreg("+", require("jsonpath").get())
-      -- end, { desc = "copy json path", buffer = true })
-    end,
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    opts = {
+      ensure_installed = {
+        "jsonls",
+      },
+    }
   },
   {
     "neovim/nvim-lspconfig",
@@ -52,5 +39,25 @@ return {
         },
       },
     },
-  }
+  },
+
+  {
+    "b0o/SchemaStore.nvim",
+    lazy = true,
+    version = false, -- last release is way too old
+  },
+  {
+    'phelipetls/jsonpath.nvim',
+    config = function(_, opts)
+      -- show json path in the winbar
+      -- if vim.fn.exists("+winbar") == 1 then
+      --   vim.opt_local.winbar = "%{%v:lua.require'jsonpath'.get()%}"
+      -- end
+
+      -- send json path to clipboard
+      -- vim.keymap.set("n", "y<C-p>", function()
+      --   vim.fn.setreg("+", require("jsonpath").get())
+      -- end, { desc = "copy json path", buffer = true })
+    end,
+  },
 }

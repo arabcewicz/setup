@@ -1,21 +1,55 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, {
+    opts = {
+      ensure_installed = {
         "lua",
         "luadoc",
         "luap",
-      })
-    end,
-
+      }
+    }
+  },
+  {
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    opts = {
+      ensure_installed = {
+        "lua_ls",
+        "stylua",
+      },
+    }
   },
   {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        lua_ls = {},
-      }
+        lua_ls = {
+          -- keys = {},
+          settings = {
+            Lua = {
+              workspace = {
+                checkThirdParty = false,
+              },
+              codeLens = {
+                enable = true,
+              },
+              completion = {
+                callSnippet = "Replace",
+              },
+              doc = {
+                privateName = { "^_" },
+              },
+              hint = {
+                enable = true,
+                setType = false,
+                paramType = true,
+                paramName = "Disable",
+                semicolon = "Disable",
+                arrayIndex = "Disable",
+              },
+            },
+          },
+        },
+      },
     }
   },
   {

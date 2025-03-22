@@ -1,11 +1,19 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, {
+    opts = {
+      ensure_installed = {
         "css",
-      })
-    end,
+      }
+    }
+  },
+  {
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    opts = {
+      ensure_installed = {
+        "tailwindcss",
+      },
+    }
   },
   {
     "neovim/nvim-lspconfig",

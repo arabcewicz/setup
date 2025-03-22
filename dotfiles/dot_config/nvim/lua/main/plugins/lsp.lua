@@ -3,12 +3,10 @@ return {
     "williamboman/mason.nvim",
     cmd = "Mason",
     build = ":MasonUpdate",
-    opts_extend = { "ensure_installed" },
     keys = {
       { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" }
     },
     opts = {
-      ensure_installed = {},
       ui = {
         border = "rounded",
       }
@@ -26,24 +24,18 @@ return {
           })
         end, 100)
       end)
-
-      mr.refresh(function()
-        for _, tool in ipairs(opts.ensure_installed) do
-          local p = mr.get_package(tool)
-          if not p:is_installed() then
-            p:install()
-          end
-        end
-      end)
     end,
   },
   {
-    "williamboman/mason-lspconfig.nvim",
-    enabled = true,
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    opts_extend = { "ensure_installed" },
     opts = {
-      ensure_installed = {}, -- servers will be added automatically
-      automatic_installation = true,
+      ensure_installed = {},
     }
+  },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    -- config at the end of nvim-lspconfig
   },
   {
     "neovim/nvim-lspconfig",
@@ -59,10 +51,8 @@ return {
       -- codelens = {
       --   enabled = false,
       -- },
-
       servers = {},
-      setup = {
-      },
+      setup = {},
     },
     config = function(_, opts)
       require('lspconfig.ui.windows').default_options.border = 'rounded'
@@ -85,7 +75,7 @@ return {
       }
 
 
-      local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+      -- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('UserLspConfig', { clear = true }),
@@ -117,21 +107,21 @@ return {
           end
 
 
-          if client.supports_method("textDocument/formatting") then
-            vim.api.nvim_clear_autocmds({
-              group = augroup,
-              buffer = bufnr,
-            })
-            -- Format on save
-            vim.api.nvim_create_autocmd('BufWritePre', {
-              group = augroup,
-              buffer = bufnr,
-              callback = function()
-                vim.lsp.buf.format({ bufnr = bufnr })
-                vim.diagnostic.show() -- TODO: workaround as diagnostics disappear after save ??
-              end,
-            })
-          end
+          -- if client.supports_method("textDocument/formatting") then
+          --   vim.api.nvim_clear_autocmds({
+          --     group = augroup,
+          --     buffer = bufnr,
+          --   })
+          --   -- Format on save
+          --   vim.api.nvim_create_autocmd('BufWritePre', {
+          --     group = augroup,
+          --     buffer = bufnr,
+          --     callback = function()
+          --       vim.lsp.buf.format({ bufnr = bufnr })
+          --       vim.diagnostic.show() -- TODO: workaround as diagnostics disappear after save ??
+          --     end,
+          --   })
+          -- end
 
           -- TODO: set only if server has such capablity (see LazyVim)
           -- TODO: put this outside and cache
@@ -140,7 +130,7 @@ return {
             { "gd",         vim.lsp.buf.definition,                             desc = "lsp: Goto Definition",            has = "definition" },
             -- { "gr",         vim.lsp.buf.references,                          desc = "lsp: References",                 nowait = true },
             { "gI",         vim.lsp.buf.implementation,                         desc = "lsp: Goto Implementation" },
-            { "gy",         vim.lsp.buf.type_definition,                        desc = "lsp: Goto T[y]pe Definition" },
+            { "gy",         vim.lsp.buf.type_definition,                        desc = "lsp: Goto Type Definition" },
             { "gD",         vim.lsp.buf.declaration,                            desc = "lsp: Goto Declaration" },
             { "K",          function() return vim.lsp.buf.hover() end,          desc = "lsp: Hover" },
             { "gK",         function() return vim.lsp.buf.signature_help() end, desc = "lsp: Signature Help",             has = "signatureHelp" },
@@ -150,7 +140,7 @@ return {
             { "<leader>cC", vim.lsp.codelens.refresh,                           desc = "lsp: Refresh & Display Codelens", mode = { "n" },          has = "codeLens" },
             -- { "<leader>cR", function() Snacks.rename.rename_file() end,      desc = "lsp: Rename File",                mode = { "n" },          has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
             { "<leader>cr", vim.lsp.buf.rename,                                 desc = "lsp: Rename",                     has = "rename" },
-            { "<leader>cf", vim.lsp.buf.format,                                 desc = "lsp: Format",                     has = "format??" },
+            { "<leader>cF", vim.lsp.buf.format,                                 desc = "lsp: Format",                     has = "format??" },
             -- { "<leader>cA", LazyVim.lsp.action.source,                          desc = "lsp: Source Action",              has = "codeAction" },
             -- {
             --   "]]",
@@ -202,46 +192,31 @@ return {
         end
       })
 
-      local servers = opts.servers
-      local cmp_nvim_lsp = require("cmp_nvim_lsp")
       local capabilities = vim.tbl_deep_extend(
         "force",
         {},
         vim.lsp.protocol.make_client_capabilities(),
-        cmp_nvim_lsp.default_capabilities() or {},
+        require("cmp_nvim_lsp").default_capabilities() or {},
         opts.capabilities or {}
       )
 
-      local function setup(server)
-        local server_opts = vim.tbl_deep_extend("force", { capabilities = vim.deepcopy(capabilities), },
-          servers[server] or {})
-
-        if opts.setup[server] then
-          if opts.setup[server](server, server_opts) then
-            return
-          end
-        else
-          require("lspconfig")[server].setup(server_opts)
-        end
-      end
-
-
-      local all_mlsp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
-      local ensure_installed = {} ---@type string[]
-      for server, server_opts in pairs(servers) do
-        setup(server)
-        -- local fts = require("lspconfig")["lua_ls"].filetypes
-        if vim.tbl_contains(all_mlsp_servers, server, {}) then
-          ensure_installed[#ensure_installed + 1] = server
-        end
-      end
       require("mason-lspconfig").setup({
-        ensure_installed = vim.tbl_deep_extend(
-          "force",
-          ensure_installed,
-          require("lazy.core.plugin").values("mason-lspconfig.nvim", "opts", false).ensure_installed or {}
-        ),
-        handlers = { setup }
+        ensure_installed = {},
+        automatic_installation = false,
+        handlers = {
+          function(server)
+            local server_opts = vim.tbl_deep_extend("force", { capabilities = vim.deepcopy(capabilities), },
+              opts.servers[server] or {})
+
+            if opts.setup[server] then
+              if opts.setup[server](server, server_opts) then
+                return
+              end
+            else
+              require("lspconfig")[server].setup(server_opts)
+            end
+          end
+        }
       })
     end
   },
