@@ -24,8 +24,6 @@ return {
         "dockerfile",
         "gitignore",
         "hocon",
-        "markdown",
-        "markdown_inline",
         "printf",
         "python",
         "query",

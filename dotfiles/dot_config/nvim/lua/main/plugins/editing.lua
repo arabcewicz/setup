@@ -1,29 +1,97 @@
 return {
   {
-    'windwp/nvim-autopairs',
-    event = "InsertEnter",
+    'echasnovski/mini.ai',
+    enabled = true,
+    version = '*',
+    opts = function()
+      local ai = require("mini.ai")
+      return {
+        n_lines = 500,
+        custom_textobjects = {
+          o = ai.gen_spec.treesitter({ -- code block
+            a = { "@block.outer", "@conditional.outer", "@loop.outer" },
+            i = { "@block.inner", "@conditional.inner", "@loop.inner" },
+          }),
+          c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }), -- class
+          d = { "%f[%d]%d+" },                                                    -- digits
+          e = {                                                                   -- Word with case
+            { "%u[%l%d]+%f[^%l%d]", "%f[%S][%l%d]+%f[^%l%d]", "%f[%P][%l%d]+%f[^%l%d]", "^[%l%d]+%f[^%l%d]" },
+            "^().*()$",
+          },
+          g = function()
+            local from = { line = 1, col = 1 }
+            local to = {
+              line = vim.fn.line('$'),
+              col = math.max(vim.fn.getline('$'):len(), 1)
+            }
+            return { from = from, to = to }
+          end,
+          u = ai.gen_spec.function_call(),                           -- u for "Usage"
+          U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
+        },
+      }
+    end,
+  },
+  {
+    'echasnovski/mini.comment',
+    version = '*',
     opts = {}
   },
   {
-    "kylechui/nvim-surround",
-    version = "*",
-    event = "VeryLazy",
-    opts = {}
+    'echasnovski/mini.operators',
+    version = '*',
+    opts = {},
   },
   {
-    'gbprod/substitute.nvim',
+    'echasnovski/mini.pairs',
+    version = '*',
+    opts = {},
+  },
+  {
+    'echasnovski/mini.splitjoin',
+    enabled = true,
+    version = '*',
     opts = {
-      highlight_substituted_text = {
-        enabled = true,
-        timer = 300,
+      -- Module mappings. Use `''` (empty string) to disable one.
+      -- Created for both Normal and Visual modes.
+      mappings = {
+        toggle = 'gJ',
+        split = '',
+        join = '',
       },
-      on_substitute = function() require("yanky.integration").substitute() end,
-    },
-    keys = {
-      { "gr",  function() require('substitute').operator() end, desc = "substitue: Operator" },
-      { "grr", function() require('substitute').line() end,     desc = "substitue: Line" },
-      { "gR",  function() require('substitute').eol() end,      desc = "substitue: eol" },
-    },
+
+      -- Detection options: where split/join should be done
+      detect = {
+        -- Array of Lua patterns to detect region with arguments.
+        -- Default: { '%b()', '%b[]', '%b{}' }
+        brackets = nil,
+
+        -- String Lua pattern defining argument separator
+        separator = ',',
+
+        -- Array of Lua patterns for sub-regions to exclude separators from.
+        -- Enables correct detection in presence of nested brackets and quotes.
+        -- Default: { '%b()', '%b[]', '%b{}', '%b""', "%b''" }
+        exclude_regions = nil,
+      },
+
+      -- Split options
+      split = {
+        hooks_pre = {},
+        hooks_post = {},
+      },
+
+      -- Join options
+      join = {
+        hooks_pre = {},
+        hooks_post = {},
+      },
+    }
+  },
+  {
+    'echasnovski/mini.surround',
+    version = '*',
+    opts = {},
   },
   {
     "folke/flash.nvim",
@@ -37,10 +105,10 @@ return {
     },
     keys = {
       -- { "<A-/>", function() require('flash').jump() end,       mode = { "n", "x", "o" },                            desc = "flash: Flash" },
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-      { "S", mode = { "n", "x", "o" }, function() require('flash').treesitter() end,        desc = "flash: Treesitter" },
-      { "r", mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-      { "R", mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<A-s>", mode = { "n", "x", "o" }, function() require("flash").jump() end,       desc = "Flash" },
+      { "<A-S>", mode = { "n", "x", "o" }, function() require('flash').treesitter() end, desc = "flash: Treesitter" },
+      -- { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      -- { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       -- { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     }
   },
@@ -140,12 +208,6 @@ return {
       { "<C-p>",     "<Plug>(YankyCycleBackward)",  desc = "yanky: Cycle yank buffer backward" },
       { "<space>fv", ":Telescope yank_history<CR>", desc = "yanky: List yank ring" },
     },
-  },
-  {
-    'echasnovski/mini.comment',
-    version = '*',
-    opts = {
-    }
   },
   -- Finds and lists all of the TODO, HACK, BUG, etc comment
   -- in your project and loads them into a browsable list.

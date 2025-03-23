@@ -4,8 +4,14 @@ return {
     opts = {
       ensure_installed = {
         "scala",
-      }
-    }
+      },
+    },
+  },
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    opts = {
+      ensure_installed = {},
+    },
   },
   {
     "scalameta/nvim-metals",
@@ -18,19 +24,86 @@ return {
       servers = {
         metals = {
           keys = {
-            { '<leader>mm', ":Telescope metals commands<CR>",                                          desc = "metals: Show commands in telescope picker" },
-            { '<leader>ml', ":MetalsToggleLogs<CR>",                                                   desc = "metals: Toggle logs" },
-            { '<leader>mu', ":MetalsGotoSuperMethod<CR>",                                              desc = "metals: Go to super method" },
-            { '<leader>mc', ":MetalsCompileClean<CR>",                                                 desc = "metals: Clean & compile" },
-            { '<leader>ma', function() require("metals.tvp").reveal_in_tree() end,                     desc = "metals: Show in tree view" },
-            { '<leader>me', function() require("metals.tvp").toggle_tree_view() end,                   desc = "metals: Toggle tree view" },
-            { '<leader>mi', "MetalsImportBuild<CR>",                                                   desc = "metals: Import build" },
-            { '<leader>mr', "MetalsRestartMetals<CR>",                                                 desc = "metals: Restart metals" },
-            { '<leader>mj', function() require("metals").toggle_settings("showImplicitArguments") end, desc = "metals: Toggle 'show implicit arguments'" },
-            { '<leader>my', function() require("metals").type_of_range() end,                          desc = "metals: Type of selected code",            mode = { 'v' } },
-            { '<leader>mh', function() require("metals").hover_worksheet() end,                        desc = "metals: Hover worksheet" },
-            { '<leader>mt', function() require("metals").select_test_case() end,                       desc = "metals: Select test case" },
-            { '<leader>mT', function() require("metals").select_test_suite() end,                      desc = "metals: Select test suite" },
+            {
+              "<leader>mm",
+              ":Telescope metals commands<CR>",
+              desc = "metals: All commands",
+            },
+            {
+              "<leader>ml",
+              ":MetalsToggleLogs<CR>",
+              desc = "metals: Toggle logs",
+            },
+            {
+              "<leader>mu",
+              ":MetalsGotoSuperMethod<CR>",
+              desc = "metals: Go to super method",
+            },
+            {
+              "<leader>mc",
+              ":MetalsCompileClean<CR>",
+              desc = "metals: Clean & compile",
+            },
+            {
+              "<leader>ma",
+              function()
+                require("metals.tvp").reveal_in_tree()
+              end,
+              desc = "metals: Reveal file in tree view",
+            },
+            {
+              "<leader>me",
+              function()
+                require("metals.tvp").toggle_tree_view()
+              end,
+              desc = "metals: Toggle tree view",
+            },
+            {
+              "<leader>mi",
+              ":MetalsImportBuild<CR>",
+              desc = "metals: Import build",
+            },
+            {
+              "<leader>mr",
+              ":MetalsRestartMetals<CR>",
+              desc = "metals: Restart metals",
+            },
+            {
+              "<leader>mj",
+              function()
+                require("metals").toggle_settings("showImplicitArguments")
+              end,
+              desc = "metals: Toggle 'show implicit arguments'",
+            },
+            {
+              "<leader>my",
+              function()
+                require("metals").type_of_range()
+              end,
+              desc = "metals: Type of selected code",
+              mode = { "v" },
+            },
+            {
+              "<leader>mh",
+              function()
+                require("metals").hover_worksheet()
+              end,
+              desc = "metals: Hover worksheet",
+            },
+            {
+              "<leader>mt",
+              function()
+                require("metals").select_test_case()
+              end,
+              desc = "metals: Select test case",
+            },
+            {
+              "<leader>mT",
+              function()
+                require("metals").select_test_suite()
+              end,
+              desc = "metals: Select test suite",
+            },
           },
           init_options = {
             disableColorOutput = false,
@@ -40,8 +113,7 @@ return {
             verboseCompilation = true,
             -- superMethodLensesEnabled = true,
             testUserInterface = "Test Explorer",
-          }
-
+          },
         },
       },
       setup = {
@@ -55,10 +127,21 @@ return {
           vim.api.nvim_create_autocmd("FileType", {
             pattern = { "scala", "sbt" },
             callback = function()
-              if vim.loop.fs_stat(vim.fn.getcwd() .. "/src/main/g8") then return end -- do not attach to giter8 projects
+              if vim.loop.fs_stat(vim.fn.getcwd() .. "/src/main/g8") then
+                return
+              end -- do not attach to giter8 projects
               metals.initialize_or_attach(metals_config)
             end,
             group = nvim_metals_group,
+          })
+
+
+          local wk = require("which-key")
+          wk.add({
+            {
+              mode = "n",
+              { "<leader>m", group = "metals: Scala commands" },
+            },
           })
 
           return true
@@ -93,5 +176,12 @@ return {
       }
     end,
   },
-
+  -- {
+  -- 	"stevearc/conform.nvim",
+  -- 	opts = {
+  -- 		formatters_by_ft = {
+  -- 			scala = { "scalafmt" },
+  -- 		},
+  -- 	},
+  -- },
 }

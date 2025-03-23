@@ -155,21 +155,30 @@ return {
           -- TODO: set only if server has such capablity (see LazyVim)
           -- TODO: put this outside and cache
           local keymaps = {
-            { "<leader>cl", "<cmd>LspInfo<cr>",                                 desc = "lsp: Lsp Info" },
-            { "gd",         vim.lsp.buf.definition,                             desc = "lsp: Goto Definition",            has = "definition" },
-            { "<leader>gr", vim.lsp.buf.references,                             desc = "lsp: References",                 nowait = true },
-            { "gI",         vim.lsp.buf.implementation,                         desc = "lsp: Goto Implementation" },
-            { "gy",         vim.lsp.buf.type_definition,                        desc = "lsp: Goto Type Definition" },
-            { "gD",         vim.lsp.buf.declaration,                            desc = "lsp: Goto Declaration" },
-            { "K",          function() return vim.lsp.buf.hover() end,          desc = "lsp: Hover" },
-            { "gK",         function() return vim.lsp.buf.signature_help() end, desc = "lsp: Signature Help",             has = "signatureHelp" },
-            { "<C-p>",      function() return vim.lsp.buf.signature_help() end, mode = "i",                               desc = "Signature Help", has = "signatureHelp" },
-            { "<leader>ca", vim.lsp.buf.code_action,                            desc = "lsp: Code Action",                mode = { "n", "v" },     has = "codeAction" },
-            { "<leader>cc", vim.lsp.codelens.run,                               desc = "lsp: Run Codelens",               mode = { "n", "v" },     has = "codeLens" },
-            { "<leader>cC", vim.lsp.codelens.refresh,                           desc = "lsp: Refresh & Display Codelens", mode = { "n" },          has = "codeLens" },
+            { "<leader>cl", "<cmd>LspInfo<cr>",                                                                     desc = "lsp: Lsp Info" },
+            -- { "gd",         vim.lsp.buf.definition,                                                                 desc = "lsp: Goto Definition",            has = "definition" },
+            { "gd",         function() require("telescope.builtin").lsp_definitions({ reuse_win = true }) end,      desc = "telescope (lsp): Goto Definition",        has = "definition" },
+            -- { "gq", vim.lsp.buf.references,                                                                 desc = "lsp: References",                 nowait = true },
+            -- { '<leader>cq', require('telescope.builtin').lsp_references,                                            desc = 'telescope (lsp): References' },
+            { "gq",         "<cmd>Telescope lsp_references<cr>",                                                    desc = "telescope (lsp): References",             nowait = true },
+            -- { "gI",         vim.lsp.buf.implementation,                                                             desc = "lsp: Goto Implementation" },
+            { "gI",         function() require("telescope.builtin").lsp_implementations({ reuse_win = true }) end,  desc = "telescope (lsp): Goto Implementation" },
+            -- { "gy",         vim.lsp.buf.type_definition,                                                            desc = "lsp: Goto Type Definition" },
+            -- { '<leader>cy', require('telescope.builtin').lsp_type_definitions,                                      desc = 'telescope (lsp): Go to type definition or list' },
+            { "gy",         function() require("telescope.builtin").lsp_type_definitions({ reuse_win = true }) end, desc = "telescope (lsp): Goto Type Definition" },
+            { '<leader>cs', require('telescope.builtin').lsp_document_symbols,                                      desc = 'telescope (lsp): Symbols in current file' },
+            { '<leader>cS', require('telescope.builtin').lsp_dynamic_workspace_symbols,                             desc = 'telescope (lsp): Workspace symbols' },
+            { '<leader>cd', require('telescope.builtin').diagnostics,                                               desc = 'telescope (lsp): Diagnostics' },
+            { "gD",         vim.lsp.buf.declaration,                                                                desc = "lsp: Goto Declaration" },
+            { "K",          function() return vim.lsp.buf.hover() end,                                              desc = "lsp: Hover" },
+            { "gK",         function() return vim.lsp.buf.signature_help() end,                                     desc = "lsp: Signature Help",                     has = "signatureHelp" },
+            { "<C-p>",      function() return vim.lsp.buf.signature_help() end,                                     mode = "i",                                       desc = "Signature Help", has = "signatureHelp" },
+            { "<leader>ca", vim.lsp.buf.code_action,                                                                desc = "lsp: Code Action",                        mode = { "n", "v" },     has = "codeAction" },
+            { "<leader>cc", vim.lsp.codelens.run,                                                                   desc = "lsp: Run Codelens",                       mode = { "n", "v" },     has = "codeLens" },
+            { "<leader>cC", vim.lsp.codelens.refresh,                                                               desc = "lsp: Refresh & Display Codelens",         mode = { "n" },          has = "codeLens" },
             -- { "<leader>cR", function() Snacks.rename.rename_file() end,      desc = "lsp: Rename File",                mode = { "n" },          has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
-            { "<leader>cr", vim.lsp.buf.rename,                                 desc = "lsp: Rename",                     has = "rename" },
-            { "<leader>cF", vim.lsp.buf.format,                                 desc = "lsp: Format",                     has = "format??" },
+            { "<leader>cr", vim.lsp.buf.rename,                                                                     desc = "lsp: Rename",                             has = "rename" },
+            { "<leader>cF", vim.lsp.buf.format,                                                                     desc = "lsp: Format",                             has = "format??" },
             -- { "<leader>cA", LazyVim.lsp.action.source,                          desc = "lsp: Source Action",              has = "codeAction" },
             -- {
             --   "]]",
@@ -229,23 +238,27 @@ return {
         opts.capabilities or {}
       )
 
+      local function setup(server)
+        local server_opts = vim.tbl_deep_extend("force", { capabilities = vim.deepcopy(capabilities), },
+          opts.servers[server] or {})
+        if opts.setup[server] then
+          if opts.setup[server](server, server_opts) then
+            return
+          end
+        else
+          require("lspconfig")[server].setup(server_opts)
+        end
+      end
+
+
+      for server, _ in pairs(opts.servers) do
+        setup(server)
+      end
+
       require("mason-lspconfig").setup({
         ensure_installed = {},
         automatic_installation = false,
-        handlers = {
-          function(server)
-            local server_opts = vim.tbl_deep_extend("force", { capabilities = vim.deepcopy(capabilities), },
-              opts.servers[server] or {})
-
-            if opts.setup[server] then
-              if opts.setup[server](server, server_opts) then
-                return
-              end
-            else
-              require("lspconfig")[server].setup(server_opts)
-            end
-          end
-        }
+        handlers = { setup }
       })
     end
   },

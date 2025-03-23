@@ -1,5 +1,40 @@
 return {
   {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = {
+      indent = { enabled = true },
+      input = { enabled = true },
+      notifier = { enabled = true },
+      picker = { enabled = false },
+      scroll = {
+        enabled = true,
+        animate = {
+          duration = { step = 5, total = 50 },
+          easing = "linear",
+        },
+      },
+    },
+    keys = {
+      -- { "<leader>n",  function() Snacks.picker.notifications() end, desc = "snacks (picker): Notification History" },
+      {
+        "<leader>n",
+        function()
+          Snacks.notifier.show_history()
+        end,
+        desc = "snacks (notifier): Notification History",
+      },
+      {
+        "<leader>un",
+        function()
+          Snacks.notifier.hide()
+        end,
+        desc = "snacks (notifier): Dismiss All Notifications",
+      },
+    },
+  },
+  {
     "j-hui/fidget.nvim",
     enabled = true,
     opts = {
@@ -7,27 +42,20 @@ return {
         window = {
           winblend = 0,
         },
-      }
+      },
     },
-  },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    enabled = true,
-    main = "ibl",
-    opts = {},
   },
   {
     "mhanberg/output-panel.nvim",
     event = "VeryLazy",
     keys = {
-      { '<A-|>', ":OutputPanel<CR>", desc = "output-panel: Toggle output panel (lsp server logs)" },
-    }
+      { "<A-|>", ":OutputPanel<CR>", desc = "output-panel: Toggle output panel (lsp server logs)" },
+    },
   },
 
   {
     "rmagatti/goto-preview",
-    opts =
-    {
+    opts = {
       width = 120, -- Width of the floating window
       height = 15, -- Height of the floating window
       border = { "↖", "─", "┐", "│", "┘", "─", "└", "│" }, -- Border characters of the floating window
@@ -38,7 +66,7 @@ return {
       post_open_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
       post_close_hook = nil, -- A function taking two arguments, a buffer and a window to be ran as a hook.
       references = { -- Configure the telescope UI for slowing the references cycling window.
-        telescope = require("telescope.themes").get_dropdown({ hide_preview = false })
+        telescope = require("telescope.themes").get_dropdown({ hide_preview = false }),
       },
       -- These two configs can also be passed down to the goto-preview definition and implementation calls for one off "peak" functionality.
       focus_on_open = true,                                        -- Focus the floating window when opening it.
@@ -49,86 +77,83 @@ return {
       preview_window_title = { enable = true, position = "left" }, -- Whether to set the preview window title as the filename
     },
     keys = {
-      { '<leader>pd', function() require('goto-preview').goto_preview_definition() end,      desc = "goto-preview: Preview definition" },
-      { '<leader>pt', function() require('goto-preview').goto_preview_type_definition() end, desc = "goto-preview: Preview type definition" },
-      { '<leader>pi', function() require('goto-preview').goto_preview_implementation() end,  desc = "goto-preview: Preview implementation" },
-      { '<leader>pD', function() require('goto-preview').goto_preview_declaration() end,     desc = "goto-preview: Preview declaration" },
-      { '<leader>pq', function() require('goto-preview').close_all_win() end,                desc = "goto-preview: Close all preview windows" },
-      { '<leader>pr', function() require('goto-preview').goto_preview_references() end,      desc = "goto-preview: Preview references" },
-    }
+      {
+        "<leader>pd",
+        function()
+          require("goto-preview").goto_preview_definition()
+        end,
+        desc = "goto-preview: Preview definition",
+      },
+      {
+        "<leader>pt",
+        function()
+          require("goto-preview").goto_preview_type_definition()
+        end,
+        desc = "goto-preview: Preview type definition",
+      },
+      {
+        "<leader>pi",
+        function()
+          require("goto-preview").goto_preview_implementation()
+        end,
+        desc = "goto-preview: Preview implementation",
+      },
+      {
+        "<leader>pD",
+        function()
+          require("goto-preview").goto_preview_declaration()
+        end,
+        desc = "goto-preview: Preview declaration",
+      },
+      {
+        "<leader>pq",
+        function()
+          require("goto-preview").close_all_win()
+        end,
+        desc = "goto-preview: Close all preview windows",
+      },
+      {
+        "<leader>pr",
+        function()
+          require("goto-preview").goto_preview_references()
+        end,
+        desc = "goto-preview: Preview references",
+      },
+    },
   },
   {
-    'nvim-lualine/lualine.nvim',
-    enabled = true,
-    config = function()
-      local function metals_status()
-        return vim.g["metals_status"] or ""
-      end
-
-      -- local navic = require("nvim-navic")
-
-      -- vim-visual-multi's status line doesn't work well with lualine, so disabling it
-      vim.g.VM_set_statusline = 0 -- disable VM's statusline updates to prevent clobbering
-      vim.g.VM_silent_exit = 1    -- because the status line already tells me the mode
-
-      require('lualine').setup {
-        options = {
-          theme = "catppuccin",
-          -- section_separators = '',
-          -- component_separators = '',
-          globalstatus = true,
-        },
-        sections = {
-          lualine_a = {
-            'mode',
-          },
-          lualine_b = {
-            -- 'buffers',
-            'branch',
-          },
-          lualine_c = {
-            {
-              function() return require('possession.session').get_session_name() or '' end
-            },
-            {
-              function() return require 'jsonpath'.get() or '' end
-            },
-            -- "navic",
-            metals_status,
-            -- vim-visual-multi status line poor integration with lualine
-            --[[ {
-        function()
-          if vim.b['visual_multi'] then
-            local ret = vim.api.nvim_exec2('call b:VM_Selection.Funcs.infoline()', { output = true })
-            print(ret.output)
-            return string.match(ret.output, 'M.*')
-          else
-            return ''
+    "echasnovski/mini.statusline",
+    version = "*",
+    opts = {
+      content = {
+        active = function()
+          local MiniStatusline = require("mini.statusline")
+          local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
+          local git = MiniStatusline.section_git({ trunc_width = 40 })
+          local diff = MiniStatusline.section_diff({ trunc_width = 75 })
+          local diagnostics = MiniStatusline.section_diagnostics({ trunc_width = 75 })
+          local lsp = MiniStatusline.section_lsp({ trunc_width = 75 })
+          local filename = MiniStatusline.section_filename({ trunc_width = 140 })
+          local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+          local location = MiniStatusline.section_location({ trunc_width = 75 })
+          local search = MiniStatusline.section_searchcount({ trunc_width = 75 })
+          local jsonpath = ""
+          if vim.bo.filetype == "json" then
+            jsonpath = require("jsonpath").get()
           end
-        end
-      }, ]]
-          },
-          lualine_x = {
-            {
-              'filename',
-              newfile_status = true,
-              path = 0,
-            },
-            'filesize',
-            'encoding',
-            'fileformat',
-            'filetype'
-          },
-          lualine_y = { 'branch', 'diff', 'diagnostics' },
-          lualine_z = { 'progress', 'location', 'selectioncount' }
-        },
-        --[[ tabline = {
-    lualine_c = { "buffers" }
-  }, ]]
-        -- extensions = { 'quickfix', 'nvim-tree' }
 
-      }
-    end
+          return MiniStatusline.combine_groups({
+            { hl = mode_hl,                 strings = { mode } },
+            { hl = "MiniStatuslineDevinfo", strings = { git, diff, diagnostics, lsp } },
+            "%<", -- Mark general truncate point
+            { hl = "MiniStatuslineFilename", strings = { filename, jsonpath } },
+            "%=", -- End left alignment
+            { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
+            { hl = mode_hl,                  strings = { search, location } },
+          })
+        end,
+      },
+    },
   },
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -255,4 +280,75 @@ return {
       })
     end,
   },
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts_extend = { "spec" },
+    opts = {
+      spec = {
+        {
+          mode = { "n", "v" },
+          { "<leader><tab>", group = "tabs" },
+          { "<leader>a", group = "avante" },
+          { "<leader>c", group = "code" },
+          { "<leader>d", group = "debug" },
+          --       { "<leader>dp", group = "profiler" },
+          { "<leader>f", group = "file/find" },
+          { "<leader>g", group = "git" },
+          --       { "<leader>gh", group = "hunks" },
+          { "<leader>q", group = "preview" },
+          { "<leader>q", group = "quit/session" },
+          { "<leader>s", group = "search" },
+          { "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
+          { "<leader>x", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
+          --       { "[", group = "prev" },
+          --       { "]", group = "next" },
+          { "g", group = "goto" },
+          { "s", group = "surround" },
+          --       { "z", group = "fold" },
+          {
+            "<leader>b",
+            group = "buffer",
+            expand = function()
+              return require("which-key.extras").expand.buf()
+            end,
+          },
+          {
+            "<leader>w",
+            group = "windows",
+            proxy = "<c-w>",
+            expand = function()
+              return require("which-key.extras").expand.win()
+            end,
+          },
+          --       -- better descriptions
+          { "gx", desc = "Open with system app" },
+        },
+      },
+    },
+    keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Keymaps (which-key)",
+      },
+      {
+        "<c-w><space>",
+        function()
+          require("which-key").show({ keys = "<c-w>", loop = true })
+        end,
+        desc = "Window Hydra Mode (which-key)",
+      },
+    },
+    -- config = function(_, opts)
+    --   local wk = require("which-key")
+    --   wk.setup(opts)
+    --   if not vim.tbl_isempty(opts.defaults) then
+    --     LazyVim.warn("which-key: opts.defaults is deprecated. Please use opts.spec instead.")
+    --     wk.register(opts.defaults)
+    --   end
+    -- end,
+  }
 }

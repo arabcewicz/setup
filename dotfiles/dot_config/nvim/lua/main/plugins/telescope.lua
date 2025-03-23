@@ -43,16 +43,16 @@ return {
             theme = "ivy",
           }
         },
-        extensions = {
-          ["ui-select"] = {
-            layout_strategy = "center",
-          }
-        },
+        -- extensions = {
+        --   ["ui-select"] = {
+        --     layout_strategy = "center",
+        --   }
+        -- },
       })
     end,
-    init = function()
-      require("telescope").load_extension("ui-select")
-    end,
+    -- init = function()
+    --   require("telescope").load_extension("ui-select")
+    -- end,
     keys = function()
       return {
         -- files
@@ -141,35 +141,30 @@ return {
         },
 
         -- git
-        { "<leader>rc", "<cmd>Telescope git_commits<CR>",                           desc = "telescope: Git commits" },
-        { "<leader>rs", "<cmd>Telescope git_status<CR>",                            desc = "telescope: Git status" },
+        { "<leader>rc", "<cmd>Telescope git_commits<CR>",               desc = "telescope: Git commits" },
+        { "<leader>rs", "<cmd>Telescope git_status<CR>",                desc = "telescope: Git status" },
         -- search
-        { '<leader>s"', "<cmd>Telescope registers<cr>",                             desc = "telescope: Registers" },
-        { "<leader>sa", "<cmd>Telescope autocommands<cr>",                          desc = "telescope: Auto commands" },
-        { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>",             desc = "telescope: Buffer" },
-        { "<leader>sc", "<cmd>Telescope command_history<cr>",                       desc = "telescope: Command history" },
-        { "<leader>sC", "<cmd>Telescope commands<cr>",                              desc = "telescope: Commands" },
-        { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>",                   desc = "telescope: Document diagnostics" },
-        { "<leader>sD", "<cmd>Telescope diagnostics<cr>",                           desc = "telescope: Workspace diagnostics" },
-        { "<leader>sH", "<cmd>Telescope highlights<cr>",                            desc = "telescope: Search highlight groups" },
-        { "<leader>sj", "<cmd>Telescope jumplist<cr>",                              desc = "telescope: Jumplist" },
-        { "<leader>sk", "<cmd>Telescope keymaps<cr>",                               desc = "telescope: Key maps" },
-        { "<leader>sl", "<cmd>Telescope loclist<cr>",                               desc = "Location list" },
-        { "<leader>sM", "<cmd>Telescope man_pages<cr>",                             desc = "Man pages" },
-        { "<leader>sm", "<cmd>Telescope marks<cr>",                                 desc = "Jump to mark" },
-        { "<leader>so", "<cmd>Telescope vim_options<cr>",                           desc = "Options" },
+        { '<leader>s"', "<cmd>Telescope registers<cr>",                 desc = "telescope: Registers" },
+        { "<leader>sa", "<cmd>Telescope autocommands<cr>",              desc = "telescope: Auto commands" },
+        { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "telescope: Buffer" },
+        { "<leader>sc", "<cmd>Telescope command_history<cr>",           desc = "telescope: Command history" },
+        { "<leader>sC", "<cmd>Telescope commands<cr>",                  desc = "telescope: Commands" },
+        { "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>",       desc = "telescope: Document diagnostics" },
+        { "<leader>sD", "<cmd>Telescope diagnostics<cr>",               desc = "telescope: Workspace diagnostics" },
+        { "<leader>sH", "<cmd>Telescope highlights<cr>",                desc = "telescope: Search highlight groups" },
+        { "<leader>sj", "<cmd>Telescope jumplist<cr>",                  desc = "telescope: Jumplist" },
+        { "<leader>sk", "<cmd>Telescope keymaps<cr>",                   desc = "telescope: Key maps" },
+        { "<leader>sl", "<cmd>Telescope loclist<cr>",                   desc = "Location list" },
+        { "<leader>sM", "<cmd>Telescope man_pages<cr>",                 desc = "Man pages" },
+        { "<leader>sm", "<cmd>Telescope marks<cr>",                     desc = "Jump to mark" },
+        { "<leader>so", "<cmd>Telescope vim_options<cr>",               desc = "Options" },
         -- { "<leader>sR", "<cmd>Telescope resume<cr>",                     desc = "Resume" },
-        { '<leader>ss', require('telescope.builtin').resume,                        desc = 'telescope: last picker' },
-        { "<leader>sq", "<cmd>Telescope quickfix<cr>",                              desc = "telescope: Quickfix list" },
+        { '<leader>ss', require('telescope.builtin').resume,            desc = 'telescope: last picker' },
+        { "<leader>sq", "<cmd>Telescope quickfix<cr>",                  desc = "telescope: Quickfix list" },
 
         -- { "<leader>uC", LazyVim.pick("colorscheme", { enable_preview = true }),           desc = "Colorscheme with Preview" },
-        { "<leader>uC", require('telescope.builtin').colorscheme,                   desc = "Colorscheme with Preview" },
+        { "<leader>uC", require('telescope.builtin').colorscheme,       desc = "Colorscheme with Preview" },
 
-        { '<leader>cy', require('telescope.builtin').lsp_type_definitions,          desc = 'telescope (lsp): Go to type definition or list' },
-        { '<leader>cs', require('telescope.builtin').lsp_document_symbols,          desc = 'telescope (lsp): Show symbols in current file' },
-        { '<leader>cS', require('telescope.builtin').lsp_dynamic_workspace_symbols, desc = 'telescope (lsp): Find workspace symbols' },
-        { '<leader>cr', require('telescope.builtin').lsp_references,                desc = 'telescope (lsp): List symbol references' },
-        { '<leader>cd', require('telescope.builtin').diagnostics,                   desc = 'telescope: Show diagnostics' },
         -- {
         --   "<leader>ss",
         --   function()
@@ -191,5 +186,5 @@ return {
       }
     end,
   },
-  { 'nvim-telescope/telescope-ui-select.nvim' },
+  -- { 'nvim-telescope/telescope-ui-select.nvim' },
 }

@@ -15,13 +15,21 @@ return {
     opts = {
       ensure_installed = {
         "vtsls",
+        "prettier",
       },
     }
   },
   {
     "neovim/nvim-lspconfig",
     opts = {
-      -- make sure mason installs the server
+      ft = {
+        "javascript",
+        "javascriptreact",
+        "javascript.jsx",
+        "typescript",
+        "typescriptreact",
+        "typescript.tsx",
+      },
       servers = {
         vtsls = {
           settings = {
