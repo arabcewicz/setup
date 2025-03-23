@@ -100,6 +100,8 @@ require("lazy").setup({
     { import = "main.plugins" },
     { import = "main.plugins.lang" },
   },
+  install = { colorscheme = { "catppuccin" } },
+  checker = { endabled = true },
   ui = {
     border = "single"
   },
