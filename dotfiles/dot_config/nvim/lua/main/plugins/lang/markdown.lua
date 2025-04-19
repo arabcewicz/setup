@@ -68,19 +68,22 @@ return {
     opts_extend = { "file_types" },
     opts = {
       file_types = { "markdown" },
+      render_modes = { 'n', 'c', 't' },
       code = {
+        render_modes = { 'n', 'c', 't' },
         sign = false,
         width = "block",
         right_pad = 1,
       },
       heading = {
-        sign = false,
+        render_modes = { 'n', 'c', 't' },
+        -- sign = false,
         -- icons = {},
-        position = 'inline',
+        -- position = 'inline',
         backgrounds = {},
       },
       checkbox = {
-        enabled = false,
+        render_modes = { 'n', 'c', 't' },
       },
     },
     ft = { "markdown" },
