@@ -89,6 +89,17 @@ prepend_previewers = [
 	{ mime = "application/x-xz",            run = "ouch" },
 ]
 
+[[plugin.prepend_fetchers]]
+id   = "git"
+name = "*"
+run  = "git"
+
+[[plugin.prepend_fetchers]]
+id   = "git"
+name = "*/"
+run  = "git"
+
+
 
 # This plugin does not provide a decompression feature because it already is supported by Yazi. To decompress with ouch, configure the opener in yazi.toml.
 # [opener]
